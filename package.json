@@ -2,9 +2,9 @@
   "name": "the_walking_drunk",
   "version": "1.0.0",
   "description": "Web application that gives you optimized pub crawl path.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon server/server.js",
     "test": "mocha testSpec.js"
   },
   "repository": {
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/TheWalkingDrunk/theWalkingDrunk#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "fs": "0.0.1-security"
   }
 }
