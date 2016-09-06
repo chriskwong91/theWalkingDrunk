@@ -7,7 +7,7 @@
     "start": "nodemon server/server.js",
     "test": "mocha testSpec.js",
     "dev": "webpack -d --watch",
-    "build" : "webpack -p"
+    "build": "webpack -p"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "babel-preset-react": "^6.11.1",
     "express": "^4.14.0",
     "fs": "0.0.1-security",
+    "google-maps-react": "^1.0.18",
     "jsx": "^0.9.89",
     "path": "^0.12.7",
     "react": "^15.3.1",
