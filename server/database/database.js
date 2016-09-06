@@ -51,7 +51,9 @@
 //
 
 class Stops () {
-  constructor(modelName) {
+  constructor(modelName, url) {
+    mongoose.connect('mongodb:' + url);
+
     this._schema = new mongoose.Schema({
       name: {type: String, required: true}       //The name of the stop
       address: {type: String, required: true}    //The address of the stop as a string
