@@ -1,12 +1,23 @@
 import React from 'react';
-import {render} from 'react-dom';
+
+class SubComponent extends React.Component {
+	render () {
+		return (
+			<h1> Automatically transpiles modified files. </h1>
+		);
+	}
+}
 
 class App extends React.Component {
   render () {
     return (
-    	<p> Hello React!</p>
+    	<div>
+	    	<p> Hello React!</p>
+	    	<SubComponent />
+    	</div>
   	);
   }
 }
 
-render(<App/>, document.getElementById('app'));
+module.exports = App;
+
