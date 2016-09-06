@@ -11,21 +11,46 @@ const testData = {}
   outOfRange2: {name: 'foo', address: '123 Foo Street', latitude: 1.2, longitude: 3.4, rating: 6, price: 2, tags: []},  //Out of range test data (rating)
 ]}
 
-//Test addStop()
-  //Test adding docs
-  //Test adding duplicate docs
-  //Test adding docs with incomplete data
-  //Test adding docs with invalid data
-  //Test adding docs with data which is out of range
-//Test findOneStop() and findStops()
-  //Test finding docs that do exist
-  //Test finding docs that do not exist
-  //Test finding docs when none exist
-//Test updateStops()
-  //Test updating docs
-  //Test updating docs to create duplicates
-  //Test updating docs that don't exist
-//Test removing docs
-  //Test removing docs
-  //Test re-adding removed docs
-  //Test removing docs that don't exist
+describe('database.js', function () {
+  describe('addStop method', function () {
+    //Test addStop()
+      //Test adding docs
+      it('should add docs'/*, function () {}*/);
+      //Test adding duplicate docs
+      it('should not add duplicate documents'/*, function () {}*/);
+      //Test adding docs that lack required data
+      it('should not add docs that lack required data'/*, function () {}*/);
+      //Test adding docs with data of the wrong type
+      it('should not add docs with data of the wrong type'/*, function () {}*/);
+      //Test adding docs with data which is out of range
+      it('should not add docs with data that is out of range'/*, function () {}*/);
+  });
+
+  describe('findOneStop and findStops methods', function () {
+    //Test findOneStop() and findStops()
+      //Test finding docs that do exist
+      it('should find docs which do exist');
+      //Test finding docs that do not exist
+      it('should not find docs which do not exist');
+      //Test finding docs when none exist
+      it('should not find docs or throw an error when no docs exist');
+  });
+
+  describe('updateStops method', function () {
+    //Test updateStops()
+      //Test updating docs
+      it('should update docs');
+      //Test updating docs to create duplicates
+      it('should not allow updating docs to create duplicates');
+      //Test updating docs that don't exist
+  });
+
+  describe('removeStops method', function () {
+    //Test removeStops()
+      //Test removing docs
+      it('should remove docs');
+      //Test re-adding removed docs
+      it('should re-add previously removed docs');
+      //Test removing docs that don't exist
+  });
+});
