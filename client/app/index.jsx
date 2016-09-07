@@ -14,7 +14,7 @@ const GOOGLEPLEX = {
 class Map extends React.Component {
   constructor(props) {
     super(props);
-    this.panToHackReactor = this.panToHackReactor.bind(this);
+    this.panTo = this.panTo.bind(this);
   }
   
   // make use of React Software Component Lifecycle
@@ -43,12 +43,8 @@ class Map extends React.Component {
 	   }.bind(this));
   }
   
-  panToHackReactor() {
-    this.map.panTo(HACK_REACTOR);
-  }
-  
-  panToGoogleplex(){
-  	this.map.panTo(GOOGLEPLEX);
+  panTo(location) {
+    this.map.panTo(location)
   }
 
   render() {
@@ -66,8 +62,8 @@ class Map extends React.Component {
     return (
     	<div>
 	    	<div>	
-	        <button onClick={this.panToHackReactor.bind(this)}>Go to Hack Reactor</button>
-	        <button onClick={this.panToGoogleplex.bind(this)}>Go to Googleplex</button>
+          <button onClick={this.panTo(HACK_REACTOR).bind(this)}>Go to Hack Reactor</button>
+          <button onClick={this.panTo(GOOGLEPLEX).bind(this)}>Go to Googleplex</button>
 	      </div>
 	      <div style={mapDivStyle}>
 	        <div ref="map" style={mapStyle}>I should be a map!</div>
