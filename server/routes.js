@@ -4,9 +4,10 @@ module.exports = function (app, express) {
 
   app.use(express.static(__dirname + '/../client'));
 
-  app.get('/', function(req, res) {
-    res.render('index');
-  });
+  app.route('/')
+    .get(function(req, res) {
+      res.render('index');
+    });
 
   app.use(function(req, res, next){
     res.status(404);
