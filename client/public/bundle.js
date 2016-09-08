@@ -21979,10 +21979,16 @@
 	  lng: -122.408945
 	};
 	
-	var GOOGLEPLEX = {
-	  lat: 37.421957,
-	  lng: -122.084036
-	};
+	var WAYPOINTS = [{
+	  location: '757 Leavenworth San Francisco, CA',
+	  stopover: true
+	}, {
+	  location: 'Civic Center, SF',
+	  stopover: true
+	}, {
+	  location: 'Union Square, SF',
+	  stopover: true
+	}];
 	
 	var Map = function (_React$Component) {
 	  _inherits(Map, _React$Component);
@@ -21992,7 +21998,10 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
 	
-	    _this.panToHackReactor = _this.panToHackReactor.bind(_this);
+	    _this.state = {
+	      startLoc: HACK_REACTOR,
+	      waypoints: WAYPOINTS
+	    };
 	    return _this;
 	  }
 	
@@ -22019,6 +22028,10 @@
 	        travelMode: google.maps.DirectionsTravelMode.WALKING
 	      };
 	
+	      if (this.state.waypoints.length > 0) {
+	        request = this.getRouteRequest();
+	      }
+	
 	      this.directionsService.route(request, function (response, status) {
 	        if (status == google.maps.DirectionsStatus.OK) {
 	          this.directionsDisplay.setDirections(response);
@@ -22026,18 +22039,96 @@
 	      }.bind(this));
 	    }
 	  }, {
-	    key: 'panToHackReactor',
-	    value: function panToHackReactor() {
-	      this.map.panTo(HACK_REACTOR);
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      if (this.state.waypoints.length > 0) {
+	
+	        var request = this.getRouteRequest();
+	        this.directionsService.route(request, function (response, status) {
+	          if (status == google.maps.DirectionsStatus.OK) {
+	            this.directionsDisplay.setDirections(response);
+	          }
+	        }.bind(this));
+	      }
 	    }
 	  }, {
-	    key: 'panToGoogleplex',
-	    value: function panToGoogleplex() {
-	      this.map.panTo(GOOGLEPLEX);
+	    key: 'panTo',
+	    value: function panTo() {
+	      this.map.panTo(this.state.startLoc);
+	    }
+	  }, {
+	    key: 'getRouteRequest',
+	    value: function getRouteRequest() {
+	      //need to calculate farthest away waypoint and set to endLoc
+	      var endLoc = this.state.waypoints[0];
+	
+	      var request = {
+	        origin: this.state.startLoc,
+	        destination: endLoc.location,
+	        travelMode: google.maps.DirectionsTravelMode.WALKING,
+	        waypoints: this.state.waypoints,
+	        optimizeWaypoints: true
+	      };
+	
+	      return request;
+	    }
+	  }, {
+	    key: 'handleLocationSubmit',
+	    value: function handleLocationSubmit(e) {
+	      var _this2 = this;
+	
+	      e.preventDefault();
+	      var address = this.refs.location.value;
+	
+	      this.getBars(address, function (bars) {
+	        var firstEigthBars = bars.slice(0, 8);
+	        console.log(firstEigthBars);
+	        var waypoints = firstEigthBars.map(function (bar) {
+	          return {
+	            location: bar.vicinity,
+	            stopover: true
+	          };
+	        });
+	        _this2.setState({
+	          startLoc: address,
+	          waypoints: waypoints
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'getBars',
+	    value: function getBars(address, callback) {
+	      var _this3 = this;
+	
+	      var geocoder = new google.maps.Geocoder();
+	
+	      geocoder.geocode({
+	        address: address
+	      }, function (results, status) {
+	        if (status === 'OK') {
+	          console.log('results ', results);
+	          var service = new google.maps.places.PlacesService(_this3.map);
+	
+	          var request = {
+	            location: results[0].geometry.location,
+	            keyword: 'bar',
+	            rankBy: google.maps.places.RankBy.DISTANCE
+	          };
+	
+	          service.nearbySearch(request, function (results, status) {
+	
+	            console.log('results before return ', results);
+	            if (status === google.maps.places.PlacesServiceStatus.OK) {
+	              callback(results);
+	            }
+	          });
+	        }
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	
 	      var mapStyle = {
 	        width: 500,
 	        height: 300
@@ -22053,18 +22144,9 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.panToHackReactor.bind(this) },
-	            'Go to Hack Reactor'
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.panToGoogleplex.bind(this) },
-	            'Go to Googleplex'
-	          )
+	          'form',
+	          { onSubmit: this.handleLocationSubmit.bind(this) },
+	          _react2.default.createElement('input', { placeholder: 'Your location', type: 'text', ref: 'location' })
 	        ),
 	        _react2.default.createElement(
 	          'div',
