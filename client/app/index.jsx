@@ -1,38 +1,53 @@
 import React from 'react';
 var map = window.Map;
 
-const HACK_REACTOR = {
-  lat: 37.783654,
-  lng: -122.408945
-};
+// const HACK_REACTOR = {
+//   lat: 37.783654,
+//   lng: -122.408945
+// };
 
-const WAYPOINTS = [
-  {
-    location: '757 Leavenworth San Francisco, CA',
-    stopover: true
-  },
-  {
-    location: 'Civic Center, SF',
-    stopover: true
-  },
-  {
-    location: 'Union Square, SF',
-    stopover: true
-  }
-];
+// const WAYPOINTS = [
+//   {
+//     location: '757 Leavenworth San Francisco, CA',
+//     stopover: true
+//   },
+//   {
+//     location: 'Civic Center, SF',
+//     stopover: true
+//   },
+//   {
+//     location: 'Union Square, SF',
+//     stopover: true
+//   }
+// ];
 
 class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startLoc: HACK_REACTOR,
-      waypoints: WAYPOINTS
+      startLoc: 'Hack Reactor SF',
+      waypoints: []
     };
-    this.panTo = this.panTo.bind(this);
   }
   
   // make use of React Software Component Lifecycle 
- componentDidUpdate() {
+  componentDidMount() {
+    this.map = new google.maps.Map(this.refs.map, {
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    this.directionsService = new google.maps.DirectionsService();
+    this.directionsDisplay = new google.maps.DirectionsRenderer();
+
+    this.directionsDisplay.setMap(this.map);
+    this.directionsDisplay.setPanel(this.refs.panel);
+
+    this.handleLocationSubmit();
+
+  }
+
+  componentDidUpdate() {
     if (this.state.waypoints.length > 0) {
 
       var request = this.getRouteRequest();
@@ -44,13 +59,9 @@ class Map extends React.Component {
     }
   }
 
-  panTo() {
-    this.map.panTo(this.state.startLoc);
-  }
-
   getRouteRequest() {
     //need to calculate farthest away waypoint and set to endLoc
-    var endLoc = this.state.waypoints[0];
+    var endLoc = this.state.waypoints[this.state.waypoints.length - 1];
 
     var request = {
       origin: this.state.startLoc,
@@ -64,12 +75,15 @@ class Map extends React.Component {
   }
 
   handleLocationSubmit(e) {
-    e.preventDefault();
-    var address = this.refs.location.value;
+    if (e) {
+      e.preventDefault();
+    }
+
+    var address = this.refs.location.value || this.state.startLoc; 
     
     this.getBars(address, (bars) => {
       var firstEigthBars = bars.slice(0, 8);
-      console.log(firstEigthBars);
+      console.log('Final waypoints: ', firstEigthBars);
       var waypoints = firstEigthBars.map((bar) => {
         return {
           location: bar.vicinity,
@@ -92,7 +106,7 @@ class Map extends React.Component {
       address: address
     }, (results, status) => {
       if (status === 'OK') {
-        console.log('results ', results);
+        console.log('Geocode results: ', results);
         var service = new google.maps.places.PlacesService(this.map);
 
         var request = {
@@ -103,7 +117,7 @@ class Map extends React.Component {
 
         service.nearbySearch(request, function(results, status) {
           
-          console.log('results before return ', results)
+          console.log('Nearby restaurants: ', results)
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             callback(results);
           }
@@ -112,12 +126,7 @@ class Map extends React.Component {
     })
   }
 
-  panTo(location) {
-    this.map.panTo(location)
-  }
-
   render() {
-
     const mapStyle = {
       width: 500,
       height: 300,
@@ -131,10 +140,9 @@ class Map extends React.Component {
 
     return (
     	<div>
-	    	<div>	
-          <button onClick={this.panTo(HACK_REACTOR).bind(this)}>Go to Hack Reactor</button>
-          <button onClick={this.panTo(GOOGLEPLEX).bind(this)}>Go to Googleplex</button>
-	      </div>
+      <form onSubmit={this.handleLocationSubmit.bind(this)}>
+        <input placeholder="Your location" type="text" ref="location"/>
+      </form>
 	      <div style={mapDivStyle}>
 	        <div ref="map" style={mapStyle}>I should be a map!</div>
 	      </div>
