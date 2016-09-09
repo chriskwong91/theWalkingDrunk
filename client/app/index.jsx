@@ -1,32 +1,32 @@
 import React from 'react';
 var map = window.Map;
 
-const HACK_REACTOR = {
-  lat: 37.783654,
-  lng: -122.408945
-};
+// const HACK_REACTOR = {
+//   lat: 37.783654,
+//   lng: -122.408945
+// };
 
-const WAYPOINTS = [
-  {
-    location: '757 Leavenworth San Francisco, CA',
-    stopover: true
-  },
-  {
-    location: 'Civic Center, SF',
-    stopover: true
-  },
-  {
-    location: 'Union Square, SF',
-    stopover: true
-  }
-];
+// const WAYPOINTS = [
+//   {
+//     location: '757 Leavenworth San Francisco, CA',
+//     stopover: true
+//   },
+//   {
+//     location: 'Civic Center, SF',
+//     stopover: true
+//   },
+//   {
+//     location: 'Union Square, SF',
+//     stopover: true
+//   }
+// ];
 
 class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       startLoc: 'Hack Reactor SF',
-      waypoints: WAYPOINTS
+      waypoints: []
     };
   }
   
@@ -45,21 +45,6 @@ class Map extends React.Component {
 
     this.handleLocationSubmit();
 
-  //   var request = {
-  //      origin: 'Hack Reactor, SF', 
-  //      destination: 'Tempest, 431 Natoma St, San Francisco, CA 94103',
-  //      travelMode: google.maps.DirectionsTravelMode.WALKING
-  //    };
-
-  //   if (this.state.waypoints.length > 0) {
-  //     request = this.getRouteRequest();
-  //   }
-
-  //    this.directionsService.route(request, function(response, status) {
-  //      if (status == google.maps.DirectionsStatus.OK) {
-  //        this.directionsDisplay.setDirections(response);
-  //      }
-  //    }.bind(this));
   }
 
   componentDidUpdate() {
@@ -90,7 +75,6 @@ class Map extends React.Component {
   }
 
   handleLocationSubmit(e) {
-
     if (e) {
       e.preventDefault();
     }
@@ -99,7 +83,7 @@ class Map extends React.Component {
     
     this.getBars(address, (bars) => {
       var firstEigthBars = bars.slice(0, 8);
-      console.log(firstEigthBars);
+      console.log('Final waypoints: ', firstEigthBars);
       var waypoints = firstEigthBars.map((bar) => {
         return {
           location: bar.vicinity,
@@ -122,7 +106,7 @@ class Map extends React.Component {
       address: address
     }, (results, status) => {
       if (status === 'OK') {
-        console.log('results ', results);
+        console.log('Geocode results: ', results);
         var service = new google.maps.places.PlacesService(this.map);
 
         var request = {
@@ -133,7 +117,7 @@ class Map extends React.Component {
 
         service.nearbySearch(request, function(results, status) {
           
-          console.log('results before return ', results)
+          console.log('Nearby restaurants: ', results)
           if (status === google.maps.places.PlacesServiceStatus.OK) {
             callback(results);
           }
@@ -143,7 +127,6 @@ class Map extends React.Component {
   }
 
   render() {
-
     const mapStyle = {
       width: 500,
       height: 300,

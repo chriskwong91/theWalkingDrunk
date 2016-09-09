@@ -21974,21 +21974,25 @@
 	
 	var map = window.Map;
 	
-	var HACK_REACTOR = {
-	  lat: 37.783654,
-	  lng: -122.408945
-	};
+	// const HACK_REACTOR = {
+	//   lat: 37.783654,
+	//   lng: -122.408945
+	// };
 	
-	var WAYPOINTS = [{
-	  location: '757 Leavenworth San Francisco, CA',
-	  stopover: true
-	}, {
-	  location: 'Civic Center, SF',
-	  stopover: true
-	}, {
-	  location: 'Union Square, SF',
-	  stopover: true
-	}];
+	// const WAYPOINTS = [
+	//   {
+	//     location: '757 Leavenworth San Francisco, CA',
+	//     stopover: true
+	//   },
+	//   {
+	//     location: 'Civic Center, SF',
+	//     stopover: true
+	//   },
+	//   {
+	//     location: 'Union Square, SF',
+	//     stopover: true
+	//   }
+	// ];
 	
 	var Map = function (_React$Component) {
 	  _inherits(Map, _React$Component);
@@ -22000,7 +22004,7 @@
 	
 	    _this.state = {
 	      startLoc: 'Hack Reactor SF',
-	      waypoints: WAYPOINTS
+	      waypoints: []
 	    };
 	    return _this;
 	  }
@@ -22023,22 +22027,6 @@
 	      this.directionsDisplay.setPanel(this.refs.panel);
 	
 	      this.handleLocationSubmit();
-	
-	      //   var request = {
-	      //      origin: 'Hack Reactor, SF', 
-	      //      destination: 'Tempest, 431 Natoma St, San Francisco, CA 94103',
-	      //      travelMode: google.maps.DirectionsTravelMode.WALKING
-	      //    };
-	
-	      //   if (this.state.waypoints.length > 0) {
-	      //     request = this.getRouteRequest();
-	      //   }
-	
-	      //    this.directionsService.route(request, function(response, status) {
-	      //      if (status == google.maps.DirectionsStatus.OK) {
-	      //        this.directionsDisplay.setDirections(response);
-	      //      }
-	      //    }.bind(this));
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
@@ -22082,7 +22070,7 @@
 	
 	      this.getBars(address, function (bars) {
 	        var firstEigthBars = bars.slice(0, 8);
-	        console.log(firstEigthBars);
+	        console.log('Final waypoints: ', firstEigthBars);
 	        var waypoints = firstEigthBars.map(function (bar) {
 	          return {
 	            location: bar.vicinity,
@@ -22106,7 +22094,7 @@
 	        address: address
 	      }, function (results, status) {
 	        if (status === 'OK') {
-	          console.log('results ', results);
+	          console.log('Geocode results: ', results);
 	          var service = new google.maps.places.PlacesService(_this3.map);
 	
 	          var request = {
@@ -22117,7 +22105,7 @@
 	
 	          service.nearbySearch(request, function (results, status) {
 	
-	            console.log('results before return ', results);
+	            console.log('Nearby restaurants: ', results);
 	            if (status === google.maps.places.PlacesServiceStatus.OK) {
 	              callback(results);
 	            }
@@ -22128,7 +22116,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	
 	      var mapStyle = {
 	        width: 500,
 	        height: 300
