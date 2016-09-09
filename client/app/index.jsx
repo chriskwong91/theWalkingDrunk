@@ -28,39 +28,11 @@ class Map extends React.Component {
       startLoc: HACK_REACTOR,
       waypoints: WAYPOINTS
     };
+    this.panTo = this.panTo.bind(this);
   }
   
-  // make use of React Software Component Lifecycle
-  componentDidMount() {
-    this.map = new google.maps.Map(this.refs.map, {
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-
-    this.directionsService = new google.maps.DirectionsService();
-    this.directionsDisplay = new google.maps.DirectionsRenderer();
-
-    this.directionsDisplay.setMap(this.map);
-    this.directionsDisplay.setPanel(this.refs.panel);
-
-    var request = {
-       origin: 'Hack Reactor, SF', 
-       destination: 'Tempest, 431 Natoma St, San Francisco, CA 94103',
-       travelMode: google.maps.DirectionsTravelMode.WALKING
-     };
-
-    if (this.state.waypoints.length > 0) {
-      request = this.getRouteRequest();
-    }
-
-     this.directionsService.route(request, function(response, status) {
-       if (status == google.maps.DirectionsStatus.OK) {
-         this.directionsDisplay.setDirections(response);
-       }
-     }.bind(this));
-  }
-  
-  componentDidUpdate() {
+  // make use of React Software Component Lifecycle 
+ componentDidUpdate() {
     if (this.state.waypoints.length > 0) {
 
       var request = this.getRouteRequest();
@@ -138,7 +110,10 @@ class Map extends React.Component {
         });
       } 
     })
+  }
 
+  panTo(location) {
+    this.map.panTo(location)
   }
 
   render() {
@@ -155,22 +130,17 @@ class Map extends React.Component {
     }
 
     return (
-      <div>
-        <form onSubmit={this.handleLocationSubmit.bind(this)}>
-          <input placeholder="Your location" type="text" ref="location"/>
-        </form>
-      {/*
-        <div> 
-          <button onClick={this.panTo.bind(this)}>Go to Hack Reactor</button>
-          <button onClick={this.panToGoogleplex.bind(this)}>Go to Googleplex</button>
-        </div>
-      */}
-        <div style={mapDivStyle}>
-          <div ref="map" style={mapStyle}>I should be a map!</div>
-        </div>
-        <div>
-          <div ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>
-        </div>
+    	<div>
+	    	<div>	
+          <button onClick={this.panTo(HACK_REACTOR).bind(this)}>Go to Hack Reactor</button>
+          <button onClick={this.panTo(GOOGLEPLEX).bind(this)}>Go to Googleplex</button>
+	      </div>
+	      <div style={mapDivStyle}>
+	        <div ref="map" style={mapStyle}>I should be a map!</div>
+	      </div>
+	      <div>
+					<div ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>
+				</div>
       </div>
     );
   }
