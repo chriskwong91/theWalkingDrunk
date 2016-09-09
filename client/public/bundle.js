@@ -22026,6 +22026,9 @@
 	      this.directionsDisplay.setMap(this.map);
 	      this.directionsDisplay.setPanel(this.refs.panel);
 	
+	      this.geocoder = new google.maps.Geocoder();
+	      this.placesService = new google.maps.places.PlacesService(this.map);
+	
 	      this.handleLocationSubmit();
 	    }
 	  }, {
@@ -22051,7 +22054,8 @@
 	        origin: this.state.startLoc,
 	        destination: endLoc.location,
 	        travelMode: google.maps.DirectionsTravelMode.WALKING,
-	        waypoints: this.state.waypoints,
+	        //last waypoint already the destination
+	        waypoints: this.state.waypoints.slice(0, -1),
 	        optimizeWaypoints: true
 	      };
 	
@@ -22069,9 +22073,10 @@
 	      var address = this.refs.location.value || this.state.startLoc;
 	
 	      this.getBars(address, function (bars) {
-	        var firstEigthBars = bars.slice(0, 8);
-	        console.log('Final waypoints: ', firstEigthBars);
-	        var waypoints = firstEigthBars.map(function (bar) {
+	        //var firstEigthBars = bars.slice(0, 8);
+	        //console.log('Final waypoints: ', firstEigthBars);
+	        console.log('Final waypoints: ', bars);
+	        var waypoints = bars.map(function (bar) {
 	          return {
 	            location: bar.vicinity,
 	            stopover: true
@@ -22088,31 +22093,81 @@
 	    value: function getBars(address, callback) {
 	      var _this3 = this;
 	
-	      var geocoder = new google.maps.Geocoder();
+	      //array of bar objects
+	      var waypoints = [];
+	      //object containing names of already visited bars
+	      var visited = {};
+	      var MAX_WAYPOINTS = 8;
 	
-	      geocoder.geocode({
-	        address: address
-	      }, function (results, status) {
-	        if (status === 'OK') {
-	          console.log('Geocode results: ', results);
-	          var service = new google.maps.places.PlacesService(_this3.map);
+	      var populateWaypoints = function populateWaypoints(newAddress, count) {
+	        if (count === 0) {
+	          callback(waypoints);
+	        } else {
+	          //geocode address into google.maps.LatLng object
+	          _this3.geocoder.geocode({
+	            address: newAddress
+	          }, function (results, status) {
+	            if (status === 'OK') {
+	              console.log('Geocode results: ', results);
 	
-	          var request = {
-	            location: results[0].geometry.location,
-	            keyword: 'bar',
-	            rankBy: google.maps.places.RankBy.DISTANCE
-	          };
+	              var request = {
+	                location: results[0].geometry.location,
+	                keyword: 'bar',
+	                rankBy: google.maps.places.RankBy.DISTANCE
+	              };
+	              //nearby search of coordinates of address
+	              _this3.placesService.nearbySearch(request, function (results, status) {
 	
-	          service.nearbySearch(request, function (results, status) {
-	
-	            console.log('Nearby restaurants: ', results);
-	            if (status === google.maps.places.PlacesServiceStatus.OK) {
-	              callback(results);
+	                if (status === google.maps.places.PlacesServiceStatus.OK) {
+	                  var current = '';
+	                  //push closest unvisited bar to waypoints
+	                  for (var i = 0; i < results.length; i++) {
+	                    if (!visited[results[i].name]) {
+	                      visited[results[i].name] = true;
+	                      waypoints.push(results[i]);
+	                      current = results[i].vicinity;
+	                      break;
+	                    }
+	                  }
+	                  console.log('Bar ' + waypoints.length + ': ' + current);
+	                  populateWaypoints(current, count - 1);
+	                }
+	              });
 	            }
 	          });
 	        }
-	      });
+	      };
+	
+	      populateWaypoints(address, MAX_WAYPOINTS);
 	    }
+	
+	    // getBars(address, callback) {
+	    //   var geocoder = new google.maps.Geocoder();
+	
+	    //   geocoder.geocode({
+	    //     address: address
+	    //   }, (results, status) => {
+	    //     if (status === 'OK') {
+	    //       console.log('Geocode results: ', results);
+	    //       var service = new google.maps.places.PlacesService(this.map);
+	
+	    //       var request = {
+	    //         location: results[0].geometry.location,
+	    //         keyword: 'bar',
+	    //         rankBy: google.maps.places.RankBy.DISTANCE
+	    //       }
+	
+	    //       service.nearbySearch(request, function(results, status) {
+	
+	    //         console.log('Nearby restaurants: ', results)
+	    //         if (status === google.maps.places.PlacesServiceStatus.OK) {
+	    //           callback(results);
+	    //         }
+	    //       });
+	    //     } 
+	    //   });
+	    // }
+	
 	  }, {
 	    key: 'render',
 	    value: function render() {
