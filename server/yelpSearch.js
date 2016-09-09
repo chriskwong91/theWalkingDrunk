@@ -15,12 +15,10 @@ var client = yelp.createClient({
 });
  
  
-
-module.exports = function(req, res){
-	client.search({
+// exports promise
+module.exports = function(location){
+	return client.search({
 	  terms: "Pubs and Bar",
-	  location: req.query.location
-	}).then(function(data){
-	  res.send(data);
+	  location: location
 	});
 };

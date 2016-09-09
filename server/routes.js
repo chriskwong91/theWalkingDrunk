@@ -1,5 +1,5 @@
 var fs = require('fs');
-var yelpSearch = require('./yelpSearch.js')
+var waypointGeneration = require('./waypointGeneration.js')
 
 module.exports = function (app, express) {
 
@@ -13,7 +13,7 @@ module.exports = function (app, express) {
   app.route('/yelp/search')
     .get(function(req, res){
       console.log('GET - /yelp/search');
-      yelpSearch(req, res);
+      waypointGeneration(req, res);
     });
 
 
