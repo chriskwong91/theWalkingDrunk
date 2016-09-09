@@ -18,7 +18,8 @@ var client = yelp.createClient({
 // exports promise
 module.exports = function(location){
 	return client.search({
-	  terms: "Pubs and Bar",
-	  location: location
+	  terms: "barcrawl",
+	  location: location,
+    category_filter: "nightlife"
 	});
 };

@@ -1,5 +1,5 @@
 var fs = require('fs');
-var waypointGeneration = require('./waypointGeneration.js')
+var waypointGeneration = require('./waypointGeneration/waypointGeneration.js')
 
 module.exports = function (app, express) {
 

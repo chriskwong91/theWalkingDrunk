@@ -4,6 +4,7 @@
 //When the transform function is passed an array of data it returns a promise
 //that calls the callback with each element of the array.  Each decorator
 //uses a different  that handles the data in a different manner (i.e. map, reduce, etc.).
+
 var transformers = {};
 
 transformers.transformMap = (callback) => {
@@ -20,7 +21,8 @@ transformers.transformEach = (callback) => {
   return (data) => 
     new Promise((resolve, reject) => 
       resolve(data.forEach((current) => 
-        callback(current))));
+        callback(current)))
+      );
 };
 
 transformers.transformReduce = (callback) => {
