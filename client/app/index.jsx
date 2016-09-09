@@ -25,14 +25,44 @@ class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startLoc: HACK_REACTOR,
+      startLoc: 'Hack Reactor SF',
       waypoints: WAYPOINTS
     };
-    this.panTo = this.panTo.bind(this);
   }
   
   // make use of React Software Component Lifecycle 
- componentDidUpdate() {
+  componentDidMount() {
+    this.map = new google.maps.Map(this.refs.map, {
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    this.directionsService = new google.maps.DirectionsService();
+    this.directionsDisplay = new google.maps.DirectionsRenderer();
+
+    this.directionsDisplay.setMap(this.map);
+    this.directionsDisplay.setPanel(this.refs.panel);
+
+    this.handleLocationSubmit();
+
+  //   var request = {
+  //      origin: 'Hack Reactor, SF', 
+  //      destination: 'Tempest, 431 Natoma St, San Francisco, CA 94103',
+  //      travelMode: google.maps.DirectionsTravelMode.WALKING
+  //    };
+
+  //   if (this.state.waypoints.length > 0) {
+  //     request = this.getRouteRequest();
+  //   }
+
+  //    this.directionsService.route(request, function(response, status) {
+  //      if (status == google.maps.DirectionsStatus.OK) {
+  //        this.directionsDisplay.setDirections(response);
+  //      }
+  //    }.bind(this));
+  }
+
+  componentDidUpdate() {
     if (this.state.waypoints.length > 0) {
 
       var request = this.getRouteRequest();
@@ -44,13 +74,9 @@ class Map extends React.Component {
     }
   }
 
-  panTo() {
-    this.map.panTo(this.state.startLoc);
-  }
-
   getRouteRequest() {
     //need to calculate farthest away waypoint and set to endLoc
-    var endLoc = this.state.waypoints[0];
+    var endLoc = this.state.waypoints[this.state.waypoints.length - 1];
 
     var request = {
       origin: this.state.startLoc,
@@ -64,8 +90,12 @@ class Map extends React.Component {
   }
 
   handleLocationSubmit(e) {
-    e.preventDefault();
-    var address = this.refs.location.value;
+
+    if (e) {
+      e.preventDefault();
+    }
+
+    var address = this.refs.location.value || this.state.startLoc; 
     
     this.getBars(address, (bars) => {
       var firstEigthBars = bars.slice(0, 8);
@@ -112,10 +142,6 @@ class Map extends React.Component {
     })
   }
 
-  panTo(location) {
-    this.map.panTo(location)
-  }
-
   render() {
 
     const mapStyle = {
@@ -131,10 +157,9 @@ class Map extends React.Component {
 
     return (
     	<div>
-	    	<div>	
-          <button onClick={this.panTo(HACK_REACTOR).bind(this)}>Go to Hack Reactor</button>
-          <button onClick={this.panTo(GOOGLEPLEX).bind(this)}>Go to Googleplex</button>
-	      </div>
+      <form onSubmit={this.handleLocationSubmit.bind(this)}>
+        <input placeholder="Your location" type="text" ref="location"/>
+      </form>
 	      <div style={mapDivStyle}>
 	        <div ref="map" style={mapStyle}>I should be a map!</div>
 	      </div>

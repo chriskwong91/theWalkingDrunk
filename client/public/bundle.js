@@ -21999,13 +21999,13 @@
 	    var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
 	
 	    _this.state = {
-	      startLoc: HACK_REACTOR,
+	      startLoc: 'Hack Reactor SF',
 	      waypoints: WAYPOINTS
 	    };
 	    return _this;
 	  }
 	
-	  // make use of React Software Component Lifecycle
+	  // make use of React Software Component Lifecycle 
 	
 	
 	  _createClass(Map, [{
@@ -22022,21 +22022,23 @@
 	      this.directionsDisplay.setMap(this.map);
 	      this.directionsDisplay.setPanel(this.refs.panel);
 	
-	      var request = {
-	        origin: 'Hack Reactor, SF',
-	        destination: 'Tempest, 431 Natoma St, San Francisco, CA 94103',
-	        travelMode: google.maps.DirectionsTravelMode.WALKING
-	      };
+	      this.handleLocationSubmit();
 	
-	      if (this.state.waypoints.length > 0) {
-	        request = this.getRouteRequest();
-	      }
+	      //   var request = {
+	      //      origin: 'Hack Reactor, SF', 
+	      //      destination: 'Tempest, 431 Natoma St, San Francisco, CA 94103',
+	      //      travelMode: google.maps.DirectionsTravelMode.WALKING
+	      //    };
 	
-	      this.directionsService.route(request, function (response, status) {
-	        if (status == google.maps.DirectionsStatus.OK) {
-	          this.directionsDisplay.setDirections(response);
-	        }
-	      }.bind(this));
+	      //   if (this.state.waypoints.length > 0) {
+	      //     request = this.getRouteRequest();
+	      //   }
+	
+	      //    this.directionsService.route(request, function(response, status) {
+	      //      if (status == google.maps.DirectionsStatus.OK) {
+	      //        this.directionsDisplay.setDirections(response);
+	      //      }
+	      //    }.bind(this));
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
@@ -22052,15 +22054,10 @@
 	      }
 	    }
 	  }, {
-	    key: 'panTo',
-	    value: function panTo() {
-	      this.map.panTo(this.state.startLoc);
-	    }
-	  }, {
 	    key: 'getRouteRequest',
 	    value: function getRouteRequest() {
 	      //need to calculate farthest away waypoint and set to endLoc
-	      var endLoc = this.state.waypoints[0];
+	      var endLoc = this.state.waypoints[this.state.waypoints.length - 1];
 	
 	      var request = {
 	        origin: this.state.startLoc,
@@ -22077,8 +22074,11 @@
 	    value: function handleLocationSubmit(e) {
 	      var _this2 = this;
 	
-	      e.preventDefault();
-	      var address = this.refs.location.value;
+	      if (e) {
+	        e.preventDefault();
+	      }
+	
+	      var address = this.refs.location.value || this.state.startLoc;
 	
 	      this.getBars(address, function (bars) {
 	        var firstEigthBars = bars.slice(0, 8);
