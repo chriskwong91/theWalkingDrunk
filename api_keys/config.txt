@@ -1,0 +1,8 @@
+GOOGLE_MAPS_API_KEY = AIzaSyByH0c5bxYDZ48BLQ401BBsm4DppG6QNkQ
+
+oauth: {
+  "consumer_key": "_Qs9S9ohkGj32ygCz0vhyA",
+  "consumer_secret": "qA3YVgM_Z31LVHSV9qRLxtriboE",
+  "token": "VWLlZeJqo7anSjDjWe4i9N0SwuItniCZ",
+  "token_secret": "R21cba_B2dJmoElanqq1Wb1GWAQ"
+}

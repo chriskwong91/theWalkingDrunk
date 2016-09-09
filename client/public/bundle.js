@@ -22080,6 +22080,24 @@
 	      e.preventDefault();
 	      var address = this.refs.location.value;
 	
+	      // send pub crawl starting location to server
+	      // server applies transformation and all filters
+	      // then returns list of "approved" pubs.
+	      // then filterToFinal8 will be done client-side
+	      // via Google Maps API. 
+	      $.ajax({
+	        url: "http://localhost:3000/yelp/search",
+	        data: { location: address },
+	        success: function success(data) {
+	          console.log(data);
+	        },
+	        error: function error(err) {
+	          console.log(err);
+	          console.log("err");
+	        },
+	        dataType: "json"
+	      });
+	
 	      this.getBars(address, function (bars) {
 	        var firstEigthBars = bars.slice(0, 8);
 	        console.log(firstEigthBars);

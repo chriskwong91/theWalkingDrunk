@@ -1,4 +1,5 @@
 var fs = require('fs');
+var yelpSearch = require('./yelpSearch.js')
 
 module.exports = function (app, express) {
 
@@ -8,6 +9,13 @@ module.exports = function (app, express) {
     .get(function(req, res) {
       res.render('index');
     });
+
+  app.route('/yelp/search')
+    .get(function(req, res){
+      console.log('GET - /yelp/search');
+      yelpSearch(req, res);
+    });
+
 
   app.use(function(req, res, next){
     res.status(404);
