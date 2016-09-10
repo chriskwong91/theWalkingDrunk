@@ -32,6 +32,13 @@ class Map extends React.Component {
   
   // make use of React Software Component Lifecycle 
   componentDidMount() {
+    this.initMap();
+
+    this.handleLocationSubmit();
+
+  }
+
+  initMap() {
     this.map = new google.maps.Map(this.refs.map, {
       zoom: 16,
       mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -45,9 +52,6 @@ class Map extends React.Component {
 
     this.geocoder = new google.maps.Geocoder();
     this.placesService = new google.maps.places.PlacesService(this.map);
-
-    this.handleLocationSubmit();
-
   }
 
   componentDidUpdate() {
@@ -88,6 +92,7 @@ class Map extends React.Component {
     this.getBars(address, (bars) => {
       //var firstEigthBars = bars.slice(0, 8);
       //console.log('Final waypoints: ', firstEigthBars);
+      bars = bars.slice(0, 8);
       console.log('Final waypoints: ', bars);
       var waypoints = bars.map((bar) => {
         return {
@@ -108,7 +113,7 @@ class Map extends React.Component {
     var waypoints = [];
     //object containing names of already visited bars
     var visited = {};
-    const MAX_WAYPOINTS = 8;
+    //const MAX_WAYPOINTS = 1;
 
     var populateWaypoints = (newAddress, count) => {
       if (count === 0) {
@@ -149,7 +154,7 @@ class Map extends React.Component {
       }
     };
 
-    populateWaypoints(address, MAX_WAYPOINTS);
+    populateWaypoints(address, this.state.waypoints.length + 1);
 
   }
 
@@ -194,15 +199,33 @@ class Map extends React.Component {
 
     return (
     	<div>
-      <form onSubmit={this.handleLocationSubmit.bind(this)}>
-        <input placeholder="Your location" type="text" ref="location"/>
-      </form>
-	      <div style={mapDivStyle}>
-	        <div ref="map" style={mapStyle}>I should be a map!</div>
-	      </div>
-	      <div>
-					<div ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>
-				</div>
+        <div>
+          <button onClick={this.handleLocationSubmit.bind(this)}>Next Bar</button>
+        </div>
+        <div>
+          <form onSubmit={(e) => {
+            e.persist();
+            var startLoc = this.refs.location.value;
+            this.setState({
+              startLoc: startLoc,
+              waypoints: [],
+              e: e
+            }, () => {
+              this.handleLocationSubmit(e);
+            });
+            
+            //this.handleLocationSubmit.call(this, e); 
+          }}>
+
+            <input placeholder="Your location" type="text" ref="location"/>
+          </form>
+        </div>
+  	      <div style={mapDivStyle}>
+  	        <div ref="map" style={mapStyle}>I should be a map!</div>
+  	      </div>
+  	      <div>
+  					<div ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>
+  				</div>
       </div>
     );
   }
