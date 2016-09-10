@@ -25,7 +25,7 @@ class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startLoc: 'Hack Reactor SF',
+      startLoc: this.props.startLoc || 'SF',
       waypoints: []
     };
     this.visited = {};
@@ -34,9 +34,7 @@ class Map extends React.Component {
   // make use of React Software Component Lifecycle 
   componentDidMount() {
     this.initMap();
-
     this.handleNextBar();
-
   }
 
   initMap() {
@@ -58,7 +56,6 @@ class Map extends React.Component {
 
   componentDidUpdate() {
     if (this.state.waypoints.length > 0) {
-
       var request = this.getRouteRequest();
       this.directionsService.route(request, (response, status) => {
         if (status == google.maps.DirectionsStatus.OK) {
@@ -90,7 +87,6 @@ class Map extends React.Component {
     }
 
     var address;
-
     if (this.state.waypoints[this.state.waypoints.length - 1]) {
       address = this.state.waypoints[this.state.waypoints.length - 1].location;
     } else if (this.refs.location.value) {
@@ -100,9 +96,7 @@ class Map extends React.Component {
     }
     
     this.getWaypoints(address, (waypoints) => {
-
       waypoints = waypoints.slice(0, 7);
-
       this.setState({
         waypoints: waypoints
       });
@@ -132,14 +126,11 @@ class Map extends React.Component {
   }
 
   getWaypoints(address, callback) {
-
     //geocode address into google.maps.LatLng object
     this.geocoder.geocode({
       address: address
     }, (results, status) => {
-
       if (status === 'OK') {
-
         var request = {
           location: results[0].geometry.location,
           keyword: 'bar',
@@ -147,9 +138,7 @@ class Map extends React.Component {
         }
         //nearby search of coordinates of address
         this.placesService.nearbySearch(request, (results, status) => {
-          
           if (status === google.maps.places.PlacesServiceStatus.OK) {
-
             //set new waypoint equal to first unvisited bar
             var i = 0;
             while (this.visited[results[i].vicinity]) {
@@ -167,37 +156,10 @@ class Map extends React.Component {
             callback(this.state.waypoints.concat(waypoint));
           }
         });
-      } 
+      }  
     });
 
   }
-
-  // getBars(address, callback) {
-  //   var geocoder = new google.maps.Geocoder();
-    
-  //   geocoder.geocode({
-  //     address: address
-  //   }, (results, status) => {
-  //     if (status === 'OK') {
-  //       console.log('Geocode results: ', results);
-  //       var service = new google.maps.places.PlacesService(this.map);
-
-  //       var request = {
-  //         location: results[0].geometry.location,
-  //         keyword: 'bar',
-  //         rankBy: google.maps.places.RankBy.DISTANCE
-  //       }
-
-  //       service.nearbySearch(request, function(results, status) {
-          
-  //         console.log('Nearby restaurants: ', results)
-  //         if (status === google.maps.places.PlacesServiceStatus.OK) {
-  //           callback(results);
-  //         }
-  //       });
-  //     } 
-  //   });
-  // }
 
   render() {
     const mapStyle = {
