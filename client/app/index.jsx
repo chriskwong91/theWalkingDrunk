@@ -87,74 +87,68 @@ class Map extends React.Component {
       e.preventDefault();
     }
 
-    var address = this.refs.location.value || this.state.startLoc; 
+    var address;
+
+    if (this.state.waypoints[this.state.waypoints.length - 1]) {
+      address = this.state.waypoints[this.state.waypoints.length - 1].location;
+    } else if (this.refs.location.value) {
+      address = this.refs.location.value;
+    } else {
+      address = this.state.startLoc;
+    }
     
     this.getBars(address, (bars) => {
-      //var firstEigthBars = bars.slice(0, 8);
-      //console.log('Final waypoints: ', firstEigthBars);
-      bars = bars.slice(0, 8);
-      console.log('Final waypoints: ', bars);
-      var waypoints = bars.map((bar) => {
-        return {
-          location: bar.vicinity,
-          stopover: true
-        }
-      });
+
+      bars = bars.slice(0, 7);
+
       this.setState({
-        startLoc: address,
-        waypoints: waypoints
+        waypoints: bars
       });
     });
     
   }
 
   getBars(address, callback) {
-    //array of bar objects
-    var waypoints = [];
-    //object containing names of already visited bars
-    var visited = {};
-    //const MAX_WAYPOINTS = 1;
 
-    var populateWaypoints = (newAddress, count) => {
-      if (count === 0) {
-        callback(waypoints);
-      } else {
-        //geocode address into google.maps.LatLng object
-        this.geocoder.geocode({
-          address: newAddress
-        }, (results, status) => {
-          if (status === 'OK') {
-            console.log('Geocode results: ', results);
+    //geocode address into google.maps.LatLng object
+    this.geocoder.geocode({
+      address: address
+    }, (results, status) => {
 
-            var request = {
-              location: results[0].geometry.location,
-              keyword: 'bar',
-              rankBy: google.maps.places.RankBy.DISTANCE
-            }
-            //nearby search of coordinates of address
-            this.placesService.nearbySearch(request, function(results, status) {
-              
-              if (status === google.maps.places.PlacesServiceStatus.OK) {
-                var current = '';
-                //push closest unvisited bar to waypoints
-                for (var i = 0; i < results.length; i++) {
-                  if (!visited[results[i].name]) {
-                    visited[results[i].name] = true;
-                    waypoints.push(results[i]);
-                    current = results[i].vicinity;
-                    break;
-                  }
-                }
-                console.log('Bar ' + waypoints.length + ': ' + current);
-                populateWaypoints(current, count - 1);
-              }
+      if (status === 'OK') {
+
+        var request = {
+          location: results[0].geometry.location,
+          keyword: 'bar',
+          rankBy: google.maps.places.RankBy.DISTANCE
+        }
+        //nearby search of coordinates of address
+        this.placesService.nearbySearch(request, (results, status) => {
+          
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+            var visited = {};
+            this.state.waypoints.forEach((waypoint) => {
+              visited[waypoint.location] = true;
             });
-          } 
-        });
-      }
-    };
 
-    populateWaypoints(address, this.state.waypoints.length + 1);
+            var i = 0;
+
+            while (visited[results[i].vicinity]) {
+              console.log(results[i].vicinity);
+              i++;
+            }
+
+            var waypoint = {
+              location: results[i].vicinity,
+              stopover: true
+            };
+
+            callback(this.state.waypoints.concat(waypoint));
+          }
+        });
+      } 
+    });
 
   }
 
@@ -209,12 +203,10 @@ class Map extends React.Component {
             this.setState({
               startLoc: startLoc,
               waypoints: [],
-              e: e
             }, () => {
               this.handleLocationSubmit(e);
             });
             
-            //this.handleLocationSubmit.call(this, e); 
           }}>
 
             <input placeholder="Your location" type="text" ref="location"/>

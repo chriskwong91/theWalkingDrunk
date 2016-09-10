@@ -22075,22 +22075,22 @@
 	        e.preventDefault();
 	      }
 	
-	      var address = this.refs.location.value || this.state.startLoc;
+	      var address;
+	
+	      if (this.state.waypoints[this.state.waypoints.length - 1]) {
+	        address = this.state.waypoints[this.state.waypoints.length - 1].location;
+	      } else if (this.refs.location.value) {
+	        address = this.refs.location.value;
+	      } else {
+	        address = this.state.startLoc;
+	      }
 	
 	      this.getBars(address, function (bars) {
-	        //var firstEigthBars = bars.slice(0, 8);
-	        //console.log('Final waypoints: ', firstEigthBars);
-	        bars = bars.slice(0, 8);
-	        console.log('Final waypoints: ', bars);
-	        var waypoints = bars.map(function (bar) {
-	          return {
-	            location: bar.vicinity,
-	            stopover: true
-	          };
-	        });
+	
+	        bars = bars.slice(0, 7);
+	
 	        _this2.setState({
-	          startLoc: address,
-	          waypoints: waypoints
+	          waypoints: bars
 	        });
 	      });
 	    }
@@ -22099,52 +22099,45 @@
 	    value: function getBars(address, callback) {
 	      var _this3 = this;
 	
-	      //array of bar objects
-	      var waypoints = [];
-	      //object containing names of already visited bars
-	      var visited = {};
-	      //const MAX_WAYPOINTS = 1;
+	      //geocode address into google.maps.LatLng object
+	      this.geocoder.geocode({
+	        address: address
+	      }, function (results, status) {
 	
-	      var populateWaypoints = function populateWaypoints(newAddress, count) {
-	        if (count === 0) {
-	          callback(waypoints);
-	        } else {
-	          //geocode address into google.maps.LatLng object
-	          _this3.geocoder.geocode({
-	            address: newAddress
-	          }, function (results, status) {
-	            if (status === 'OK') {
-	              console.log('Geocode results: ', results);
+	        if (status === 'OK') {
 	
-	              var request = {
-	                location: results[0].geometry.location,
-	                keyword: 'bar',
-	                rankBy: google.maps.places.RankBy.DISTANCE
-	              };
-	              //nearby search of coordinates of address
-	              _this3.placesService.nearbySearch(request, function (results, status) {
+	          var request = {
+	            location: results[0].geometry.location,
+	            keyword: 'bar',
+	            rankBy: google.maps.places.RankBy.DISTANCE
+	          };
+	          //nearby search of coordinates of address
+	          _this3.placesService.nearbySearch(request, function (results, status) {
 	
-	                if (status === google.maps.places.PlacesServiceStatus.OK) {
-	                  var current = '';
-	                  //push closest unvisited bar to waypoints
-	                  for (var i = 0; i < results.length; i++) {
-	                    if (!visited[results[i].name]) {
-	                      visited[results[i].name] = true;
-	                      waypoints.push(results[i]);
-	                      current = results[i].vicinity;
-	                      break;
-	                    }
-	                  }
-	                  console.log('Bar ' + waypoints.length + ': ' + current);
-	                  populateWaypoints(current, count - 1);
-	                }
+	            if (status === google.maps.places.PlacesServiceStatus.OK) {
+	
+	              var visited = {};
+	              _this3.state.waypoints.forEach(function (waypoint) {
+	                visited[waypoint.location] = true;
 	              });
+	
+	              var i = 0;
+	
+	              while (visited[results[i].vicinity]) {
+	                console.log(results[i].vicinity);
+	                i++;
+	              }
+	
+	              var waypoint = {
+	                location: results[i].vicinity,
+	                stopover: true
+	              };
+	
+	              callback(_this3.state.waypoints.concat(waypoint));
 	            }
 	          });
 	        }
-	      };
-	
-	      populateWaypoints(address, this.state.waypoints.length + 1);
+	      });
 	    }
 	
 	    // getBars(address, callback) {
@@ -22212,13 +22205,10 @@
 	                var startLoc = _this4.refs.location.value;
 	                _this4.setState({
 	                  startLoc: startLoc,
-	                  waypoints: [],
-	                  e: e
+	                  waypoints: []
 	                }, function () {
 	                  _this4.handleLocationSubmit(e);
 	                });
-	
-	                //this.handleLocationSubmit.call(this, e); 
 	              } },
 	            _react2.default.createElement('input', { placeholder: 'Your location', type: 'text', ref: 'location' })
 	          )
