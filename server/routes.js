@@ -16,10 +16,10 @@ module.exports = function (app, express) {
   app.route('/cached/routes')
     .get(function(req, res){
       console.log('GET - /cached/routes');
+      db.retrievePubRoutes(req, res);
     })
     .post(function(req, res){
       console.log('POST - /cached/routes');
-      console.log(req.body);
       db.cachePubRoutes(req, res);
     });
 

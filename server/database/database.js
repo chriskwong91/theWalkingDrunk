@@ -30,11 +30,10 @@ var Pubs = mongoose.model('Pubs', pubSchema);
 // Utility object to be exported
 var utils = {};
 
-utils.cachePubRoutes = (currPub, nextPubs) => {
-  console.log(Pubs);
+utils.cachePubRoutes = (req, res) => {
   new Pubs({
-    currPub: currPub,
-    nextPubs: nextPubs
+    currPub: req.body.currPub,
+    nextPubs: req.body.nextPubs
   })
   .save((err) => {
     if(err)
@@ -45,7 +44,7 @@ utils.cachePubRoutes = (currPub, nextPubs) => {
 
 // make promise then it will work
 utils.retrievePubRoutes = (req, res) => {
-  Pubs.findOne({currPub:req.body.currPub}, (err, query) => {
+  Pubs.findOne({currPub:req.headers.currpub}, (err, query) => {
       if (err) throw err;
       res.send(query)
     });
