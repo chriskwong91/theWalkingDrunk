@@ -1,5 +1,8 @@
 var fs = require('fs');
-var waypointGeneration = require('./waypointGeneration/waypointGeneration.js')
+var yelpSearch = require('./yelpSearch.js');
+var db = require('./database/database.js');
+var bodyParser = require('body-parser');
+
 
 module.exports = function (app, express) {
 
@@ -10,14 +13,17 @@ module.exports = function (app, express) {
       res.render('index');
     });
 
-  app.route('/yelp/search')
+  app.route('/cached/routes')
     .get(function(req, res){
-      console.log('GET - /yelp/search');
-      waypointGeneration(req, res);
+      console.log('GET - /cached/routes');
+    })
+    .post(function(req, res){
+      console.log('POST - /cached/routes');
+      console.log(req.body);
+      db.cachePubRoutes(req, res);
     });
 
-
-  app.use(function(req, res, next){
+  app.use(function(req, res){
     res.status(404);
 
     if (req.accepts('html')) {

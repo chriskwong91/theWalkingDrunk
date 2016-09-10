@@ -16,10 +16,10 @@ var client = yelp.createClient({
  
  
 // exports promise
-module.exports = function(location){
+module.exports = (req) => {
 	return client.search({
-	  terms: "barcrawl",
-	  location: location,
+	  terms: "bar",
+	  location: "elk grove, ca",
     category_filter: "nightlife"
 	});
 };
