@@ -1,5 +1,6 @@
 import React from 'react';
 var map = window.Map;
+var CurrInfoComponent = require('./CurrInfoComponent.jsx');
 
 class Map extends React.Component {
   constructor(props) {
@@ -159,6 +160,9 @@ class Map extends React.Component {
 
     return (
       <div>
+        <div>
+          <CurrInfoComponent />
+        </div>
         <div>
           <button onClick={this.handleNextBar.bind(this)}>Next Bar</button>
         </div>
