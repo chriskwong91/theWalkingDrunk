@@ -22015,6 +22015,13 @@
 	  _createClass(Map, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
+	      this.initMap();
+	
+	      this.handleLocationSubmit();
+	    }
+	  }, {
+	    key: 'initMap',
+	    value: function initMap() {
 	      this.map = new google.maps.Map(this.refs.map, {
 	        zoom: 16,
 	        mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -22028,8 +22035,6 @@
 	
 	      this.geocoder = new google.maps.Geocoder();
 	      this.placesService = new google.maps.places.PlacesService(this.map);
-	
-	      this.handleLocationSubmit();
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
@@ -22075,6 +22080,7 @@
 	      this.getBars(address, function (bars) {
 	        //var firstEigthBars = bars.slice(0, 8);
 	        //console.log('Final waypoints: ', firstEigthBars);
+	        bars = bars.slice(0, 8);
 	        console.log('Final waypoints: ', bars);
 	        var waypoints = bars.map(function (bar) {
 	          return {
@@ -22097,7 +22103,7 @@
 	      var waypoints = [];
 	      //object containing names of already visited bars
 	      var visited = {};
-	      var MAX_WAYPOINTS = 8;
+	      //const MAX_WAYPOINTS = 1;
 	
 	      var populateWaypoints = function populateWaypoints(newAddress, count) {
 	        if (count === 0) {
@@ -22138,7 +22144,7 @@
 	        }
 	      };
 	
-	      populateWaypoints(address, MAX_WAYPOINTS);
+	      populateWaypoints(address, this.state.waypoints.length + 1);
 	    }
 	
 	    // getBars(address, callback) {
@@ -22171,6 +22177,8 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this4 = this;
+	
 	      var mapStyle = {
 	        width: 500,
 	        height: 300
@@ -22186,9 +22194,34 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          'form',
-	          { onSubmit: this.handleLocationSubmit.bind(this) },
-	          _react2.default.createElement('input', { placeholder: 'Your location', type: 'text', ref: 'location' })
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.handleLocationSubmit.bind(this) },
+	            'Next Bar'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'form',
+	            { onSubmit: function onSubmit(e) {
+	                e.persist();
+	                var startLoc = _this4.refs.location.value;
+	                _this4.setState({
+	                  startLoc: startLoc,
+	                  waypoints: [],
+	                  e: e
+	                }, function () {
+	                  _this4.handleLocationSubmit(e);
+	                });
+	
+	                //this.handleLocationSubmit.call(this, e); 
+	              } },
+	            _react2.default.createElement('input', { placeholder: 'Your location', type: 'text', ref: 'location' })
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
