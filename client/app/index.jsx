@@ -163,8 +163,8 @@ class Map extends React.Component {
 
   render() {
     const mapStyle = {
-      width: 500,
-      height: 300,
+      height: 400,
+      width: 100,
     };
     
     const mapDivStyle = {
@@ -174,24 +174,34 @@ class Map extends React.Component {
     }
 
     return (
-    	<div>
-        <div>
-          <button onClick={this.handleNextBar.bind(this)}>Next Bar</button>
+      
+    	<div className="row">
+        
+        <div> 
+          <div>
+            <button type="submit" name="action"
+            onClick={this.handleNextBar.bind(this)}>Next Bar</button>
+          </div>
+           
+          <div>
+            <button type="submit" name="action" 
+            onClick={this.handleChangeBar.bind(this)}>Change Current Bar</button>
+          </div>
         </div>
-        <div>
-          <button onClick={this.handleChangeBar.bind(this)}>Change Current Bar</button>
-        </div>
+        
         <div>
           <form onSubmit={this.handleLocationSubmit.bind(this)}>
             <input placeholder="Your location" type="text" ref="location"/>
           </form>
         </div>
-  	      <div style={mapDivStyle}>
-  	        <div ref="map" style={mapStyle}>I should be a map!</div>
-  	      </div>
-  	      <div>
-  					<div id="directions-panel" ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>
-  				</div>
+
+        <div style={mapDivStyle}> 
+	        <div ref="map" style={mapStyle}>I should be a map!</div>
+	      </div>
+  	      
+        <div>
+					<div id="directions-panel" ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>
+				</div>
       </div>
     );
   }
