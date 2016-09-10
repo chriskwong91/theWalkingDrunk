@@ -22017,7 +22017,7 @@
 	    value: function componentDidMount() {
 	      this.initMap();
 	
-	      this.handleLocationSubmit();
+	      this.handleNextBar();
 	    }
 	  }, {
 	    key: 'initMap',
@@ -22035,18 +22035,21 @@
 	
 	      this.geocoder = new google.maps.Geocoder();
 	      this.placesService = new google.maps.places.PlacesService(this.map);
+	      this.stepDisplay = new google.maps.InfoWindow();
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
 	    value: function componentDidUpdate() {
+	      var _this2 = this;
+	
 	      if (this.state.waypoints.length > 0) {
 	
 	        var request = this.getRouteRequest();
 	        this.directionsService.route(request, function (response, status) {
 	          if (status == google.maps.DirectionsStatus.OK) {
-	            this.directionsDisplay.setDirections(response);
+	            _this2.directionsDisplay.setDirections(response);
 	          }
-	        }.bind(this));
+	        });
 	      }
 	    }
 	  }, {
@@ -22061,15 +22064,15 @@
 	        travelMode: google.maps.DirectionsTravelMode.WALKING,
 	        //last waypoint already the destination
 	        waypoints: this.state.waypoints.slice(0, -1),
-	        optimizeWaypoints: true
+	        optimizeWaypoints: false
 	      };
 	
 	      return request;
 	    }
 	  }, {
-	    key: 'handleLocationSubmit',
-	    value: function handleLocationSubmit(e) {
-	      var _this2 = this;
+	    key: 'handleNextBar',
+	    value: function handleNextBar(e) {
+	      var _this3 = this;
 	
 	      if (e) {
 	        e.preventDefault();
@@ -22085,19 +22088,33 @@
 	        address = this.state.startLoc;
 	      }
 	
-	      this.getBars(address, function (bars) {
+	      this.getWaypoints(address, function (waypoints) {
 	
-	        bars = bars.slice(0, 7);
+	        waypoints = waypoints.slice(0, 7);
 	
-	        _this2.setState({
-	          waypoints: bars
+	        _this3.setState({
+	          waypoints: waypoints
 	        });
 	      });
 	    }
 	  }, {
-	    key: 'getBars',
-	    value: function getBars(address, callback) {
-	      var _this3 = this;
+	    key: 'handleLocationSubmit',
+	    value: function handleLocationSubmit(e) {
+	      var _this4 = this;
+	
+	      e.persist();
+	      var startLoc = this.refs.location.value;
+	      this.setState({
+	        startLoc: startLoc,
+	        waypoints: []
+	      }, function () {
+	        _this4.handleNextBar(e);
+	      });
+	    }
+	  }, {
+	    key: 'getWaypoints',
+	    value: function getWaypoints(address, callback) {
+	      var _this5 = this;
 	
 	      //geocode address into google.maps.LatLng object
 	      this.geocoder.geocode({
@@ -22112,17 +22129,18 @@
 	            rankBy: google.maps.places.RankBy.DISTANCE
 	          };
 	          //nearby search of coordinates of address
-	          _this3.placesService.nearbySearch(request, function (results, status) {
+	          _this5.placesService.nearbySearch(request, function (results, status) {
 	
 	            if (status === google.maps.places.PlacesServiceStatus.OK) {
 	
 	              var visited = {};
-	              _this3.state.waypoints.forEach(function (waypoint) {
+	              //populate vitised object with waypoint addresses
+	              _this5.state.waypoints.forEach(function (waypoint) {
 	                visited[waypoint.location] = true;
 	              });
 	
+	              //set new waypoint equal to first unvisited bar
 	              var i = 0;
-	
 	              while (visited[results[i].vicinity]) {
 	                console.log(results[i].vicinity);
 	                i++;
@@ -22133,7 +22151,7 @@
 	                stopover: true
 	              };
 	
-	              callback(_this3.state.waypoints.concat(waypoint));
+	              callback(_this5.state.waypoints.concat(waypoint));
 	            }
 	          });
 	        }
@@ -22170,8 +22188,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this4 = this;
-	
 	      var mapStyle = {
 	        width: 500,
 	        height: 300
@@ -22191,7 +22207,7 @@
 	          null,
 	          _react2.default.createElement(
 	            'button',
-	            { onClick: this.handleLocationSubmit.bind(this) },
+	            { onClick: this.handleNextBar.bind(this) },
 	            'Next Bar'
 	          )
 	        ),
@@ -22200,16 +22216,7 @@
 	          null,
 	          _react2.default.createElement(
 	            'form',
-	            { onSubmit: function onSubmit(e) {
-	                e.persist();
-	                var startLoc = _this4.refs.location.value;
-	                _this4.setState({
-	                  startLoc: startLoc,
-	                  waypoints: []
-	                }, function () {
-	                  _this4.handleLocationSubmit(e);
-	                });
-	              } },
+	            { onSubmit: this.handleLocationSubmit.bind(this) },
 	            _react2.default.createElement('input', { placeholder: 'Your location', type: 'text', ref: 'location' })
 	          )
 	        ),
@@ -22227,7 +22234,7 @@
 	          null,
 	          _react2.default.createElement(
 	            'div',
-	            { ref: 'panel' },
+	            { id: 'directions-panel', ref: 'panel' },
 	            'Hack Reactor to Tempest!!! Drink on my hacking drunkards!'
 	          )
 	        )

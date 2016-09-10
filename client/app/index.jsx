@@ -34,7 +34,7 @@ class Map extends React.Component {
   componentDidMount() {
     this.initMap();
 
-    this.handleLocationSubmit();
+    this.handleNextBar();
 
   }
 
@@ -52,17 +52,18 @@ class Map extends React.Component {
 
     this.geocoder = new google.maps.Geocoder();
     this.placesService = new google.maps.places.PlacesService(this.map);
+    this.stepDisplay = new google.maps.InfoWindow();
   }
 
   componentDidUpdate() {
     if (this.state.waypoints.length > 0) {
 
       var request = this.getRouteRequest();
-      this.directionsService.route(request, function(response, status) {
+      this.directionsService.route(request, (response, status) => {
         if (status == google.maps.DirectionsStatus.OK) {
           this.directionsDisplay.setDirections(response);
         }
-      }.bind(this));
+      });
     }
   }
 
@@ -76,13 +77,13 @@ class Map extends React.Component {
       travelMode: google.maps.DirectionsTravelMode.WALKING,
       //last waypoint already the destination
       waypoints: this.state.waypoints.slice(0, -1),
-      optimizeWaypoints: true
+      optimizeWaypoints: false
     }
 
     return request;
   }
 
-  handleLocationSubmit(e) {
+  handleNextBar(e) {
     if (e) {
       e.preventDefault();
     }
@@ -97,18 +98,29 @@ class Map extends React.Component {
       address = this.state.startLoc;
     }
     
-    this.getBars(address, (bars) => {
+    this.getWaypoints(address, (waypoints) => {
 
-      bars = bars.slice(0, 7);
+      waypoints = waypoints.slice(0, 7);
 
       this.setState({
-        waypoints: bars
+        waypoints: waypoints
       });
     });
     
   }
 
-  getBars(address, callback) {
+  handleLocationSubmit(e) {
+    e.persist();
+    var startLoc = this.refs.location.value;
+    this.setState({
+      startLoc: startLoc,
+      waypoints: [],
+    }, () => {
+      this.handleNextBar(e);
+    });
+  }
+
+  getWaypoints(address, callback) {
 
     //geocode address into google.maps.LatLng object
     this.geocoder.geocode({
@@ -128,12 +140,13 @@ class Map extends React.Component {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
 
             var visited = {};
+            //populate vitised object with waypoint addresses
             this.state.waypoints.forEach((waypoint) => {
               visited[waypoint.location] = true;
             });
 
+            //set new waypoint equal to first unvisited bar
             var i = 0;
-
             while (visited[results[i].vicinity]) {
               console.log(results[i].vicinity);
               i++;
@@ -194,21 +207,10 @@ class Map extends React.Component {
     return (
     	<div>
         <div>
-          <button onClick={this.handleLocationSubmit.bind(this)}>Next Bar</button>
+          <button onClick={this.handleNextBar.bind(this)}>Next Bar</button>
         </div>
         <div>
-          <form onSubmit={(e) => {
-            e.persist();
-            var startLoc = this.refs.location.value;
-            this.setState({
-              startLoc: startLoc,
-              waypoints: [],
-            }, () => {
-              this.handleLocationSubmit(e);
-            });
-            
-          }}>
-
+          <form onSubmit={this.handleLocationSubmit.bind(this)}>
             <input placeholder="Your location" type="text" ref="location"/>
           </form>
         </div>
@@ -216,7 +218,7 @@ class Map extends React.Component {
   	        <div ref="map" style={mapStyle}>I should be a map!</div>
   	      </div>
   	      <div>
-  					<div ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>
+  					<div id="directions-panel" ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>
   				</div>
       </div>
     );
