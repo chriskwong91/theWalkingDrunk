@@ -6,7 +6,8 @@ class Map extends React.Component {
     super(props);
     this.state = {
       startLoc: this.props.startLoc || 'SF',
-      waypoints: []
+      waypoints: [],
+      current: {}
     };
     this.visited = {};
   }
@@ -75,10 +76,10 @@ class Map extends React.Component {
       address = this.state.startLoc;
     }
     
-    this.getWaypoints(address, (waypoints) => {
-      waypoints = waypoints.slice(0, 7);
+    this.getWaypoints(address, (results) => {
       this.setState({
-        waypoints: waypoints
+        waypoints: results.waypoints.slice(0, 7),
+        current: results.current
       });
     });
   }
@@ -118,7 +119,6 @@ class Map extends React.Component {
           //set new waypoint equal to first unvisited bar
           var i = 0;
           while (this.visited[results[i].vicinity]) {
-            console.log(results[i].vicinity);
             i++;
           }
 
@@ -129,7 +129,14 @@ class Map extends React.Component {
 
           this.visited[waypoint.location] = true;
 
-          callback(this.state.waypoints.concat(waypoint));
+          var waypoints = this.state.waypoints.concat(waypoint);
+
+          var results = {
+            waypoints: waypoints,
+            current: results[i]
+          };
+
+          callback(results);
         }
       });
     });
