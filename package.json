@@ -33,6 +33,8 @@
     "fs": "0.0.1-security",
     "google-maps-react": "^1.0.18",
     "jsx": "^0.9.89",
+    "mongoose": "^4.6.0",
+    "node-yelp": "0.0.3",
     "path": "^0.12.7",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
