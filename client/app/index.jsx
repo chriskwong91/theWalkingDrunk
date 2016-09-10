@@ -28,6 +28,7 @@ class Map extends React.Component {
       startLoc: 'Hack Reactor SF',
       waypoints: []
     };
+    this.visited = {};
   }
   
   // make use of React Software Component Lifecycle 
@@ -116,6 +117,16 @@ class Map extends React.Component {
       startLoc: startLoc,
       waypoints: [],
     }, () => {
+      this.visited = {};
+      this.handleNextBar(e);
+    });
+  }
+
+  handleChangeBar(e) {
+    e.persist();
+    this.setState({
+      waypoints: this.state.waypoints.slice(0, -1)
+    }, () => {
       this.handleNextBar(e);
     });
   }
@@ -139,15 +150,9 @@ class Map extends React.Component {
           
           if (status === google.maps.places.PlacesServiceStatus.OK) {
 
-            var visited = {};
-            //populate vitised object with waypoint addresses
-            this.state.waypoints.forEach((waypoint) => {
-              visited[waypoint.location] = true;
-            });
-
             //set new waypoint equal to first unvisited bar
             var i = 0;
-            while (visited[results[i].vicinity]) {
+            while (this.visited[results[i].vicinity]) {
               console.log(results[i].vicinity);
               i++;
             }
@@ -156,6 +161,8 @@ class Map extends React.Component {
               location: results[i].vicinity,
               stopover: true
             };
+
+            this.visited[waypoint.location] = true;
 
             callback(this.state.waypoints.concat(waypoint));
           }
@@ -208,6 +215,9 @@ class Map extends React.Component {
     	<div>
         <div>
           <button onClick={this.handleNextBar.bind(this)}>Next Bar</button>
+        </div>
+        <div>
+          <button onClick={this.handleChangeBar.bind(this)}>Change Current Bar</button>
         </div>
         <div>
           <form onSubmit={this.handleLocationSubmit.bind(this)}>

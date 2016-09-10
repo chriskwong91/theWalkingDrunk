@@ -22006,6 +22006,7 @@
 	      startLoc: 'Hack Reactor SF',
 	      waypoints: []
 	    };
+	    _this.visited = {};
 	    return _this;
 	  }
 	
@@ -22108,13 +22109,26 @@
 	        startLoc: startLoc,
 	        waypoints: []
 	      }, function () {
+	        _this4.visited = {};
 	        _this4.handleNextBar(e);
+	      });
+	    }
+	  }, {
+	    key: 'handleChangeBar',
+	    value: function handleChangeBar(e) {
+	      var _this5 = this;
+	
+	      e.persist();
+	      this.setState({
+	        waypoints: this.state.waypoints.slice(0, -1)
+	      }, function () {
+	        _this5.handleNextBar(e);
 	      });
 	    }
 	  }, {
 	    key: 'getWaypoints',
 	    value: function getWaypoints(address, callback) {
-	      var _this5 = this;
+	      var _this6 = this;
 	
 	      //geocode address into google.maps.LatLng object
 	      this.geocoder.geocode({
@@ -22129,19 +22143,13 @@
 	            rankBy: google.maps.places.RankBy.DISTANCE
 	          };
 	          //nearby search of coordinates of address
-	          _this5.placesService.nearbySearch(request, function (results, status) {
+	          _this6.placesService.nearbySearch(request, function (results, status) {
 	
 	            if (status === google.maps.places.PlacesServiceStatus.OK) {
 	
-	              var visited = {};
-	              //populate vitised object with waypoint addresses
-	              _this5.state.waypoints.forEach(function (waypoint) {
-	                visited[waypoint.location] = true;
-	              });
-	
 	              //set new waypoint equal to first unvisited bar
 	              var i = 0;
-	              while (visited[results[i].vicinity]) {
+	              while (_this6.visited[results[i].vicinity]) {
 	                console.log(results[i].vicinity);
 	                i++;
 	              }
@@ -22151,7 +22159,9 @@
 	                stopover: true
 	              };
 	
-	              callback(_this5.state.waypoints.concat(waypoint));
+	              _this6.visited[waypoint.location] = true;
+	
+	              callback(_this6.state.waypoints.concat(waypoint));
 	            }
 	          });
 	        }
@@ -22209,6 +22219,15 @@
 	            'button',
 	            { onClick: this.handleNextBar.bind(this) },
 	            'Next Bar'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.handleChangeBar.bind(this) },
+	            'Change Current Bar'
 	          )
 	        ),
 	        _react2.default.createElement(
