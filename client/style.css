@@ -28,6 +28,7 @@
 	font-size: 65px; 
 }*/
 
+
 .text {
 	text-align: center;
 	color: #000;
@@ -40,6 +41,8 @@
 	margin-right: 7px;
 	border-radius: 100px;
 	border: 5px solid #FFF;
+	overflow: hidden;
+
 
 }
 
@@ -55,11 +58,14 @@ div.effect1 img{
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0;
-    transition: opacity 500ms;
+    border-radius:100px;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 div.effect1:hover img{
-    opacity: 0.7;
+    opacity: 0.3;
+    -webkit-transform: rotate(720deg);
+    transform: rotate(720deg);
 }
 
 /*Image effect 2*/
@@ -81,16 +87,16 @@ div.effect3{
 }
 div.effect3 img{
     position: absolute;
-    opacity: .7;
+    opacity: 0.7;
     top: 0;
     left: 0;
-    margin-left: -200px;
     -webkit-box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
     box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
     transition: margin-left 800ms;
 }
 div.effect3:hover img{
-    margin-left: 0;
+    margin-left: -200px;
+    /*margin-left: 0;*/
 }
 /*Image effect 4*/
 div.effect4{
@@ -103,16 +109,16 @@ div.effect4 img{
 }
 div.effect4 img{
     opacity: .7;
-    transform: solid(0);
+    transform: solid(1);
     transition-duration: 800ms;
-    -webkit-transform: scale(0);
+    -webkit-transform: scale(1);
     -webkit-box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
     box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
 }
 div.effect4:hover img{
-    transform: solid(1);
+    transform: solid(0);
     transition-duration: 800ms;
-    -webkit-transform: scale(1);
+    -webkit-transform: scale(0);
 }
  
 /*Image effect 5*/
@@ -124,14 +130,14 @@ div.effect5 img{
     position:absolute;
     top:0;
     left:0;
-    margin-top:-200px;
+    margin-top:0px;
     border-radius:100px;
     opacity: 0.7;
     -webkit-box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
     box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
 }
 div.effect5:hover img{
-    margin-top:0;
+    margin-top:-200px;
     transition-duration: 800ms;
 }
 /*Image effect 6*/
@@ -142,7 +148,7 @@ div.effect6 img{
     position:absolute;
     top:0;
     left:0;
-    border-radius:105px;
+    border-radius:100px;
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }

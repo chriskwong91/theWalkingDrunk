@@ -22195,7 +22195,7 @@
 	              null,
 	              _react2.default.createElement(
 	                'button',
-	                { className: 'btn waves-effect waves-light btn-large red lighten-2', type: 'submit', name: 'action',
+	                { className: 'btn waves-effect waves-light btn-large red lighten-2 z-depth-5', type: 'submit', name: 'action',
 	                  onClick: this.handleNextBar.bind(this) },
 	                'Next Bar'
 	              )
@@ -22205,7 +22205,7 @@
 	              null,
 	              _react2.default.createElement(
 	                'button',
-	                { className: 'btn waves-effect waves-light btn-large red lighten-2', type: 'submit', name: 'action',
+	                { className: 'btn waves-effect waves-light btn-large red lighten-2 z-depth-5', type: 'submit', name: 'action',
 	                  onClick: this.handleChangeBar.bind(this) },
 	                'Change Current Bar'
 	              )
@@ -22217,10 +22217,14 @@
 	            _react2.default.createElement(
 	              'form',
 	              { onSubmit: this.handleLocationSubmit.bind(this) },
-	              _react2.default.createElement('input', { placeholder: 'Your location', type: 'text', ref: 'location' }),
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                _react2.default.createElement('input', { placeholder: 'Your location', type: 'text', ref: 'location' })
+	              ),
 	              _react2.default.createElement(
 	                'button',
-	                { className: 'btn waves-effect waves-light red lighten-2', type: 'submit', name: 'action' },
+	                { className: 'btn waves-effect waves-light red lighten-2 z-depth-5', type: 'submit', name: 'action' },
 	                'Find',
 	                _react2.default.createElement(
 	                  'i',
