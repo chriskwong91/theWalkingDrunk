@@ -7,7 +7,7 @@ class Map extends React.Component {
     super(props);
     this.state = {
       startLoc: this.props.startLoc || 'SF',
-      waypoints: [],
+      waypoints: [],  
       current: {}
     };
     this.visited = {};
@@ -168,7 +168,7 @@ class Map extends React.Component {
     return (
       <div>
         <div>
-          <CurrInfoComponent />
+          <CurrInfoComponent current={this.state.current} />
         </div>
         <div>
           <button onClick={this.handleNextBar.bind(this)}>Next Bar</button>
@@ -181,12 +181,12 @@ class Map extends React.Component {
             <input placeholder="Your location" type="text" ref="location"/>
           </form>
         </div>
-          <div style={mapDivStyle}>
-            <div ref="map" style={mapStyle}>I should be a map!</div>
-          </div>
-          <div>
-            <div id="directions-panel" ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>
-          </div>
+        <div style={mapDivStyle}>
+          <div ref="map" style={mapStyle}>I should be a map!</div>
+        </div>
+        <div>
+          <div id="directions-panel" ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>
+        </div>
       </div>
     );
   }

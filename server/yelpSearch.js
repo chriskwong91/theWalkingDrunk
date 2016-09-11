@@ -1,5 +1,7 @@
 var yelp = require("node-yelp");
 var db = require('./database/database.js');
+var fs = require('fs');
+
 var client = yelp.createClient({
   oauth: {
     "consumer_key": "_Qs9S9ohkGj32ygCz0vhyA",
@@ -23,19 +25,29 @@ module.exports = (req, res) => {
   //   res.send(db.retrieveEntry(req.headers.bar));
   //   return;
   // }
-
+  // console.log(req.query.name, req.query.location);
 	client.search({
-	  terms: req.headers.name,
-	  location: req.headers.location
+	  terms: req.query.name,
+	  location: req.query.location + ',USA' 
     // category_filter: "nightlife"
 	})
   .catch((err) => {
-    throw err
+    res.send(err);
   })
   .then((obj) => {
     // does not check validity of result
     // relies on accuracy of google.maps.places results
-    db.cacheYelpInfo(obj.businesses[0]); 
-    res.send(obj.businesses[0]);
+    // console.log(obj.businesses[0]);
+    if (obj){
+      db.cacheYelpInfo(obj.businesses[0]); 
+      for (var i = 0; i < obj.businesses.length; i++){
+        if(obj.businesses[i].name === req.query.name){
+          res.send(obj.businesses[i]);
+          console.log('selected ', obj.businesses[i].name, obj.businesses[i].location);
+          return;
+        }
+      }
+    res.send(!!obj.businesses ? obj.businesses[0] : 'Try Again');
+    }
   });
 };
