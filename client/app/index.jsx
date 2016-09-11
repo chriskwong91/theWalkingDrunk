@@ -2,6 +2,8 @@ import React from 'react';
 var map = window.Map;
 
 class Map extends React.Component {
+  //Tests:
+  //Calling new Map returns a new object that is a map.
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +20,8 @@ class Map extends React.Component {
     this.handleNextBar();
   }
 
+  //Setup the Google map objects, these are used later to
+  //interact with the map.
   initMap() {
     this.map = new google.maps.Map(this.refs.map, {
       zoom: 16,
@@ -35,6 +39,9 @@ class Map extends React.Component {
     this.stepDisplay = new google.maps.InfoWindow();
   }
 
+  //Re-render the map and directions when the state changes:
+  //Tests:
+  //The html for the map changes when the state changes?
   componentDidUpdate() {
     if (this.state.waypoints.length > 0) {
       var request = this.getRouteRequest();
@@ -46,6 +53,9 @@ class Map extends React.Component {
     }
   }
 
+  //Form a request that is sent to the mapping API:
+  //Tests:
+  //The destination is the furthest location in the waypoints array.
   getRouteRequest() {
     //need to calculate farthest away waypoint and set to endLoc
     var endLoc = this.state.waypoints[this.state.waypoints.length - 1];
@@ -62,6 +72,12 @@ class Map extends React.Component {
     return request;
   }
 
+  //Called when the user clicks the "Next Bar" button.
+  //Adds the next bar to the waypoints array in the state.
+  //Tests:
+  //The waypoints array has a length of n + 1 or 8 if n was already 8.
+  //state.current should be a new bar
+  //The address of state.current should be the same as the last location in the waypoints array.
   handleNextBar(e) {
     if (e) {
       e.preventDefault();
@@ -80,10 +96,16 @@ class Map extends React.Component {
       this.setState({
         waypoints: results.waypoints.slice(0, 7),
         current: results.current
-      });
+      }, () => console.log(this.state.current));
     });
   }
 
+  //Called when the user clicks the "Find >" button.
+  //Sets a new starting location and clears the current
+  //waypoints.
+  //Tests:
+  //state.startLoc equals the submited value
+  //The waypoints array has a length of 1
   handleLocationSubmit(e) {
     e.persist();
     var startLoc = this.refs.location.value;
@@ -96,6 +118,13 @@ class Map extends React.Component {
     });
   }
 
+  //Called when the user clicks the "Next Bar" button.
+  //Removes the last waypoint from the state and then finds
+  //an alternate bar which has not been visited yet.
+  //Tests:
+  //There is a new bar in the waypoints.
+  //The previous bar is not in the waypoints.
+  //If there are no bars to change to, it retains the current bar.
   handleChangeBar(e) {
     e.persist();
     this.setState({
@@ -105,15 +134,20 @@ class Map extends React.Component {
     });
   }
 
+  //Finds an array of waypoints and passes them to a callback:
+  //Tests:
+  //Passes results to the callback.
+  //No item is in the waypoint array more than once.
   getWaypoints(address, callback) {
     //geocode address into google.maps.LatLng object
     this.geocodeAddress(address, (latLng) => {
+      //Construct the request object:
       var request = {
         location: latLng,
         types: ['bar'],
         rankBy: google.maps.places.RankBy.DISTANCE
       }
-      //nearby search of coordinates of address
+      //Search for bars near the geocoded location:
       this.placesService.nearbySearch(request, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           //set new waypoint equal to first unvisited bar
@@ -122,10 +156,14 @@ class Map extends React.Component {
             i++;
           }
 
-          var waypoint = {
-            location: results[i].vicinity,
-            stopover: true
-          };
+          if (!results[i]) {
+            //do something
+          } else {
+            var waypoint = {
+              location: results[i].vicinity,
+              stopover: true
+            };
+          }
 
           this.visited[waypoint.location] = true;
 
@@ -142,6 +180,10 @@ class Map extends React.Component {
     });
   }
 
+  //Geocodes an address and passes the associated latitude and longitude
+  //to a callback.
+  //Tests:
+  // Geocache Hack Reactor's website, verify that it finds the correct longitude and latitude.
   geocodeAddress(address, callback) {
     this.geocoder.geocode({
       address: address
@@ -152,6 +194,7 @@ class Map extends React.Component {
     });
   }
 
+  //Render the map:
   render() {
     const mapStyle = {
       height: 500,
