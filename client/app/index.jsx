@@ -154,16 +154,17 @@ class Map extends React.Component {
           var i = 0;
           while (this.visited[results[i].vicinity]) {
             i++;
+            if (!results[i]) {
+              break;
+            }
           }
 
-          if (!results[i]) {
-            //do something
-          } else {
-            var waypoint = {
-              location: results[i].vicinity,
-              stopover: true
-            };
-          }
+          var current = results[i] ? results[i] : this.state.current;
+
+          var waypoint = {
+            location: current.vicinity,
+            stopover: true
+          };
 
           this.visited[waypoint.location] = true;
 
@@ -171,7 +172,7 @@ class Map extends React.Component {
 
           var results = {
             waypoints: waypoints,
-            current: results[i]
+            current: current
           };
 
           callback(results);
