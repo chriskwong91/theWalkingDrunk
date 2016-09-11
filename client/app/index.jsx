@@ -176,17 +176,19 @@ class Map extends React.Component {
     return (
       
     	<div className="row">
-        <div className="col xs12 m4 l3">
+        <div className="col s12 m4 l3">
           <div> 
-            <div className="">
+            
+            <div>
               <button className="btn waves-effect waves-light btn-large red lighten-2" type="submit" name="action"
               onClick={this.handleNextBar.bind(this)}>Next Bar</button>
             </div>
              
-            <div className="">
-              <button className="waves-effect waves-light btn-large red lighten-2" type="submit" name="action" 
+            <div>
+              <button className="btn waves-effect waves-light btn-large red lighten-2" type="submit" name="action" 
               onClick={this.handleChangeBar.bind(this)}>Change Current Bar</button>
             </div>
+          
           </div>
           
           <div>
@@ -201,9 +203,10 @@ class Map extends React.Component {
             </form>
           
           </div>
+        
         </div>
 
-        <div className="col xs12 m8 l9">
+        <div className="col s12 m8 l9">
           
           <div style={mapDivStyle}> 
   	        <div ref="map" style={mapStyle}>I should be a map!</div>
@@ -211,7 +214,7 @@ class Map extends React.Component {
        
         </div>
   	      
-        <div>
+        <div className="col s12 m12 l12">
 					<div id="directions-panel" ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>
 				</div>
       </div>

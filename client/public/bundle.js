@@ -22186,13 +22186,13 @@
 	        { className: 'row' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col xs12 m4 l3' },
+	          { className: 'col s12 m4 l3' },
 	          _react2.default.createElement(
 	            'div',
 	            null,
 	            _react2.default.createElement(
 	              'div',
-	              { className: '' },
+	              null,
 	              _react2.default.createElement(
 	                'button',
 	                { className: 'btn waves-effect waves-light btn-large red lighten-2', type: 'submit', name: 'action',
@@ -22202,10 +22202,10 @@
 	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: '' },
+	              null,
 	              _react2.default.createElement(
 	                'button',
-	                { className: 'waves-effect waves-light btn-large red lighten-2', type: 'submit', name: 'action',
+	                { className: 'btn waves-effect waves-light btn-large red lighten-2', type: 'submit', name: 'action',
 	                  onClick: this.handleChangeBar.bind(this) },
 	                'Change Current Bar'
 	              )
@@ -22233,7 +22233,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'col xs12 m8 l9' },
+	          { className: 'col s12 m8 l9' },
 	          _react2.default.createElement(
 	            'div',
 	            { style: mapDivStyle },
@@ -22246,7 +22246,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'col s12 m12 l12' },
 	          _react2.default.createElement(
 	            'div',
 	            { id: 'directions-panel', ref: 'panel' },
