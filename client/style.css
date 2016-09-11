@@ -1,0 +1,170 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+/*body {
+	background: #F6F6F6;
+	background: linear-gradient(to bottom, #F6F6F6 0%, #C4C4C4 100%) fixed;
+	border-top: 3px solid pink;
+}*/
+#wrapper {
+	width: 100px;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-orient: horizontal;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+/*#header {
+	font-family: 'Tangerine', Serif;
+	font-family: Arial, Helvetica, Sans-Serif;
+	font-family: 900;
+	text-align: center;
+	margin-top: 70px;
+	color: #069;
+	text-shadow: rgba(0,0,0,0.4) 2px, 2px, 5px;
+	font-size: 65px; 
+}*/
+
+
+.text {
+	text-align: center;
+	color: #000;
+	font-size: 18px;
+}
+
+.box {
+	height: 200px;
+	width: 200px;
+	margin-right: 7px;
+	border-radius: 100px;
+	border: 5px solid #FFF;
+	overflow: hidden;
+
+
+}
+
+.top {
+	border-radius: 200px;
+}
+
+/*Image effect 1*/
+div.effect1{
+    position: relative;
+}
+div.effect1 img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius:100px;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+div.effect1:hover img{
+    opacity: 0.3;
+    -webkit-transform: rotate(720deg);
+    transform: rotate(720deg);
+}
+
+/*Image effect 2*/
+div.effect2{
+    position: relative;
+}
+div.effect2 img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: margin-left 800ms;
+}
+div.effect2:hover img{
+    margin-left: 200px;
+}
+/*Image effect 3*/
+div.effect3{
+    position: relative;
+}
+div.effect3 img{
+    position: absolute;
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    -webkit-box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
+    box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
+    transition: margin-left 800ms;
+}
+div.effect3:hover img{
+    margin-left: -200px;
+    /*margin-left: 0;*/
+}
+/*Image effect 4*/
+div.effect4{
+    position: relative;
+}
+div.effect4 img{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+div.effect4 img{
+    opacity: .7;
+    transform: solid(1);
+    transition-duration: 800ms;
+    -webkit-transform: scale(1);
+    -webkit-box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
+    box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
+}
+div.effect4:hover img{
+    transform: solid(0);
+    transition-duration: 800ms;
+    -webkit-transform: scale(0);
+}
+ 
+/*Image effect 5*/
+div.effect5{
+    position:relative;
+    overflow:hidden;
+}
+div.effect5 img{
+    position:absolute;
+    top:0;
+    left:0;
+    margin-top:0px;
+    border-radius:100px;
+    opacity: 0.7;
+    -webkit-box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
+    box-shadow: inset 0px 0px 5px 2px rgba(255,255,255,.75);
+}
+div.effect5:hover img{
+    margin-top:-200px;
+    transition-duration: 800ms;
+}
+/*Image effect 6*/
+div.effect6{
+    position: relative;
+}
+div.effect6 img{
+    position:absolute;
+    top:0;
+    left:0;
+    border-radius:100px;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+div.effect6:hover img{
+    opacity: 0.3;
+    -webkit-transform: rotate(720deg);
+    transform: rotate(720deg);
+}
+/*.mapStyle {
+  height: 500;
+  width: 950;
+}
+    
+.mapDivStyle {
+  border: 1px solid black;
+  display: table;
+  margin: 0 auto;
+}*/
+

@@ -1,5 +1,3 @@
-//These 
-
 //These decorator functions take a callback and transform function.
 //When the transform function is passed an array of data it returns a promise
 //that calls the callback with each element of the array.  Each decorator
