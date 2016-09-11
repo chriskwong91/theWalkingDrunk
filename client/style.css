@@ -3,4 +3,58 @@
 	margin: 0px;
 }
 
+/*body {
+	background: #F6F6F6;
+	background: linear-gradient(to bottom, #F6F6F6 0%, #C4C4C4 100%) fixed;
+	border-top: 3px solid pink;
+}*/
+#wrapper {
+	width: 100px;
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-orient: horizontal;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+/*#header {
+	font-family: 'Tangerine', Serif;
+	font-family: Arial, Helvetica, Sans-Serif;
+	font-family: 900;
+	text-align: center;
+	margin-top: 70px;
+	color: #069;
+	text-shadow: rgba(0,0,0,0.4) 2px, 2px, 5px;
+	font-size: 65px; 
+}*/
+
+.text {
+	text-align: center;
+	color: #000;
+	font-size: 18px;
+}
+
+.box {
+	height: 200px;
+	width: 200px;
+	margin-right: 7px;
+	border-radius: 100px;
+	border: 5px solid #FFF;
+
+}
+
+img {
+	border-radius: 200px;
+}
+
+/*.mapStyle {
+  height: 500;
+  width: 950;
+}
+    
+.mapDivStyle {
+  border: 1px solid black;
+  display: table;
+  margin: 0 auto;
+}*/
 

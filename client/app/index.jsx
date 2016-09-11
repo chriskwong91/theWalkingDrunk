@@ -163,41 +163,53 @@ class Map extends React.Component {
 
   render() {
     const mapStyle = {
-      height: 400,
-      width: 100,
+      height: 500,
+      width: 950,
     };
     
     const mapDivStyle = {
       border: '1px solid black',
       display: 'table',
-      margin: '0 auto'
+      margin: '0 auto',
     }
 
     return (
       
     	<div className="row">
-        
-        <div> 
-          <div>
-            <button type="submit" name="action"
-            onClick={this.handleNextBar.bind(this)}>Next Bar</button>
+        <div className="col xs12 m4 l3">
+          <div> 
+            <div className="">
+              <button className="btn waves-effect waves-light btn-large red lighten-2" type="submit" name="action"
+              onClick={this.handleNextBar.bind(this)}>Next Bar</button>
+            </div>
+             
+            <div className="">
+              <button className="waves-effect waves-light btn-large red lighten-2" type="submit" name="action" 
+              onClick={this.handleChangeBar.bind(this)}>Change Current Bar</button>
+            </div>
           </div>
-           
+          
           <div>
-            <button type="submit" name="action" 
-            onClick={this.handleChangeBar.bind(this)}>Change Current Bar</button>
+            
+            <form onSubmit={this.handleLocationSubmit.bind(this)}>
+              
+              <input placeholder="Your location" type="text" ref="location"/>
+              <button className="btn waves-effect waves-light red lighten-2" type="submit" name="action">Find
+                <i className="material-icons right">send</i>
+              </button>
+
+            </form>
+          
           </div>
-        </div>
-        
-        <div>
-          <form onSubmit={this.handleLocationSubmit.bind(this)}>
-            <input placeholder="Your location" type="text" ref="location"/>
-          </form>
         </div>
 
-        <div style={mapDivStyle}> 
-	        <div ref="map" style={mapStyle}>I should be a map!</div>
-	      </div>
+        <div className="col xs12 m8 l9">
+          
+          <div style={mapDivStyle}> 
+  	        <div ref="map" style={mapStyle}>I should be a map!</div>
+  	      </div>
+       
+        </div>
   	      
         <div>
 					<div id="directions-panel" ref="panel">Hack Reactor to Tempest!!! Drink on my hacking drunkards!</div>

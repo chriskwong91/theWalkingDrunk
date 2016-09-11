@@ -62,8 +62,17 @@
 	// Get main React component.
 	var App = __webpack_require__(/*! ./index.jsx */ 172);
 	
-	// ReactDOM render
-	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
+	if (navigator.geolocation) {
+	  navigator.geolocation.getCurrentPosition(function (position) {
+	    var pos = {
+	      lat: position.coords.latitude,
+	      lng: position.coords.longitude
+	    };
+	    _reactDom2.default.render(_react2.default.createElement(App, { startLoc: pos }), document.getElementById('app'));
+	  });
+	} else {
+	  _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
+	}
 
 /***/ },
 /* 1 */
@@ -22003,7 +22012,7 @@
 	    var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
 	
 	    _this.state = {
-	      startLoc: 'Hack Reactor SF',
+	      startLoc: _this.props.startLoc || 'SF',
 	      waypoints: []
 	    };
 	    _this.visited = {};
@@ -22162,8 +22171,8 @@
 	    key: 'render',
 	    value: function render() {
 	      var mapStyle = {
-	        width: 500,
-	        height: 300
+	        height: 500,
+	        width: 950
 	      };
 	
 	      var mapDivStyle = {
@@ -22174,41 +22183,65 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'row' },
 	        _react2.default.createElement(
 	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.handleNextBar.bind(this) },
-	            'Next Bar'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.handleChangeBar.bind(this) },
-	            'Change Current Bar'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'form',
-	            { onSubmit: this.handleLocationSubmit.bind(this) },
-	            _react2.default.createElement('input', { placeholder: 'Your location', type: 'text', ref: 'location' })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { style: mapDivStyle },
+	          { className: 'col xs12 m4 l3' },
 	          _react2.default.createElement(
 	            'div',
-	            { ref: 'map', style: mapStyle },
-	            'I should be a map!'
+	            null,
+	            _react2.default.createElement(
+	              'div',
+	              { className: '' },
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'btn waves-effect waves-light btn-large red lighten-2', type: 'submit', name: 'action',
+	                  onClick: this.handleNextBar.bind(this) },
+	                'Next Bar'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: '' },
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'waves-effect waves-light btn-large red lighten-2', type: 'submit', name: 'action',
+	                  onClick: this.handleChangeBar.bind(this) },
+	                'Change Current Bar'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'form',
+	              { onSubmit: this.handleLocationSubmit.bind(this) },
+	              _react2.default.createElement('input', { placeholder: 'Your location', type: 'text', ref: 'location' }),
+	              _react2.default.createElement(
+	                'button',
+	                { className: 'btn waves-effect waves-light red lighten-2', type: 'submit', name: 'action' },
+	                'Find',
+	                _react2.default.createElement(
+	                  'i',
+	                  { className: 'material-icons right' },
+	                  'send'
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col xs12 m8 l9' },
+	          _react2.default.createElement(
+	            'div',
+	            { style: mapDivStyle },
+	            _react2.default.createElement(
+	              'div',
+	              { ref: 'map', style: mapStyle },
+	              'I should be a map!'
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(

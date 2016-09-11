@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="utf-8">
 
-	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByH0c5bxYDZ48BLQ401BBsm4DppG6QNkQ&libraries=places" type="text/javascript"></script>
 
 	    <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -13,33 +12,74 @@
 
 	    <!--Let browser know website is optimized for mobile-->
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	    
+	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByH0c5bxYDZ48BLQ401BBsm4DppG6QNkQ&libraries=places" type="text/javascript"></script>
 		
 	</head>
 	
 	<body class="container">
-		
-		<nav >
-			<div class="nav-wrapper">
-	      <a href="#" class="brand-logo center">The Walking Drunk</a>
-	    </div>
-		</nav>
+			<nav>
+				<div class="nav-wrapper">
+		      <a href="#" class="brand-logo wave-effect wave-light center">The Walking Drunk</a>
+		      <ul id="nav-mobile" class="left hide-on-med-and-down">
+		        <li><a href="index.html">Home</a></li>
+		      </ul>
+		  	</div>
+		  </nav>
 
-		<div class="container">
-			<span >
+				<div class="col xs12 m2">
+		      <p class="z-depth-5">.</p>
+		    </div>
+				
+				<div id="wrapper">
+					
+					<div class="box">
+						<img src="a.jpg" height="200px" width="200px" alt="1st image">
+					</div>
+
+					<div class="box">
+						<img src="h.jpg" height="200px" width="200px" alt="1st image">
+						<div class="text"></div>
+					</div>
+
+					<div class="box">
+						<img src="j.jpg" height="200px" width="200px" alt="1st image">
+						<div class="text"></div>
+					</div>
+
+					<div class="box">
+						<img src="b.jpg" height="200px" width="200px" alt="1st image">
+						<div class="text"></div>
+					</div>
+
+					<div class="box">
+						<a href="#"><img src="c.png" height="200px" width="200px" alt="1st image"></a>
+						<div class="text"></div>
+					</div>
+
+					<div class="box">
+						<img src="d.jpg" height="200px" width="200px" alt="1st image">
+						<div class="text"></div>
+					</div>
+
+				</div>
+			
 
 
-				<div id="app"></div>
-				<!-- **********************************************************************************
-					Include React bundle in same hierarchial level as the DOM element to be loaded on. 
-					See following link for more information:
-						http://stackoverflow.com/questions/26566317/invariant-violation-registercomponent-target-container-is-not-a-dom-elem
-				********************************************************************************** -->
-				<script src='public/bundle.js'></script>
+				<span >
 
 
-			</span>
-		</div>
-		
+					<div id='app'></div>
+					<!-- **********************************************************************************
+						Include React bundle in same hierarchial level as the DOM element to be loaded on. 
+						See following link for more information:
+							http://stackoverflow.com/questions/26566317/invariant-violation-registercomponent-target-container-is-not-a-dom-elem
+					********************************************************************************** -->
+					<script src='public/bundle.js'></script>
+
+
+				</span>
+			</div>
 		<!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>

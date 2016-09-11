@@ -12,7 +12,7 @@ if (navigator.geolocation) {
       lng: position.coords.longitude
     };
     ReactDOM.render(<App startLoc={pos}/>, document.getElementById('app'));
-  };
+  });
 } else {
 	ReactDOM.render(<App />, document.getElementById('app'));
 }
