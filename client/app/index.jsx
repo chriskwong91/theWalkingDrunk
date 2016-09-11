@@ -111,7 +111,7 @@ class Map extends React.Component {
     this.geocodeAddress(address, (latLng) => {
       var request = {
         location: latLng,
-        keyword: 'bar',
+        types: ['bar'],
         rankBy: google.maps.places.RankBy.DISTANCE
       }
       //nearby search of coordinates of address
