@@ -8,7 +8,7 @@ describe('Endpoints', function() {
   	describe('GET', function() {
 	    it('should respond with HTML', function() {
 	    	http.get('http://localhost:3000/', (res) => {
-				  expect((JSON.parse(res).body)).to.be.a('string');
+				  expect(res.body).to.be.a('string');
 				});
 	    });
 	    it('should respond with a status code of 200', function() {
