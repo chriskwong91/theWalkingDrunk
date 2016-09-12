@@ -84,21 +84,25 @@ class Map extends React.Component {
       e.preventDefault();
     }
 
-    var address;
-    if (this.state.waypoints[this.state.waypoints.length - 1]) {
-      address = this.state.waypoints[this.state.waypoints.length - 1].location;
-    } else if (this.refs.location.value) {
-      address = this.refs.location.value;
+    if (this.state.waypoints.length > 8) {
+      console.log('Too many waypoints');
     } else {
-      address = this.state.startLoc;
+      var address;
+      if (this.state.waypoints[this.state.waypoints.length - 1]) {
+        address = this.state.waypoints[this.state.waypoints.length - 1].location;
+      } else if (this.refs.location.value) {
+        address = this.refs.location.value;
+      } else {
+        address = this.state.startLoc;
+      }
+      
+      this.getWaypoints(address, (results) => {
+        this.setState({
+          waypoints: results.waypoints,
+          current: results.current
+        }, () => console.log(this.state.current));
+      });
     }
-    
-    this.getWaypoints(address, (results) => {
-      this.setState({
-        waypoints: results.waypoints.slice(0, 7),
-        current: results.current
-      }, () => console.log(this.state.current));
-    });
   }
 
   //Called when the user clicks the "Find >" button.
