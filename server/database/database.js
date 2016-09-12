@@ -24,6 +24,13 @@ var pubSchema = new Schema({
   nextPubs: String
 });
 
+var yelpInfoSchema = new Schema({
+  name: String,
+  yelpObj: String
+});
+
+var YelpInfo = mongoose.model('YelpInfo', yelpInfoSchema);
+
 // define Mongoose Model
 var Pubs = mongoose.model('Pubs', pubSchema);
 
@@ -48,6 +55,14 @@ utils.retrievePubRoutes = (req, res) => {
       if (err) throw err;
       res.send(query)
     });
+};
+
+utils.cacheYelpInfo = (obj) => {
+  new YelpInfo({
+    name: obj.name,
+    yelpObj: obj
+  })
+  .save();
 };
 
 module.exports = utils;

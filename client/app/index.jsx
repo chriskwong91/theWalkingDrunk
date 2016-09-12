@@ -1,5 +1,6 @@
 import React from 'react';
 var map = window.Map;
+var CurrInfoComponent = require('./CurrInfoComponent.jsx');
 
 class Map extends React.Component {
   //Tests:
@@ -8,7 +9,7 @@ class Map extends React.Component {
     super(props);
     this.state = {
       startLoc: this.props.startLoc || 'SF',
-      waypoints: [],
+      waypoints: [],  
       current: {}
     };
     this.visited = {};
@@ -212,7 +213,10 @@ class Map extends React.Component {
     	<div className="row">
         <div className="col s12 m4 l3">
           <div> 
-            
+            <div>
+              <CurrInfoComponent current={this.state.current} />
+            </div>
+
             <div>
               <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5" type="submit" name="action"
               onClick={this.handleNextBar.bind(this)}>Next Bar</button>
