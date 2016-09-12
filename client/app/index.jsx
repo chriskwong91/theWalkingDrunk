@@ -39,6 +39,7 @@ class Map extends React.Component {
     this.geocoder = new google.maps.Geocoder();
     this.placesService = new google.maps.places.PlacesService(this.map);
     this.stepDisplay = new google.maps.InfoWindow();
+
     this.getRouteRequest = utils.getRouteRequest.bind(this);
     this.geocodeAddress = utils.geocodeAddress.bind(this);
     this.getWaypoints = utils.getWaypoints.bind(this);
@@ -58,10 +59,6 @@ class Map extends React.Component {
       });
     }
   }
-
-  //Form a request that is sent to the mapping API:
-  //Tests:
-  //The destination is the furthest location in the waypoints array.
 
   //Called when the user clicks the "Next Bar" button.
   //Adds the next bar to the waypoints array in the state.
@@ -128,12 +125,6 @@ class Map extends React.Component {
       this.handleNextBar(e);
     });
   }
-
-  // Finds an array of waypoints and passes them to a callback:
-  // Tests:
-  // Passes results to the callback.
-  // No item is in the waypoint array more than once.
-
 
   //Render the map:
   render() {
