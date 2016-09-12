@@ -28,6 +28,11 @@
 	font-size: 65px; 
 }*/
 
+.spc {
+    /*padding: 30px;*/
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 .text {
 	text-align: center;
@@ -38,7 +43,7 @@
 .box {
 	height: 200px;
 	width: 200px;
-	margin-right: 7px;
+	margin-right: 15px;
 	border-radius: 100px;
 	border: 5px solid #FFF;
 	overflow: hidden;
@@ -108,7 +113,7 @@ div.effect4 img{
     left: 0;
 }
 div.effect4 img{
-    opacity: .7;
+    opacity: 0.7;
     transform: solid(1);
     transition-duration: 800ms;
     -webkit-transform: scale(1);
@@ -167,4 +172,37 @@ div.effect6:hover img{
   display: table;
   margin: 0 auto;
 }*/
+
+/*
+hover over on address button to 
+see info.
+*/
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.spc1 {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
 

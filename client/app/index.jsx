@@ -175,7 +175,7 @@ class Map extends React.Component {
             </div>
              
             <div>
-              <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5" type="submit" name="action" 
+              <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5 spc" type="submit" name="action" 
               onClick={this.handleChangeBar.bind(this)}>Change Current Bar</button>
             </div>
           
@@ -185,16 +185,33 @@ class Map extends React.Component {
             
             <form onSubmit={this.handleLocationSubmit.bind(this)}>
               <span>
-              <input placeholder="Your location" type="text" ref="location"/>
+              <input className="spc" placeholder="Your location" type="text" ref="location"/>
               </span>
-              <button className="btn waves-effect waves-light red lighten-2 z-depth-5" type="submit" name="action">Find
+              <button className="btn waves-effect waves-light red lighten-2 z-depth-5 spc" type="submit" name="action">Find
                 <i className="material-icons right">send</i>
               </button>
 
             </form>
           
           </div>
-        
+          
+          <div>
+            
+            <h4><font color="#FF6347">Current Bar's detail</font></h4>
+            
+            <div className="tooltip spc1">
+              <i className="medium material-icons navigation" ><font color="#FF6347">navigation</font>
+              </i>
+              <span className="tooltiptext">foo bar</span>
+            </div>
+
+            <div className="tooltip spc1">
+              <i className="medium material-icons"><font color="#FF6347">contact_phone</font>
+              </i>
+              <span className="tooltiptext">4154302930</span>
+            </div>
+
+          </div>
         </div>
 
         <div className="col s12 m8 l9">
