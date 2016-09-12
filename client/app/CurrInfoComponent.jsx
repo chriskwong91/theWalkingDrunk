@@ -8,20 +8,23 @@ class CurrInfoComponent extends React.Component {
 	render(){
 		return (
 			<div>
+				<h4><font color="#F08080">Current Bar's detail</font></h4>
 				<div>
-					<b>Pub Name:</b>
+					<b><font color="#F08080">Bar Name:- </font></b>
 					{this.props.current.name}
 				</div>
 				<div>
-					<b>Address:</b>
+					<b><font color="#F08080">Address:- </font></b>
 					{this.props.current.vicinity}
 				</div>
-				<div>
-					<b>Rating:</b>
+				
+				
+				<div >
+					<b><font color="#F08080">Rating:- </font></b>
 					{this.props.current.rating}
 				</div>
-				<div>
-					<b>Price Level:</b>
+				<div >
+					<b><font color="#F08080">Price:- </font></b>
 					{this.props.current.price_level}
 				</div>
 			</div>

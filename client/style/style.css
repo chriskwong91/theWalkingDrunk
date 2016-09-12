@@ -3,11 +3,36 @@
 	margin: 0px;
 }
 
+.font1 {
+
+}
+
+.font2 {
+
+}
+
 /*body {
 	background: #F6F6F6;
 	background: linear-gradient(to bottom, #F6F6F6 0%, #C4C4C4 100%) fixed;
 	border-top: 3px solid pink;
 }*/
+
+/*body {
+  background-color: #282828;
+}*/
+
+.primary-color {
+  background-color: #530906;
+}
+
+.secondary-color {
+  background-color: #2B0200;
+}
+
+.text-color {
+  color: #812C28;
+}
+
 #wrapper {
 	width: 100px;
 	display: -webkit-box;
@@ -178,12 +203,20 @@ see info.
     border-bottom: 1px dotted black;
 }
 
+.distance {
+    margin-top: 20px;
+    margin-bottom: 20px; 
+}
+
 .spc1 {
     /*margin-left: 60px;*/
     margin-right: 60px;
 }
 .spaceDown {
-    margin-bottom: 60px; 
+    margin-bottom: 40px; 
+}
+.spcDwn {
+    margin-bottom: 15px;
 }
 
 .tooltip .tooltiptext {

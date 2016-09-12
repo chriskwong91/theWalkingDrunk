@@ -1,7 +1,7 @@
 import React from 'react';
 var map = window.Map;
 // var FrontEndStyling = require('./frontEndStyling.jsx');
-var CurrInfoComponent = require('./CurrInfoComponent.jsx');
+const CurrInfoComponent = require('./CurrInfoComponent.jsx');
 
 class Map extends React.Component {
   //Tests:
@@ -216,35 +216,22 @@ class Map extends React.Component {
 
     return (      
     	<div className="row">
-        <div className="col s12 m4 l3">
-           
+        <div className="col s12 m4 l3">        
+          <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5 spcDwn" 
+          type="submit" name="action"
+          onClick={this.handleNextBar.bind(this)}>Next Bar</button>
 
-          <div>
-            <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5" 
-            type="submit" name="action"
-            onClick={this.handleNextBar.bind(this)}>Next Bar</button>
-          </div>
-           
-          <div>
-            <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5" type="submit" name="action" 
-            onClick={this.handleChangeBar.bind(this)}>Change Current Bar</button>
-          </div>
+          <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5 spaceDown" type="submit" name="action" 
+          onClick={this.handleChangeBar.bind(this)}>Change Current Bar</button>
           
-          
-          
-          <div>
-            
-            <form onSubmit={this.handleLocationSubmit.bind(this)}>
-              <span>
-              <input placeholder="Your location" type="text" ref="location"/>
-              </span>
-              <button className="btn waves-effect waves-light red lighten-2 z-depth-5 spaceDown" type="submit" name="action">Find
-                <i className="material-icons right">send</i>
-              </button>
-
-            </form>
-          
-          </div>
+          <form onSubmit={this.handleLocationSubmit.bind(this)}>
+            <span>
+            <input placeholder="Your location" type="text" ref="location"/>
+            </span>
+            <button className="btn waves-effect waves-light red lighten-2 z-depth-5 spcDwn" type="submit" name="action">Find
+              <i className="material-icons right">send</i>
+            </button>
+          </form>
         
           <div>
             <CurrInfoComponent current={this.state.current} />
