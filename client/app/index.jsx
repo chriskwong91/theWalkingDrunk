@@ -197,16 +197,16 @@ class Map extends React.Component {
           
           <div>
             
-            <h4><font color="#FF6347">Current Bar's detail</font></h4>
+            <h4><font color="#F08080">Current Bar's detail</font></h4>
             
             <div className="tooltip spc1">
-              <i className="medium material-icons navigation" ><font color="#FF6347">navigation</font>
+              <i className="medium material-icons navigation" ><font color="#F08080">navigation</font>
               </i>
               <span className="tooltiptext">foo bar</span>
             </div>
 
             <div className="tooltip spc1">
-              <i className="medium material-icons"><font color="#FF6347">contact_phone</font>
+              <i className="medium material-icons"><font color="#F08080">contact_phone</font>
               </i>
               <span className="tooltiptext">4154302930</span>
             </div>
