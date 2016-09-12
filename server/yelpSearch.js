@@ -26,10 +26,11 @@ module.exports = (req, res) => {
   //   return;
   // }
   // console.log(req.query.name, req.query.location);
+  console.log(req.query.location, '', 'req.query.loc');
 	client.search({
-	  terms: req.query.name,
-	  location: req.query.location + ',USA' 
-    // category_filter: "nightlife"
+	  terms: 'chilis',
+	  location: req.query.location + 'California, USA' ,
+     category_filter: "mexican"
 	})
   .catch((err) => {
     res.send(err);
@@ -41,6 +42,7 @@ module.exports = (req, res) => {
     if (obj){
       db.cacheYelpInfo(obj.businesses[0]); 
       for (var i = 0; i < obj.businesses.length; i++){
+        console.log(obj.businesses[i].name);
         if(obj.businesses[i].name === req.query.name){
           res.send(obj.businesses[i]);
           console.log('selected ', obj.businesses[i].name, obj.businesses[i].location);
