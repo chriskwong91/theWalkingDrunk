@@ -220,14 +220,14 @@ class Map extends React.Component {
           <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5 spcDwn" 
           type="submit" name="action"
           onClick={this.handleNextBar.bind(this)}>Next Bar</button>
-
+ 
           <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5 spaceDown" type="submit" name="action" 
           onClick={this.handleChangeBar.bind(this)}>Change Current Bar</button>
           
           <form onSubmit={this.handleLocationSubmit.bind(this)}>
-            <span>
+            <div>
             <input placeholder="Your location" type="text" ref="location"/>
-            </span>
+            </div>
             <button className="btn waves-effect waves-light red lighten-2 z-depth-5 spcDwn" type="submit" name="action">Find
               <i className="material-icons right">send</i>
             </button>

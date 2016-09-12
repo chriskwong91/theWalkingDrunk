@@ -8,7 +8,7 @@ class CurrInfoComponent extends React.Component {
 	render(){
 		return (
 			<div>
-				<h4><font color="#F08080">Current Bar's detail</font></h4>
+				<h4><font color="#F08080">Current Bar Details</font></h4>
 				<div>
 					<b><font color="#F08080">Bar Name:- </font></b>
 					{this.props.current.name}

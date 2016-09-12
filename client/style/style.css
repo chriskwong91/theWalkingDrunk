@@ -3,13 +3,15 @@
 	margin: 0px;
 }
 
-.font1 {
-
+input {
+    height: auto;
+    line-height: normal;
+    overflow: 'off';
+    line-height: 100px;
+    padding-bottom: 100px;
 }
 
-.font2 {
 
-}
 
 /*body {
 	background: #F6F6F6;
@@ -17,9 +19,20 @@
 	border-top: 3px solid pink;
 }*/
 
-/*body {
-  background-color: #282828;
-}*/
+body {
+  background-color: #505050;
+  color: #FFF;
+}
+
+font {
+    font-family: 'Concert One', Sans-Serif;
+}
+
+.brand-logo,a {
+    font-family: 'Kavoon', Sans-Serif;
+    font-size: 65px;
+
+}
 
 .primary-color {
   background-color: #530906;
@@ -31,6 +44,21 @@
 
 .text-color {
   color: #812C28;
+}
+
+td {
+    background-color: #2B0200;
+    color: #FFF;
+    border: 0px;
+    border-radius: 0px;
+}
+
+span {
+    color: #FFF;
+}
+
+.adp-text {
+    background-color: #2B0200;
 }
 
 #wrapper {
@@ -54,11 +82,11 @@
 }*/
 
 
-.text {
+/*.text {
 	text-align: center;
 	color: #000;
 	font-size: 18px;
-}
+}*/
 
 .box {
 	height: 200px;
