@@ -45,6 +45,7 @@ class Map extends React.Component {
     this.getWaypoints = utils.getWaypoints.bind(this);
   }
 
+
   //Re-render the map and directions when the state changes:
   //Tests:
   //The html for the map changes when the state changes?
