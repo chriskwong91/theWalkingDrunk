@@ -18,6 +18,23 @@ mongoose.connection.on('error', function(err) {
     console.log('Connection opened');
 });
 
+// User Schema
+
+var userSchema = mongoose.Schema({
+
+  local : {
+    username : String,
+    password : String,
+  },
+
+  facebook: {
+    id: String,
+    token: String,
+    email: String,
+    name: String
+  }
+});
+
 // define Mongoose Schema
 var pubSchema = new Schema({
   currPub: String,
@@ -36,6 +53,10 @@ var Pubs = mongoose.model('Pubs', pubSchema);
 
 // Utility object to be exported
 var utils = {};
+
+//create prop in utils for users
+utils.User = mongoose.model('User', userSchema);
+
 
 utils.cachePubRoutes = (req, res) => {
   new Pubs({
