@@ -2,11 +2,22 @@ var fs = require('fs');
 var yelpSearch = require('./yelpSearch.js');
 var db = require('./database/database.js');
 var bodyParser = require('body-parser');
+var utils = require('./config/utils.js');
+var passport = require('passport');
 
 
 module.exports = function (app, express) {
 
   app.use(express.static(__dirname + '/../client'));
+  app.use(utils.isLoggedIn);
+  app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'email']}));
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+      successRedirect : '/',
+      failureRedirect : '/'
+    }));
+
+  //facebook route
 
   app.route('/')
     .get(function(req, res) {
@@ -45,5 +56,11 @@ module.exports = function (app, express) {
     }
     // default to plain-text. send()
     res.type('txt').send('404 - Not found');
+  });
+
+  // route for logging out
+  app.get('/logout', function(req, res) {
+      req.logout();
+      res.redirect('/');
   });
 };
