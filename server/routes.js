@@ -9,13 +9,13 @@ var passport = require('passport');
 module.exports = function (app, express) {
 
   app.use(express.static(__dirname + '/../client'));
-  app.use(utils.isLoggedIn);
   app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'email']}));
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
       successRedirect : '/',
-      failureRedirect : '/'
+      failureRedirect : '/login'
     }));
+  app.use(utils.isLoggedIn);
 
   //facebook route
 
@@ -42,6 +42,11 @@ module.exports = function (app, express) {
       yelpSearch(req, res);
     });
 
+  // route for logging out
+  app.get('/logout', function(req, res) {
+      req.logout();
+      res.redirect('/login');
+  });
   app.use(function(req, res){
     res.status(404);
 
@@ -58,9 +63,4 @@ module.exports = function (app, express) {
     res.type('txt').send('404 - Not found');
   });
 
-  // route for logging out
-  app.get('/logout', function(req, res) {
-      req.logout();
-      res.redirect('/');
-  });
 };
