@@ -11,8 +11,10 @@ var _ = require('underbar');
  * @return {undefined} There is no defined return type.
  */
 var searchYelp = function(req, res) {
-  // I'm not sure what parameters the query will have.
-  // if (req.query.NAME)
+
+  // Certain parameters need to be sent to the server in order for this to run. We need either
+  //   a location parameter or a latitude/longitude parameter. 
+  //   For more details, see https://www.yelp.com/developers/documentation/v2/search_api .
   var query = _.extend(req.query, {
     limit: 20,
     category_filter: 'bars,nightlife'
