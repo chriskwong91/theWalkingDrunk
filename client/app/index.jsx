@@ -10,13 +10,13 @@ class Map extends React.Component {
     super(props);
     this.state = {
       startLoc: this.props.startLoc || 'SF',
-      waypoints: [],  
+      waypoints: [],
       current: {}
     };
     this.visited = {};
   }
-  
-  // make use of React Software Component Lifecycle 
+
+  // make use of React Software Component Lifecycle
   componentDidMount() {
     this.initMap();
     this.handleNextBar();
@@ -82,7 +82,7 @@ class Map extends React.Component {
       } else {
         address = this.state.startLoc;
       }
-      
+
       this.getWaypoints(address, (results) => {
         this.setState({
           waypoints: results.waypoints,
@@ -132,23 +132,23 @@ class Map extends React.Component {
       height: 500,
       width: 950,
     };
-    
+
     const mapDivStyle = {
       border: '1px solid black',
       display: 'table',
       margin: '0 auto',
     }
 
-    return (      
+    return (
     	<div className="row">
-        <div className="col s12 m4 l3">        
-          <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5 spcDwn" 
+        <div className="col s12 m4 l3">
+          <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5 spcDwn"
           type="submit" name="action"
           onClick={this.handleNextBar.bind(this)}>Next Bar</button>
- 
-          <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5 spaceDown" type="submit" name="action" 
+
+          <button className="btn waves-effect waves-light btn-large red lighten-2 z-depth-5 spaceDown" type="submit" name="action"
           onClick={this.handleChangeBar.bind(this)}>Change Current Bar</button>
-          
+
           <form onSubmit={this.handleLocationSubmit.bind(this)}>
             <div>
             <input placeholder="Your location" type="text" ref="location"/>
@@ -157,21 +157,21 @@ class Map extends React.Component {
               <i className="material-icons right">send</i>
             </button>
           </form>
-        
+
           <div>
             <CurrInfoComponent current={this.state.current} />
           </div>
-          
+
         </div>
 
         <div className="col s12 m8 l9">
-          
-          <div style={mapDivStyle}> 
+
+          <div style={mapDivStyle}>
             <div ref="map" style={mapStyle}>I should be a map!</div>
           </div>
-       
+
         </div>
-          
+
         <div className="col s12 m12 l12">
           <div id="directions-panel" ref="panel"></div>
         </div>
@@ -180,4 +180,5 @@ class Map extends React.Component {
   }
 }
 
+export default Map;
 module.exports = Map;
