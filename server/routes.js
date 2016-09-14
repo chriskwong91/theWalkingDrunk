@@ -24,23 +24,7 @@ module.exports = function (app, express) {
       res.render('index');
     });
 
-  app.route('/cached/routes')
-    .get(function(req, res){
-      console.log('GET - /cached/routes');
-      db.retrievePubRoutes(req, res);
-    })
-    .post(function(req, res){
-      console.log('POST - /cached/routes');
-      db.cachePubRoutes(req, res);
-    });
-
-  app.route('/yelp/search')
-    .get(function(req, res){
-      console.log('GET - /yelp/search');
-
-      // replace with memoization feature
-      yelpSearch(req, res);
-    });
+  app.get('/api/search', yelpSearch);
 
   // route for logging out
   app.get('/logout', function(req, res) {
@@ -62,5 +46,5 @@ module.exports = function (app, express) {
     // default to plain-text. send()
     res.type('txt').send('404 - Not found');
   });
-
 };
+
