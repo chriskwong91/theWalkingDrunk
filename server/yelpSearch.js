@@ -37,7 +37,7 @@ var searchYelp = function(req, res) {
   client.search(query).then(result => {
     res.status(200).send(result);
   }).catch(err => {
-    console.log(`There was en error: ${err}`);
+    console.log(err);
     res.status(400).send('There was an error');
   });
 };
