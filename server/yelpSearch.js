@@ -1,5 +1,6 @@
 var yelp = require("node-yelp");
 var config = require('./config/env/config.js');
+var _ = require('underbar');
 
 
 /**
@@ -12,6 +13,12 @@ var config = require('./config/env/config.js');
 var searchYelp = function(req, res) {
   // I'm not sure what parameters the query will have.
   // if (req.query.NAME)
+  var query = _.extend(req.query, {
+    limit: 20,
+    category_filter: 'bars,nightlife'
+  });
+  
+  console.log(`There was a Yelp search with the following query: ${query}`);
     
   var client = yelp.createClient({
     oauth: {
@@ -27,11 +34,7 @@ var searchYelp = function(req, res) {
     }
   });
 
-  client.search({
-    limit: 20,
-    category_filter: 'bars,nightlife',
-    location: '944 Market Street, San Francisco, CA 94102'
-  }).then(result => {
+  client.search(query).then(result => {
     res.status(200).send(result);
   }).catch(err => {
     console.log(`There was en error: ${err}`);
