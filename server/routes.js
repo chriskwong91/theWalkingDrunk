@@ -13,16 +13,6 @@ module.exports = function (app, express) {
       res.render('index');
     });
 
-  app.route('/cached/routes')
-    .get(function(req, res){
-      console.log('GET - /cached/routes');
-      db.retrievePubRoutes(req, res);
-    })
-    .post(function(req, res){
-      console.log('POST - /cached/routes');
-      db.cachePubRoutes(req, res);
-    });
-
   app.get('/api/search', yelpSearch);
 
   app.use(function(req, res){
