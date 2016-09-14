@@ -18,7 +18,8 @@ var searchYelp = function(req, res) {
     category_filter: 'bars,nightlife'
   });
   
-  console.log(`There was a Yelp search with the following query: ${query}`);
+  console.log('There was a Yelp search with the following query:');
+  console.log(query);
     
   var client = yelp.createClient({
     oauth: {
