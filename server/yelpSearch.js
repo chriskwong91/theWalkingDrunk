@@ -1,4 +1,5 @@
 var yelp = require("node-yelp");
+var config = require('./config/env/config.js');
 
 
 /**
@@ -14,10 +15,10 @@ var searchYelp = function(req, res) {
     
   var client = yelp.createClient({
     oauth: {
-      'consumer_key': '_Qs9S9ohkGj32ygCz0vhyA',
-      'consumer_secret': 'qA3YVgM_Z31LVHSV9qRLxtriboE',
-      'token': 'VWLlZeJqo7anSjDjWe4i9N0SwuItniCZ',
-      'token_secret': 'R21cba_B2dJmoElanqq1Wb1GWAQ'
+      'consumer_key': config.oauth.consumer_key,
+      'consumer_secret': config.oauth.consumer_secret,
+      'token': config.oauth.token, 
+      'token_secret': config.oauth.token_secret 
     },
   
     // Optional settings: 

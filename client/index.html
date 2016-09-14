@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByH0c5bxYDZ48BLQ401BBsm4DppG6QNkQ&libraries=places" type="text/javascript"></script>
+
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 		<meta charset="utf-8">
@@ -20,10 +21,33 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Kavoon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Concert+One">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Josefin+Sans|Roboto">
-	
+
 	</head>
-	
+
 	<body class="container">
+		<!--*********************************************************************
+		Sets up the Facebook (for auth/login)  SDK for Javascript
+		*************************************************************************-->
+		<script>
+		  window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : '1059720117468553',
+		      xfbml      : true,
+		      version    : 'v2.7'
+		    });
+		  };
+
+		  (function(d, s, id){
+		     var js, fjs = d.getElementsByTagName(s)[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement(s); js.id = id;
+		     js.src = "//connect.facebook.net/en_US/sdk.js";
+		     fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+		</script>
+
+					  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
+
 			<div>
 				<nav>
 					<div class="nav-wrapper">
@@ -33,13 +57,13 @@
 			      </ul>
 			  	</div>
 			  </nav>
-				
+
 				<div class="col xs12 m2">
 		      <p class="z-depth-5"></p>
 		    </div>
-				
+
 				<div id="wrapper">
-					
+
 					<div class="box effect1 z-depth-5">
 						<img class="top" src="style/a.jpg" height="200px" width="200px" alt="1st image">
 					</div>
@@ -70,7 +94,7 @@
 					</div>
 
 				</div>
-			
+
 
 
 				<div >
@@ -78,7 +102,7 @@
 
 					<div id='app'></div>
 					<!-- **********************************************************************************
-						Include React bundle in same hierarchial level as the DOM element to be loaded on. 
+						Include React bundle in same hierarchial level as the DOM element to be loaded on.
 						See following link for more information:
 							http://stackoverflow.com/questions/26566317/invariant-violation-registercomponent-target-container-is-not-a-dom-elem
 					********************************************************************************** -->
@@ -88,6 +112,6 @@
 		<!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="style/js/materialize.min.js"></script>
-    
+
 	</body>
 </html>
