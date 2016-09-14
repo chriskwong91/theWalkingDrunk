@@ -13,12 +13,12 @@ ReactDOM.render (
   <Router history={hashHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={App}></IndexRoute>
-      <Route path='decision' component={Decision}</Route>
-      <Route path='location' component={Location}</Route>
-      <Route path='mapbar' component={mapBar}</Route>
-      <Route path='randombar' component={randomBar}</Route>
-      <Route path='selectbar' component={selectBar}</Route>
-      <Route path='signup' component={signup}</Route>
+      <Route path='decision' component={Decision} />
+      <Route path='location' component={Location} />
+      <Route path='mapbar' component={mapBar} />
+      <Route path='randombar' component={randomBar} />
+      <Route path='selectbar' component={selectBar} />
+      <Route path='signup' component={signup} />
     </Route>
   </Router>,
     document.getElementById('app'));
