@@ -51,9 +51,7 @@ class App extends React.Component {
     var setIntervalId = setInterval(() => {
       if(barsFound.length !== 0){
         var randomNum = Math.floor(Math.random() * barsFound.length);
-        console.log('value for randomNum is: ', randomNum);
         var randomBar = barsFound[randomNum];
-        console.log('randomBar ', randomBar);
         this.setState({
           randomBar: randomBar
         });
