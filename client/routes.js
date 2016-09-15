@@ -8,13 +8,27 @@ import randomBar from './app/randomBar.jsx';
 import selectBar from './app/selectBar.jsx';
 import signup from './app/signup.jsx';
 import Index from './app/index.jsx';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory, RouteHandler } from 'react-router';
 
-let App = (props) => (
-  <div>
-    <div className='container'>{props.children}</div>
-  </div>
-);
+let word = 'hi';
+class App extends React.Component{
+  constructor(props) {
+    super(props);
+    console.log(props);
+    this.state = {
+      current: 'good',
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <div className='container'>{React.cloneElement(this.props.children, {test: 'prop1'})}</div>
+      </div>
+    )
+  }
+
+};
 
 ReactDOM.render (
   <Router history={hashHistory}>
@@ -25,7 +39,7 @@ ReactDOM.render (
       <Route path='mapbar' component={mapBar} />
       <Route path='randombar' component={randomBar} />
       <Route path='selectbar' component={selectBar} />
-      <Route path='signup' component={signup} />
+      <Route path='signup' component={signup}/>
     </Route>
   </Router>,
     document.getElementById('app'));
