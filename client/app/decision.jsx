@@ -1,11 +1,16 @@
 import React from 'react';
 
 let decision = (props) => {
+
   return (
     <div>
-      <a href="/#/randombar">Random Bar</a>
+    	<div onClick = {props.getRandomBar}>
+      	<a href="/#/randombar">Random Bar</a>
+      </div>
       <br/>
-      <a href="/#/selectbar">Select Bar</a>
+      <div>
+      	<a href="/#/selectbar">Select Bar</a>
+      </div>
     </div>
   );
 };
