@@ -19,6 +19,12 @@ class App extends React.Component {
     };
   }
 
+  setLocation(loc) {
+    this.setState({
+      location: loc
+    });
+  }
+
   render() {
     return (
       <div>
