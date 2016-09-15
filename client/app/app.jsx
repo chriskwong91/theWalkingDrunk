@@ -46,7 +46,12 @@ class App extends React.Component {
     return (
       <div>
         <div className='container'>
-        {React.cloneElement(this.props.children, {setLocation: this.setLocation.bind(this)})}
+          {
+	    React.cloneElement(this.props.children, {setLocation: this.setLocation.bind(this),
+						     addWaypoint: this.addWaypoint.bind(this),
+						     bars: this.state.bars,
+						     waypoints: this.state.waypoints
+	    })}
         </div>
       </div>
     );
