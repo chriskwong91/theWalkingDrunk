@@ -13,12 +13,19 @@ let location = props => {
   /* The add location form isn't working at the moment. */
   return (
     <div>
+      <div className="navScreen center-align">
+      <h1 className="thin">Location</h1>
+      </div>
       <form action="">
-	<input name="userLocation" type="text"/>
-	<button>Add Location</button>
+	      <input name="userLocation" type="text"/>
+        <div className="center-align">
+        <a className="waves-effect waves-light btn mat-btn">Add Location</a>
+        </div>
       </form>
       <br/>
-      <a href="/#/decision" onClick={getCurrLoc}>Use Current Location</a>
+      <div className="center-align current-loc-box">
+        <a className="waves-effect waves-light btn mat-btn" href="/#/decision" onClick={getCurrLoc}>Use Current Location</a>
+      </div>
     </div>
   );
 };
