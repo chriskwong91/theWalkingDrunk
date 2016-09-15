@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import App from './app/app.jsx';
+import App from './app/app.jsx';
 import Decision from './app/decision.jsx';
 import Location from './app/location.jsx';
 import mapBar from './app/mapBar.jsx';
@@ -10,11 +10,7 @@ import signup from './app/signup.jsx';
 import Index from './app/index.jsx';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-let App = (props) => (
-  <div>
-    <div className='container'>{props.children}</div>
-  </div>
-);
+
 
 ReactDOM.render (
   <Router history={hashHistory}>
