@@ -22,14 +22,10 @@ let signup = () => {
   };
   // <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
   return (
-    <div className='container center-align'>
-      <div className='row'>
-        <div className='col s12'>
-          <span className='thin'>Welcome to YelpCrawl!</span>
-        </div>
-        <br/>
-        <br/>
-          <div><span className='fb-login-button'>Sign in with FaceBook</span></div>
+    <div className='signup valign-wrapper'>
+      <div className="welcome thin center-align">
+        <p className="p-welcome">Welcome to YelpCrawl</p>
+        <button className='btn'>Sign in with FaceBook</button>
       </div>
     </div>
   );
