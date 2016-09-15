@@ -4,7 +4,7 @@ let location = () => {
   return (
     <div>
       <input type="text"/>
-      <button>Add</button>
+      <a href="/#/decision">Add</a>
     </div>
   );
 };
