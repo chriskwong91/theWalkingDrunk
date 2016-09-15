@@ -10,11 +10,24 @@ import signup from './app/signup.jsx';
 import Index from './app/index.jsx';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
-let App = (props) => (
-  <div>
-    <div className='container'>{props.children}</div>
-  </div>
-);
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: 'San Francisco'
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <div className='container'>{this.props.children}</div>
+      </div>
+    );
+  }
+};
+
 
 ReactDOM.render (
   <Router history={hashHistory}>
