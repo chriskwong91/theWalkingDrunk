@@ -7,6 +7,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       location: 'San Francisco',
+      waypoints: [],
       bars: []
     };
   }
@@ -26,6 +27,12 @@ class App extends React.Component {
       });
     this.setState({
       location: loc
+    });
+  }
+
+  addWaypoint(dest) {
+    this.setState({
+      waypoints: this.state.waypoints.push(dest)
     });
   }
 
