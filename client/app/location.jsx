@@ -1,6 +1,6 @@
 import React from 'react';
 
-let location = () => {
+let location = props => {
   return (
     <div>
       <input type="text"/>

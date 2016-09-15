@@ -28,7 +28,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className='container'>{this.props.children}</div>
+        <div className='container'>
+        {React.cloneElement(this.props.children, {setLocation: this.setLocation.bind(this)})}
+        </div>
       </div>
     );
   }
