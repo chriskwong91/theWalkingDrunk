@@ -3,11 +3,10 @@ import {Map, Marker} from 'google-maps-react'
 
 
 var mapBar = (props) => {
-  console.log(props.bars);
   return (
     <div>
       <Map google={window.google}>
-	{props.bars.map(bar => {
+	{props.waypoints.map(bar => {
 	   return (
 	     <Marker
 		 name={bar.name}
