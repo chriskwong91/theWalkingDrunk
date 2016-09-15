@@ -12,8 +12,8 @@ class App extends React.Component {
     };
   }
 
-  setLocation(loc) {
-    fetch('/api/search?ll=' + loc)
+  setLocation(loc, filt = 'bars,nightlife') {
+    fetch(`/api/search?category_filter=${filt}&ll=${loc}`)
       .then(response => {
         return response.json();
       })

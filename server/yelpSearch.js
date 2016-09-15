@@ -16,8 +16,7 @@ var searchYelp = function(req, res) {
   //   a location parameter or a latitude/longitude parameter. 
   //   For more details, see https://www.yelp.com/developers/documentation/v2/search_api .
   var query = _.extend(req.query, {
-    limit: 20,
-    category_filter: 'bars,nightlife'
+    limit: 20
   });
   
   console.log('There was a Yelp search with the following query:');
