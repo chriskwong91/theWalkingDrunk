@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Nav from './navBar.jsx';
 
 
 class App extends React.Component {
@@ -68,6 +69,7 @@ class App extends React.Component {
     return (
       <div>
         <div className='container'>
+          <Nav />
           {
       React.cloneElement(this.props.children, {setLocation: this.setLocation.bind(this),
                  addWaypoint: this.addWaypoint.bind(this),
