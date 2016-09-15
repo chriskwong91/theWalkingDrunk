@@ -3,11 +3,11 @@ import React from 'react';
 let decision = (props) => {
 
 	var randomRedirect = () => {
-		
+		// used so when a user clicks the space of the 'a-random-box' div element, we'll redirect them to the random section
 	}
 
 	var selectRedirect = () => {
-
+		// used so when a user clicks the space of the 'a-select-box' div element, we'll redirect them to the select section
 	}
 
   return (
