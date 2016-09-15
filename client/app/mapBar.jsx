@@ -1,10 +1,22 @@
 import React from 'react';
+import {Map, Marker} from 'google-maps-react'
 
 
 var mapBar = (props) => {
   return (
     <div>
-      Hi.
+      <Map google={window.google}>
+	{props.waypoints.map(bar => {
+	   return (
+	     <Marker
+		 name={bar.name}
+		 position={{
+		   lat: bar.location.coordinate.latitude,
+		   lng: bar.location.coordinate.longitude
+		 }} />
+	   );
+	 })}
+      </Map>
     </div>
   );
 };
