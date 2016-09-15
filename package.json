@@ -46,8 +46,8 @@
     "path": "^0.12.7",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
-    "underbar": "^0.1.0",
     "react-router": "^2.8.1",
+    "underbar": "^0.1.0",
     "webpack": "^1.13.2"
   }
 }
