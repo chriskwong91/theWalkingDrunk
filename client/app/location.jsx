@@ -10,16 +10,17 @@ let location = props => {
     });
   };
 
+
   /* The add location form isn't working at the moment. */
   return (
     <div>
       <div className="navScreen center-align">
-      <div>
+      <div className="location-h1">
        <h1 className="thin">Location</h1>
       </div>
       </div>
-      <form action="">
-	      <input name="userLocation" type="text"/>
+      <form action="" className="location-form">
+	      <input name="userLocation" type="text" className="thin"/>
         <div className="center-align">
         <a className="waves-effect waves-light btn mat-btn">Add Location</a>
         </div>
