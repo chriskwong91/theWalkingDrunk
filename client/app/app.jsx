@@ -6,11 +6,24 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: 'San Francisco'
+      location: 'San Francisco',
+      bars: []
     };
   }
 
   setLocation(loc) {
+    fetch('/api/search?ll=' + loc)
+      .then(response => {
+        return response.json();
+      })
+      .then(value => {
+        this.setState({
+          bars: value.businesses
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
     this.setState({
       location: loc
     });
