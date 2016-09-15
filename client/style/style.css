@@ -5,7 +5,9 @@
 	border-top: 3px solid pink;
 }*/
 
-
+.nav {
+    color: #26c6da;
+}
 .randomButton {
     background-image: url('beer-pexels.jpg');
     background-size: cover;
@@ -14,6 +16,13 @@
     width: 830px;
 }
 
+.welcome {
+    background-image: url('bar-pexels.jpg');
+    background-size: cover;
+    opacity: 0.72;
+    height: 500px; /*full-screen is @ 511*/
+    width: 830px;
+}
 .selectButton {
     /*background-color: #6d4c41;*/
     height: 500px; /*full-screen is @ 511*/
@@ -39,12 +48,21 @@ a.a-random {
     font-size: 100px;
 }
 
+p.p-welcome {
+    color: #eee;
+    font-size: 100px;
+}
+
 .a-select-box {
     height: 150px;
 }
 
 .a-random-box {
     height: 150px;
+}
+
+.a-welcome-box {
+    height: 50px;
 }
 
 a.mat-btn {
