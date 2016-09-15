@@ -10,6 +10,8 @@ var selectBar = (props) => {
   return (
     <div>
       <h1>Bars</h1>
+
+      <a href="/#/mapbar">Go to Map</a><br/>
       
    		{bars.length === 0 ? 'loading...' : bars.map( (bar, index) =>
    			<div key={ index }>
