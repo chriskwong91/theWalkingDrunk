@@ -6,14 +6,40 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: 'San Francisco'
+      location: 'San Francisco',
+      waypoints: [],
+      bars: []
     };
   }
 
-  setLocation(loc) {
+  setLocation(loc, filt = 'bars,nightlife') {
+    fetch(`/api/search?category_filter=${filt}&ll=${loc}`)
+      .then(response => {
+        return response.json();
+      })
+      .then(value => {
+        this.setState({
+          bars: value.businesses
+        });
+      })
+      .catch(err => {
+        console.error(`API error: ${err}`);
+      });
     this.setState({
       location: loc
     });
+  }
+
+  addWaypoint(dest) {
+    if (Array.isArray(dest)) {
+      this.setState({
+        waypoints: dest
+      });
+    } else {
+      this.setState({
+        waypoints: this.state.waypoints.push(dest)
+      });
+    }
   }
 
   render() {
