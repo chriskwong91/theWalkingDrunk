@@ -3,7 +3,7 @@ import React from 'react';
 var randomBar = (props) => {
   return (
     <div>
-      Hi
+      {props.randomBar}
     </div>
   );
 };
