@@ -7,9 +7,16 @@ var mapBar = (props) => {
   return (
     <div>
       <Map google={window.google}>
-	<Marker
-	    name={'SOMA'}
-	    position={{lat: 37.778519, lng: -122.405640}} />
+	{props.bars.map(bar => {
+	   return (
+	     <Marker
+		 name={bar.name}
+		 position={{
+		   lat: bar.location.coordinate.latitude,
+		   lng: bar.location.coordinate.longitude
+		 }} />
+	   );
+	 })}
       </Map>
     </div>
   );
