@@ -31,9 +31,15 @@ class App extends React.Component {
   }
 
   addWaypoint(dest) {
-    this.setState({
-      waypoints: this.state.waypoints.push(dest)
-    });
+    if (Array.isArray(dest)) {
+      this.setState({
+        waypoints: dest
+      });
+    } else {
+      this.setState({
+        waypoints: this.state.waypoints.push(dest)
+      });
+    }
   }
 
   render() {
