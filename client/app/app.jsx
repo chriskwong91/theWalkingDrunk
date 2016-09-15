@@ -38,8 +38,10 @@ class App extends React.Component {
         waypoints: dest
       });
     } else {
+      var waypoints = this.state.waypoints;
+      waypoints.push(dest);
       this.setState({
-        waypoints: this.state.waypoints.push(dest)
+        waypoints: waypoints
       });
     }
   }
