@@ -14,7 +14,9 @@ let location = props => {
   return (
     <div>
       <div className="navScreen center-align">
-      <h1 className="thin">Location</h1>
+      <div>
+       <h1 className="thin">Location</h1>
+      </div>
       </div>
       <form action="">
 	      <input name="userLocation" type="text"/>
