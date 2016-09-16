@@ -5,7 +5,7 @@ var connection;
 
 /**
  * @name createConn
- * @desc Given a connection variable, create a connection to our database. 
+ * @desc Given a connection variable, create a connection to our database.
  * @param {var} conn -
  * @return {undefined}
  */
@@ -29,22 +29,22 @@ createConn(connection);
 
 /**
  * @name getRoutes
- * @desc Given a string uid representing a userid, return all of the routes the given uid is 
- *   traveling on. 
- * @param {string} uid - A string representing a Facebook uid. 
- * return {Promise<RowDataPacket[]>} Returns a promise that resolved to an array of 
+ * @desc Given a string uid representing a userid, return all of the routes the given uid is
+ *   traveling on.
+ * @param {string} uid - A string representing a Facebook uid.
+ * return {Promise<RowDataPacket[]>} Returns a promise that resolved to an array of
  *   'RowDataPacket'.
  */
 var getRoutes = function(uid) {
   var q = `select * from dev.routes where uid = ${mysql.escape(uid)};`;
-  
+
   return connection.query(q);
 };
 
 /**
  * @name removeRoutes
- * @desc Given a string uid, an optional number routeNumber, and an optional string location, 
- *   remove the bars matching the latter two paramters from the routes. 
+ * @desc Given a string uid, an optional number routeNumber, and an optional string location,
+ *   remove the bars matching the latter two paramters from the routes.
  * @param {string} uid - A string representing a Facebook uid.
  * @param {number} [routeNumber] - An optional number.
  * @param {string} [location] - An optional location.
@@ -64,23 +64,23 @@ var removeRoutes = function(uid, routeNumber, location) {
 
 /**
  * @name addRoute
- * @desc Given a string uid and a string location, add the string/location tuple to the db. 
+ * @desc Given a string uid and a string location, add the string/location tuple to the db.
  * @param {string} uid - A Facebook user id.
  * @param {string} location - A Yelp bar location.
  * @return {undefined} There is no defined return type.
  */
 var addRoute = function(uid, location) {
   connection.query(`
-    select route_number 
-    from dev.routes 
+    select route_number
+    from dev.routes
     where uid = ${mysql.escape(uid)}
     order by route_number desc
     limit 1;
   `).then(res => {
     var q = `
-      insert into dev.routes 
+      insert into dev.routes
       (uid, route_number, location)
-      values 
+      values
       (${mysql.escape(uid)}, ${res[0] === undefined ? 1 : res[0].route_number + 1}, ${mysql.escape(location)});
       `;
     connection.query(q);
@@ -89,6 +89,7 @@ var addRoute = function(uid, location) {
 
 
 module.exports = {
+  createConn: createConn,
   connection: connection,
   getRoutes: getRoutes,
   addRoute: addRoute,
