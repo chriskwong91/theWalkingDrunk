@@ -2,6 +2,10 @@ import React from 'react';
 
 let decision = (props) => {
 
+ 	componentDidMount: {
+ 		console.log('hellooooo');
+ 	}
+
 	var randomRedirect = () => {
 		// used so when a user clicks the space of the 'a-random-box' div element, we'll redirect them to the random section
 	}

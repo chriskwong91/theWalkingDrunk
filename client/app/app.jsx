@@ -15,15 +15,18 @@ class App extends React.Component {
   }
 
   setLocation(loc, filt = 'bars,nightlife') {
+    console.log('entered setLocation', loc);
     fetch(`/api/search?category_filter=${filt}&ll=${loc}`)
       .then(response => {
         return response.json();
       })
       .then(value => {
-        console.log('value in app.jsx is: ', value);
+        console.log('value in app.jsx is: ', value.businesses);
         this.setState({
           bars: value.businesses
         });
+        debugger;
+        console.log('entered past debugger')
       })
       .catch(err => {
         console.error(`API error: ${err}`);

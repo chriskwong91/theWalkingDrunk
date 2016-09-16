@@ -8,21 +8,20 @@ var googleKey = require('../../server/config/env/config.js').GOOGLE_MAPS_API_KEY
 class Location extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      startLoc: ''
-    };
+    // this.state = {
+    //   startLoc: ''
+    // };
   }
 
   getCurrLoc () {
     navigator.geolocation.getCurrentPosition((res) => {
-      props.setLocation('' + res.coords.latitude + ',' + res.coords.longitude);
+      this.props.setLocation('' + res.coords.latitude + ',' + res.coords.longitude);
     });
   }
 
-  handleLocationSubmit (e) {
+  handleLocationSubmit () {
     var userInput = document.getElementById("userLocation").value;
     // now we need the google api
-    console.log(this);
     var userInput = userInput.split(' ');
     var userInput = userInput.join('+');
     console.log(userInput);
@@ -38,8 +37,9 @@ class Location extends React.Component {
       // this.setState({
       //   startLoc: coord
       // });
-      props.setLocation(coord);
-      
+      console.log('value for this.props.setlocation', this.props.setLocation);
+      this.props.setLocation(coord);
+
     }).catch(err => {
       console.error(`API error: ${err}`);
     });
@@ -57,15 +57,14 @@ class Location extends React.Component {
          <h1 className="thin">Location</h1>
         </div>
         </div>
-        <form action="" className="location-form" onSubmit={this.handleLocationSubmit}>
+        <form action="" className="location-form" onSubmit={this.handleLocationSubmit.bind(this)}>
   	      <input id="userLocation" type="text" className="thin"/>
-          <div className="center-align">
-            <input type="submit" value="Add Location" className="waves-effect waves-light btn mat-btn"/>
-          </div>
+          <div className="center-align"></div>
         </form>
+        <a className="waves-effect waves-light btn mat-btn" href="/#/decision" onClick={this.handleLocationSubmit.bind(this)}>Add Location</a>
         <br/>
         <div className="center-align current-loc-box">
-          <a className="waves-effect waves-light btn mat-btn" href="/#/decision" onClick={this.getCurrLoc}>Use Current Location</a>
+        <a className="waves-effect waves-light btn mat-btn" href="/#/decision" onClick={this.getCurrLoc.bind(this)}>Use Current Location</a>
         </div>
       </div>
     );

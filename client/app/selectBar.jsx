@@ -5,8 +5,11 @@ var selectBar = (props) => {
   var bars = [];
 
 	if (props.bars.length === 20) {
-		bars = props.bars;		
-	} 
+		bars = props.bars;	
+    console.log('selectBar1: ', bars[0]);	
+	} else {
+    console.log('selectBar2: ', bars[0]);  
+  }
   return (
     <div>
       <h1>Bars</h1>
