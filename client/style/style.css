@@ -5,15 +5,51 @@
 	border-top: 3px solid pink;
 }*/
 
-.nav {
-    color: #26c6da;
+.container {
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100%;
 }
+
+.location-h1 {
+    padding-top: 100px;
+}
+
+h1.thin {
+    margin-top: 0px;
+}
+
+.user-enter-box {
+    text-align: center;
+}
+
+/* not in use right now, currently set to light-cyan-4
+ *.nav {
+    color: #26c6da;
+}*/
+
+.fb-button {
+    background-color: #b2ebf2;
+}
+
+.location-form {
+    padding-top: 10px;
+}
+
+input[type=text] {
+    height: 3em;
+    font-size: 2em;
+    text-align: center;
+}
+
 .randomButton {
     background-image: url('beer-pexels.jpg');
     background-size: cover;
     opacity: 0.75;
     height: 500px; /*full-screen is @ 511*/
-    width: 830px;
+    width: 1600px;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .welcome {
@@ -21,20 +57,33 @@
     background-size: cover;
     opacity: 0.72;
     height: 500px; /*full-screen is @ 511*/
-    width: 830px;
+    width: 1600px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.randomBar {
+    background-image: url('red-drink.jpg');
+    background-size: cover;
+    opacity: 0.75;
+    height: 500px; /*full-screen is @ 511*/
+    width: 1600px;
+    max-width: 100%;
+    max-height: 100%;
 }
 .selectButton {
     /*background-color: #6d4c41;*/
     height: 500px; /*full-screen is @ 511*/
-    width: 830px;
+    width: 1600px;
     /*height:100vh;*/
     opacity: 0.75;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .navScreen {
     height: 250px;
     background-color: #bcaaa4;
-    margin-bottom: 200px;
 }
 
 a.a-select {
@@ -53,8 +102,47 @@ p.p-welcome {
     font-size: 100px;
 }
 
+.h1-header {
+    background-image: url('black-and-white-people-bar-men.jpg');
+    background-size: cover;
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 0.75;
+    background: rgb(54, 25, 25); /* Fall-back for browsers that don't support rgba */
+    background: rgba(54, 25, 25, .5);
+}
+
+.h1-select {
+    /*background-color: #ffa726;*/
+    /*background-color: #ffcc80;*/
+    background-image: url('black-and-white-people-bar-men.jpg');
+    background-size: cover;
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 0.75;
+
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 75px;
+    padding-bottom: 75px;
+    color: black;
+    font-size: 50px;
+}
+
+/* button to get the user from select-bar to the map*/
+.select-go-to-map {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 50px;
+    background-color: #ffcc80;
+}
+
 .a-select-box {
     height: 150px;
+}
+
+a.to-map {
+    color: #eee;
 }
 
 .a-random-box {
@@ -69,6 +157,56 @@ a.mat-btn {
     background-color: #b2ebf2;
 }
 
+a.mat-btn-select {
+    background-color: #b2ebf2;
+    max-width: 100%
+}
+
+.select-bar-test {
+    background-color: #b2ebf2;
+    padding-bottom: 25px;
+    padding-top: 25px;
+    background: rgb(178, 235, 242);
+    background: rgba(178, 235, 242, 0.4);
+}
+
+.select-bar-info {
+
+}
+
+.add-bar-text {
+    padding-top: 25px;
+}
+
 .current-loc-box {
-    margin-top: 100px;
+    margin-top: 50px;
+}
+
+.spinner {
+    margin-top 250px;
+}
+
+.randombar-name {
+    font-weight: bold;
+    opacity: 1;
+
+}
+
+.randombar-info {
+    font-size: 16px;
+    opacity: 1;
+    font-weight: bold;
+}
+
+p.randombar-header {
+    font-size: 16px;
+    opacity: 1;
+    font-weight: normal;
+    display: inline-block;
+
+}
+.snippet {
+    font-size: 16px;
+    opacity: 1;
+    max-width: 450px;
 }

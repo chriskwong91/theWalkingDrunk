@@ -25,7 +25,7 @@ let signup = () => {
     <div className='signup valign-wrapper'>
       <div className="welcome thin center-align">
         <p className="p-welcome">Welcome to YelpCrawl</p>
-        <button className='btn'>Sign in with FaceBook</button>
+        <button onClick={facebookLogin} className='btn fb-button'>Sign in with FaceBook</button>
       </div>
     </div>
   );

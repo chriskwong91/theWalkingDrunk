@@ -35,6 +35,7 @@ module.exports = function(passport) {
   },
   // this is what Facebook sends back
   (token, refreshToken, profile, done) => {
+    console.log(profile);
     //async process
     process.nextTick(() => {
       //finds if user is in database

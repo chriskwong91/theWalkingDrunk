@@ -3,7 +3,7 @@ import React from 'react';
 let navBar = (props) => {
 
   return (
-    <nav className='cyan lighten-1'>
+    <nav className='cyan lighten-4'>
       <div className="nav-wrapper">
         <a href="#" className="brand-logo center">yc</a>
         <ul id="slide-out" className="side-nav">
