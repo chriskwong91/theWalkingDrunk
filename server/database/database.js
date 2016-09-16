@@ -27,6 +27,23 @@ var createConn = function(conn) {
 createConn(connection);
 
 
+/**
+ * @name getRoutes
+ * @desc Given a string uid representing a userid, return all of the routes the given uid is 
+ *   traveling on. 
+ * @param {string} uid - A string representing a Facebook uid. 
+ * return {Promise<RowDataPacket[]>} Returns a promise that resolved to an array of 
+ *   'RowDataPacket'.
+ */
+var getRoutes = function(uid) {
+  var q = `select * from dev.routes where uid = ${mysql.escape(uid)}`;
+  
+  return connection.query(q);
+};
 
 
+module.exports = {
+  connection: connection,
+  getRoutes: getRoutes
+};
 
