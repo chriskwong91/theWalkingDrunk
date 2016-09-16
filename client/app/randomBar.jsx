@@ -21,7 +21,7 @@ var randomBar = (props) => {
   } else {
     var bar = props.randomBar;
     return (
-      <div className='randomBar'>
+      <div className='randomBar thin'>
         <div className="location-h1 nav-Screen center-align">
          <h1 className="thin">Your random bar is:</h1>
         </div>
@@ -38,12 +38,12 @@ var randomBar = (props) => {
             <div><p className='randombar-header'>Go to Yelp Page:</p> <a href={bar.mobile_url}>{bar.name}</a></div>
           </div>
         </div>
-        <div className='row'>
+        <div className='row center-align buttons-random'>
           <div className=''>
-            <button className='btn' onClick={() => {props.addWaypoint(bar)}}>Add to routes!</button>
+            <button className='btn add-random-bar' onClick={() => {props.addWaypoint(bar)}}>Guide Me There Now</button>
           </div>
           <div className=''>
-            <button className='btn' onClick={() => {props.getRandomBar()}}>Another Random Bar!</button>
+            <button className='btn get-random-bar' onClick={() => {props.getRandomBar()}}> I don't like this Bar</button>
           </div>
         </div>
       </div>
