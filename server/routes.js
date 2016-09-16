@@ -27,15 +27,33 @@ module.exports = function (app, express) {
   app.get('/api/search', yelpSearch);
 
   app.route('/api/routes/:uid/:location?')
-    .all((req, res) => {
-      var location = req.params.location;
-      var uid = req.params.uid;
-      console.log(location);
-      console.log(uid);
+    .delete((req, res, next) => {
+      if (req.params.location === undefined) {
+        // Delete all routes for the current user.
+        db.removeRoutes(req.params.uid);
+      } else {
+        // Delete routes that only match the given location.
+        db.removeRoutes(req.params.uid, undefined, req.params.location);
+      }
+      res.status(202).send('Started route removal.');
     })
-    .get((req, res) => {
-      console.log('hi');
-      res.status(200).send('hi');
+    .put((req, res, next) => {
+      if (req.params.location !== undefined) {
+        db.addRoute(req.params.uid, req.params.location);
+        res.status(202).send('Adding new route');
+      } else {
+        res.status(400).send('Must specify location to add to routes');
+      }
+    })
+    .get((req, res, next) => {
+      if (req.params.location !== undefined) {
+        res.status(400).send('No location parameter needed');
+      } else {
+        db.getRoutes(req.params.uid).then(rows => {
+          console.log(rows);
+          res.status(200).send('hi');
+        });
+      }
     });
 
   // route for logging out
