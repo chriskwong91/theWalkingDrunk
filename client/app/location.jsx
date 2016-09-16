@@ -9,7 +9,7 @@ class Location extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startLoc: this.props.startLoc || 'SF'
+      startLoc: ''
     };
   }
 
@@ -22,7 +22,7 @@ class Location extends React.Component {
   handleLocationSubmit (e) {
     var userInput = document.getElementById("userLocation").value;
     // now we need the google api
-    console.log(userInput);
+    console.log(this);
     var userInput = userInput.split(' ');
     var userInput = userInput.join('+');
     console.log(userInput);
@@ -34,20 +34,19 @@ class Location extends React.Component {
       var lat = value.results[0].geometry.location.lat;
       var lng = value.results[0].geometry.location.lng;
       var coord = '' + lat + ',' + lng;
-      console.log(coord);
 
+      // this.setState({
+      //   startLoc: coord
+      // });
       props.setLocation(coord);
+      
     }).catch(err => {
       console.error(`API error: ${err}`);
-    })
+    });
+
     //https://maps.googleapis.com/maps/api/geocode/xml?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
-
-
+    
   }
-
-
-
-
 
   /* The add location form isn't working at the moment. */
    render () { 
