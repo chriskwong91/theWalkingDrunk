@@ -81,7 +81,7 @@ var addRoute = function(uid, location) {
       insert into dev.routes 
       (uid, route_number, location)
       values 
-      (${mysql.escape(uid)}, ${res[0].route_number + 1}, ${mysql.escape(location)});
+      (${mysql.escape(uid)}, ${res[0] === undefined ? 1 : res[0].route_number + 1}, ${mysql.escape(location)});
       `;
     connection.query(q);
   });
