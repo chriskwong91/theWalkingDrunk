@@ -10,29 +10,46 @@ var selectBar = (props) => {
 	} else {
     console.log('selectBar2: ', bars[0]);  
   }
+
+  /* removed items: 
+   <button className="waves-effect waves-light btn mat-btn-select" onClick={ () => { 
+              props.addWaypoint( bars[index] )
+            } 
+          }>Add</button>
+
+  */
+
+  var bars = bars.slice(0,10);
+
   return (
     <div>
-      <h1>Bars</h1>
+      <p className="h1-select center-align thin">Select Bars</p>
 
-      <a href="/#/mapbar">Go to Map</a><br/>
-      
    		{bars.length === 0 ? 'loading...' : bars.map( (bar, index) =>
    			<div key={ index }>
-   			  <h5>{ bar.name }</h5>
-   			  <span>{ bar.location.address }</span><br/>
-   			  <span>{ bar.location.city }</span><br/>
-   			  <span>Rating: { bar.rating }</span><br/>
-   			  <span>Review Count: { bar.review_count }</span>
-   			  <p>{ bar.snippet_text }</p>
-   			  <button onClick={ () => { 
-   			  	  props.addWaypoint( bars[index] )
-   			    } 
-   			  }>Add</button>
-   			  <br />
-   			  <br />
+          <div className = "select-bar-info thin center-align">
+     			  <h5>{ bar.name }</h5>
+     			  <span>{ bar.location.address }</span><br/>
+     			  <span>{ bar.location.city }</span><br/>
+     			  <span>Rating: { bar.rating }</span><br/>
+     			  <span>Review Count: { bar.review_count }</span>
+     			  <p>{ bar.snippet_text }</p>
+          </div>
+   			  
+          <div className="select-bar-test thin center-align" onClick={ () => { 
+              props.addWaypoint( bars[index] )
+            } 
+          }>Add <b>{bar.name}</b> to your Route!</div>
    			</div>
    		)}
+
+      <div href="/#/mapbar" className="select-go-to-map center-align thin">
+        <a href="/#/mapbar" className="to-map">Kickoff My yelpCrawl!</a>
+      </div>
+
     </div>
+
+
   );
 
 };

@@ -61,11 +61,13 @@ class Location extends React.Component {
   	      <input id="userLocation" type="text" className="thin"/>
           <div className="center-align"></div>
         </form>
-        <a className="waves-effect waves-light btn mat-btn" href="/#/decision" onClick={this.handleLocationSubmit.bind(this)}>Add Location</a>
-        <br/>
-        <div className="center-align current-loc-box">
-        <a className="waves-effect waves-light btn mat-btn" href="/#/decision" onClick={this.getCurrLoc.bind(this)}>Use Current Location</a>
-        </div>
+          <div className="center-align current-loc-box">
+            <a className="waves-effect waves-light btn mat-btn" href="/#/decision" onClick={this.handleLocationSubmit.bind(this)}>Add Location</a>
+          </div>
+          <br/>
+          <div className="center-align current-loc-box">
+          <a className="waves-effect waves-light btn mat-btn" href="/#/decision" onClick={this.getCurrLoc.bind(this)}>Use Current Location</a>
+          </div>
       </div>
     );
   }

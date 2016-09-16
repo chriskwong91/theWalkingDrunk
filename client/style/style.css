@@ -19,6 +19,10 @@ h1.thin {
     margin-top: 0px;
 }
 
+.user-enter-box {
+    text-align: center;
+}
+
 /* not in use right now, currently set to light-cyan-4
  *.nav {
     color: #26c6da;
@@ -29,7 +33,7 @@ h1.thin {
 }
 
 .location-form {
-    padding-top: 300px;
+    padding-top: 10px;
 }
 
 input[type=text] {
@@ -98,8 +102,31 @@ p.p-welcome {
     font-size: 100px;
 }
 
+.h1-select {
+    /*background-color: #ffa726;*/
+    background-color: #ffcc80;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: #eee;
+    font-size: 50px;
+}
+
+/* button to get the user from select-bar to the map*/
+.select-go-to-map {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 50px;
+    background-color: #ffcc80;
+}
+
 .a-select-box {
     height: 150px;
+}
+
+a.to-map {
+    color: #eee;
 }
 
 .a-random-box {
@@ -114,8 +141,27 @@ a.mat-btn {
     background-color: #b2ebf2;
 }
 
+a.mat-btn-select {
+    background-color: #b2ebf2;
+    max-width: 100%
+}
+
+.select-bar-test {
+    background-color: #b2ebf2;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.select-bar-info {
+
+}
+
+.add-bar-text {
+    padding-top: 25px;
+}
+
 .current-loc-box {
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .spinner {
