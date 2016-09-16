@@ -42,8 +42,31 @@ var getRoutes = function(uid) {
 };
 
 
+/**
+ * @name removeBars
+ * @desc Given a string uid, an optional number routeNumber, and an optional string location, remove the bars matching the latter two paramters from the routes. 
+ * @param {string} uid - A string representing a Facebook uid.
+ * @param {number} [routeNumber] - An optional number.
+ * @param {string} [location] - An optional location.
+ * @return {undefined} There is no defined return type.
+ */
+var removeBars = function(uid, routeNumber, location) {
+  var q = `delete from dev.routes where uid = ${mysql.escape(uid)}`;
+  if (routeNumber !== undefined) {
+    q += ` and route_number = ${mysql.escape(routeNumber)}`;
+  }
+  if (location !== undefined) {
+    q += ` and location = ${mysql.escape(location)}`;
+  }
+
+  connection.query(q);
+};
+
+
+
 module.exports = {
   connection: connection,
-  getRoutes: getRoutes
+  getRoutes: getRoutes,
+  removeBars: removeBars
 };
 
