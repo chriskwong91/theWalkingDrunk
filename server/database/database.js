@@ -1,93 +1,32 @@
-// connect to DB
-// if schema doesnt exist
-  // create schema
-// create Model
-// export utilityFunctions
-
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-// connect to DB
-mongoose.connect('mongodb://localhost/test');
-
-// check connection
-mongoose.connection.on('error', function(err) {
-    console.log('Mongo Error:\n');
-    console.log(err);
-}).on('open', function() {
-    console.log('Connection opened');
-});
-
-// User Schema
-
-var userSchema = mongoose.Schema({
-
-  local : {
-    username : String,
-    password : String,
-  },
-
-  facebook: {
-    id: String,
-    token: String,
-    email: String,
-    name: String,
-    friends: [String],
-  }
-});
-
-// define Mongoose Schema
-var pubSchema = new Schema({
-  currPub: String,
-  nextPubs: String
-});
-
-var yelpInfoSchema = new Schema({
-  name: String,
-  yelpObj: String
-});
-
-var YelpInfo = mongoose.model('YelpInfo', yelpInfoSchema);
-
-// define Mongoose Model
-var Pubs = mongoose.model('Pubs', pubSchema);
-
-// Utility object to be exported
-var utils = {};
-
-//create prop in utils for users
-utils.User = mongoose.model('User', userSchema);
+var mysql = require('promise-mysql');
+var config = require('../config/env/config.js');
+var connection;
 
 
-utils.cachePubRoutes = (req, res) => {
-  new Pubs({
-    currPub: req.body.currPub,
-    nextPubs: req.body.nextPubs
-  })
-  .save((err) => {
-    if(err)
-      throw err;
-    res.send(200);
-  })
-};
-
-// make promise then it will work
-utils.retrievePubRoutes = (req, res) => {
-  Pubs.findOne({currPub:req.headers.currpub}, (err, query) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(query)
-      }
+/**
+ * @name createConn
+ * @desc Given a connection variable, create a connection to our database. 
+ * @param {var} conn -
+ * @return {undefined}
+ */
+var createConn = function(conn) {
+  mysql.createConnection(config.sql)
+    .then(res => {
+      conn = res;
+    })
+    .catch(err => {
+      console.log('There was an error with the server, attempting to reconnect in 10 seconds.');
+      console.error(err);
+      setTimeout(() => createConn(conn), 1000*10);
     });
 };
 
-utils.cacheYelpInfo = (obj) => {
-  new YelpInfo({
-    name: obj.name,
-    yelpObj: obj
-  })
-  .save();
-};
+// Create a connection to our server when the server starts.
+// For information on escaping using nodesql, refer to:
+//   https://github.com/mysqljs/mysql#escaping-query-values
+createConn(connection);
 
-module.exports = utils;
+
+
+
+
