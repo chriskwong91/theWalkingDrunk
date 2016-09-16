@@ -20,6 +20,7 @@ class App extends React.Component {
         return response.json();
       })
       .then(value => {
+        console.log('value in app.jsx is: ', value);
         this.setState({
           bars: value.businesses
         });
