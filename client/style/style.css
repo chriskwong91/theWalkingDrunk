@@ -102,14 +102,30 @@ p.p-welcome {
     font-size: 100px;
 }
 
+.h1-header {
+    background-image: url('black-and-white-people-bar-men.jpg');
+    background-size: cover;
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 0.75;
+    background: rgb(54, 25, 25); /* Fall-back for browsers that don't support rgba */
+    background: rgba(54, 25, 25, .5);
+}
+
 .h1-select {
     /*background-color: #ffa726;*/
-    background-color: #ffcc80;
+    /*background-color: #ffcc80;*/
+    background-image: url('black-and-white-people-bar-men.jpg');
+    background-size: cover;
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 0.75;
+
     margin-top: 0px;
     margin-bottom: 0px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    color: #eee;
+    padding-top: 75px;
+    padding-bottom: 75px;
+    color: black;
     font-size: 50px;
 }
 
@@ -150,6 +166,8 @@ a.mat-btn-select {
     background-color: #b2ebf2;
     padding-bottom: 25px;
     padding-top: 25px;
+    background: rgb(178, 235, 242);
+    background: rgba(178, 235, 242, 0.4);
 }
 
 .select-bar-info {
