@@ -12,7 +12,7 @@ var connection;
 var createConn = function(conn) {
   mysql.createConnection(config.sql)
     .then(res => {
-      conn = res;
+      connection = res;
     })
     .catch(err => {
       console.log('There was an error with the server, attempting to reconnect in 10 seconds.');
