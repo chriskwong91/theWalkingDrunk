@@ -50,8 +50,7 @@ module.exports = function (app, express) {
         res.status(400).send('No location parameter needed');
       } else {
         db.getRoutes(req.params.uid).then(rows => {
-          console.log(rows);
-          res.status(200).send('hi');
+          res.status(200).send(JSON.stringify(rows));
         });
       }
     });
