@@ -26,6 +26,18 @@ module.exports = function (app, express) {
 
   app.get('/api/search', yelpSearch);
 
+  app.route('/api/routes/:uid/:location?')
+    .all((req, res) => {
+      var location = req.params.location;
+      var uid = req.params.uid;
+      console.log(location);
+      console.log(uid);
+    })
+    .get((req, res) => {
+      console.log('hi');
+      res.status(200).send('hi');
+    });
+
   // route for logging out
   app.get('/logout', function(req, res) {
       req.logout();
