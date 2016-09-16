@@ -92,6 +92,7 @@ var addRoute = function(uid, location) {
 module.exports = {
   connection: connection,
   getRoutes: getRoutes,
+  addRoute: addRoute,
   removeRoutes: removeRoutes
 };
 
