@@ -17,7 +17,7 @@ var createConn = function(conn) {
     .catch(err => {
       console.log('There was an error with the server, attempting to reconnect in 10 seconds.');
       console.error(err);
-      setTimeout(createConn(conn), 1000*10);
+      setTimeout(() => createConn(conn), 1000*10);
     });
 };
 
