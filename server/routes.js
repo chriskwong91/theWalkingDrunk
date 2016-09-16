@@ -39,16 +39,20 @@ module.exports = function (app, express) {
     })
     .put((req, res, next) => {
       if (req.params.location !== undefined) {
+        // Add a new location to our list of routes.
         db.addRoute(req.params.uid, req.params.location);
         res.status(202).send('Adding new route');
       } else {
+        // Invalid endpoint.
         res.status(400).send('Must specify location to add to routes');
       }
     })
     .get((req, res, next) => {
       if (req.params.location !== undefined) {
+        // Invalid endpoint.
         res.status(400).send('No location parameter needed');
       } else {
+        // Get all of the locations.
         db.getRoutes(req.params.uid).then(rows => {
           res.status(200).send(JSON.stringify(rows));
         });
