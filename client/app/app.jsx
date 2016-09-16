@@ -48,6 +48,9 @@ class App extends React.Component {
 
   getRandomBar() {
     console.log('entered into randomBar');
+    this.setState({
+      randomBar: ''
+    });
 
     var setIntervalId = setInterval(() => {
       var barsFound = this.state.bars;

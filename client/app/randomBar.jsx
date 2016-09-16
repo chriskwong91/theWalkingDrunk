@@ -38,6 +38,14 @@ var randomBar = (props) => {
             <div><p className='randombar-header'>Go to Yelp Page:</p> <a href={bar.mobile_url}>{bar.name}</a></div>
           </div>
         </div>
+        <div className='row'>
+          <div className=''>
+            <button className='btn' onClick={() => {props.addWaypoint(bar)}}>Add to routes!</button>
+          </div>
+          <div className=''>
+            <button className='btn' onClick={() => {props.getRandomBar()}}>Another Random Bar!</button>
+          </div>
+        </div>
       </div>
     );
   }
