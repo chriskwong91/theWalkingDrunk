@@ -18,12 +18,12 @@ let decision = (props) => {
     <div className="decision-buttons">
     	<div className="randomButton thin valign center-align" onClick = {props.getRandomBar}>
     		<div className="a-random-box"></div>
-      	<a href="/#/randombar" className="a-random">Random Bar</a>
+      	<a href="/#/randombar" className="a-random">I am an Aimless Drunk</a>
       </div>
       <div className="selectButton thin center-align">
       	<div className="a-select-box"></div>
       	<div className="a-select">
-      		<a href="/#/selectbar" className="a-select">Select Bar</a>
+      		<a href="/#/selectbar" className="a-select">I Know Where to Go</a>
       	</div>
       </div>
     </div>
