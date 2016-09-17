@@ -5,7 +5,9 @@ var Waypoint = (props) => {
   return (
     <li className="collection-item">
       {props.bar.name}
-      <i className="material-icons">delete</i>
+      <a href="" className="secondary-content">
+	<i className="material-icons">delete</i>
+      </a>
     </li>
   );
 }
