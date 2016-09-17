@@ -89,6 +89,10 @@
 	
 	var _RouteList2 = _interopRequireDefault(_RouteList);
 	
+	var _profile = __webpack_require__(/*! ./app/profile.jsx */ 261);
+	
+	var _profile2 = _interopRequireDefault(_profile);
+	
 	var _index = __webpack_require__(/*! ./app/index.jsx */ 197);
 	
 	var _index2 = _interopRequireDefault(_index);
@@ -114,6 +118,7 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: 'randombar', component: _randomBar2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'selectbar', component: _selectBar2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'Routes', component: _RouteList2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _profile2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _signup2.default })
 	  )
 	), document.getElementById('app'));
@@ -22225,6 +22230,15 @@
 	          null,
 	          _react2.default.createElement(
 	            'a',
+	            { href: '#/profile' },
+	            'Profile'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            'a',
 	            { href: '#/Routes' },
 	            'List Routes'
 	          )
@@ -33383,6 +33397,43 @@
 	
 	exports.default = (0, _createRouterHistory2.default)(_createHashHistory2.default);
 	module.exports = exports['default'];
+
+/***/ },
+/* 261 */
+/*!********************************!*\
+  !*** ./client/app/profile.jsx ***!
+  \********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var profile = function profile(props) {
+		return _react2.default.createElement(
+			"div",
+			null,
+			_react2.default.createElement(
+				"div",
+				{ className: "location-h1 center-align" },
+				_react2.default.createElement(
+					"h1",
+					{ className: "thin" },
+					"Profile"
+				)
+			)
+		);
+	};
+	
+	exports.default = profile;
 
 /***/ }
 /******/ ]);
