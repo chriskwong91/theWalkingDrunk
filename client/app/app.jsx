@@ -96,7 +96,7 @@ class App extends React.Component {
                  removeWaypoint: this.removeWaypoint.bind(this),
                  randomBar: this.state.randomBar,
                  currentUser: this.state.currentUser,
-                 getUser: this.getUser.bind(this);
+                 getUser: this.getUser.bind(this)
       })}
         </div>
       </div>
