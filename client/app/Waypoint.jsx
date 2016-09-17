@@ -7,6 +7,7 @@ var Waypoint = (props) => {
       {props.bar.name}
       <a className="secondary-content">
 	<i className="material-icons" onClick={() => {
+	    props.removeBar(props.bar.id);
 	  }}>delete</i>
       </a>
     </li>
