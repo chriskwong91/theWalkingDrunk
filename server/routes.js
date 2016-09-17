@@ -33,9 +33,10 @@ module.exports = function (app, express) {
   app.get('/api/user', function(req, res) {
     console.log(user);
     console.log('Getting user data....', user);
-    db.findUser(user.id, function(err, user) {
-      res.json(user);
-    });
+    res.status(200).send(user);
+    // db.findUser(user.id, function(err, user) {
+    //   res.json(user);
+    // });
   });
 
   app.route('/api/routes/:uid/:location?')

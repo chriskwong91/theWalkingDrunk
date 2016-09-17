@@ -11,6 +11,7 @@ class Location extends React.Component {
     // this.state = {
     //   startLoc: ''
     // };
+    props.getUser();
   }
 
   getCurrLoc () {
@@ -40,11 +41,11 @@ class Location extends React.Component {
     });
 
     //https://maps.googleapis.com/maps/api/geocode/xml?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
-    
+
   }
 
   /* The add location form isn't working at the moment. */
-   render () { 
+   render () {
     return (
       <div>
         <div className="navScreen center-align">

@@ -54,12 +54,15 @@ class App extends React.Component {
   }
 
   getUser(user) {
+    console.log('getting user');
     fetch('/api/user').then(response => {
+      console.log('response getting user', response);
       return response.json();
     }).then(user => {
       this.setState({
-        currentUser: user
+        currentUser: user.facebook
       });
+      console.log('current user state is ', this.state.currentUser);
     }).catch(err => {
       console.error('Get User Error: ', err);
     });
