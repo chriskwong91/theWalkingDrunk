@@ -4,6 +4,7 @@ var db = require('./database/database.js');
 var bodyParser = require('body-parser');
 var utils = require('./config/utils.js');
 var passport = require('passport');
+var user;
 
 
 module.exports = function (app, express) {
@@ -12,9 +13,12 @@ module.exports = function (app, express) {
   app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'email']}));
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect : '/',
-      failureRedirect : '#/signup'
-    }));
+      failureRedirect : '/#/signup'
+    }), function(req, res) {
+      user = req.user;
+      console.log('user in facebook', user);
+      res.redirect('/#/location');
+    });
 
   // app.use(utils.isLoggedIn);
   //facebook route
@@ -25,6 +29,15 @@ module.exports = function (app, express) {
     });
 
   app.get('/api/search', yelpSearch);
+
+  app.get('/api/user', function(req, res) {
+    console.log(user);
+    console.log('Getting user data....', user);
+    res.status(200).send(user);
+    // db.findUser(user.id, function(err, user) {
+    //   res.json(user);
+    // });
+  });
 
   app.route('/api/routes/:uid/:location?')
     .delete((req, res, next) => {
