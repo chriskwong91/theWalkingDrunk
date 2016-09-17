@@ -2,8 +2,8 @@
 
 var FacebookStrategy = require('passport-facebook').Strategy;
 // var User = require('../database/database.js').User;
-var connection = require('../database/database.js').connection;
-var mysql = require('promise-mysql');
+
+var database = require('../database/database.js');
 //loads facebook or other auth variables
 // var configAuth = require('./auth');
 var configAuth = require('./env/config.js');
@@ -13,13 +13,15 @@ module.exports = function(passport) {
 
   // serialize user for session
   passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    console.log('serializing: ', user);
+    done(null, user.facebook.id);
   });
 
   // deserialize the user
   passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-      done(err, user);
+    database.findUser(id, function(err, user) {
+      console.log('user deserialize', user)
+        done(err, user);
     });
   });
 
@@ -40,28 +42,7 @@ module.exports = function(passport) {
     //async process
     process.nextTick(() => {
       //finds if user is in database
-      var findUserQuery = `
-        select * from dev.user
-        where uid = ${mysql.escape(profile.id)};
-      `;
-      connection.findUserQuery().then(res => {
-        if (res) {
-          console.log('user exists: ', res);
-        } else {
-          //create new user
-          var newUserQuery = `
-            insert into dev.users
-            (uid, name, email)
-            values
-            (${mysql.escape(profile.id)}, ${mysql.escape(name)}, ${mysql.escape(email)});
-          `;
-          connection.newUserQuery().then(res => {
-            console.log('New User added: ', res);
-          });
-        }
-      });
-
-
+      database.addUser(profile, token, done);
       // User.findOne({ 'facebook.id' : profile.id }, (err, user) => {
       //   if (err) { return done(err); }
       //   // if found, return user

@@ -87,8 +87,45 @@ var addRoute = function(uid, location) {
   });
 };
 
+var findUser = (id, callback) => {
+  var findUserQuery = `
+    select * from dev.users
+    where uid = ${mysql.escape(id)};
+  `;
+  connection.query(findUserQuery, (err, res) => {
+    if (callback) {
+      callback(err, res[0]);
+    }
+  });
+}
+var addUser = (profile, token, done) => {
+  findUser(profile.id, (err, res) => {
+    if (err) { console.log('Error!: ', err); }
+    if (res) {
+      console.log('user exists: ', res);
+      return done(null, {facebook: res});
+    } else {
+      //create new user
+      var newUserQuery = `
+        insert into dev.users
+        (uid, id, name, email, token)
+        values
+        (${mysql.escape(profile.id)}, ${mysql.escape(profile.id)},
+         ${mysql.escape(profile.displayName)}, ${mysql.escape(profile.emails[0].value)},
+         ${mysql.escape(token)});
+      `;
+      connection.query(newUserQuery, (err, res) => {
+        if (err) { console.log('Error!: ', err); }
+        console.log('New User added: ', res);
+        return done(null, {facebook: res});
+      });
+    }
+  });
+};
 
 module.exports = {
+  findUser: findUser,
+  addUser: addUser,
   createConn: createConn,
   connection: connection,
   getRoutes: getRoutes,
