@@ -11,7 +11,9 @@ class Location extends React.Component {
     // this.state = {
     //   startLoc: ''
     // };
-    props.getUser();
+    if (Object.keys(props.currentUser).length === 0) {
+      props.getUser();
+    }
   }
 
   getCurrLoc () {

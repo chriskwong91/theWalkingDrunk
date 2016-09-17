@@ -62,6 +62,7 @@ class App extends React.Component {
       this.setState({
         currentUser: user.facebook
       });
+      window.localStorage.setItem('com.yelpcrawl', user.facebook.token);
       console.log('current user state is ', this.state.currentUser);
     }).catch(err => {
       console.error('Get User Error: ', err);
