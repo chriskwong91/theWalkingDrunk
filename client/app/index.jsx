@@ -1,6 +1,5 @@
 import React from 'react';
 var map = window.Map;
-var CurrInfoComponent = require('./CurrInfoComponent.jsx');
 var utils = require('./utils.js');
 
 class Map extends React.Component {
