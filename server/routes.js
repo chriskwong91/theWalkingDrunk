@@ -26,6 +26,14 @@ module.exports = function (app, express) {
 
   app.get('/api/search', yelpSearch);
 
+  app.get('/api/friends', function(req, res) {
+    var user = req.user;
+    database.grabFriends(user.id, function(err, friends) {
+      if (err) {console.error('Querying Friends Error: ', err); }
+      res.json(friends);
+    });
+  });
+
   app.route('/api/routes/:uid/:location?')
     .delete((req, res, next) => {
       if (req.params.location === undefined) {
