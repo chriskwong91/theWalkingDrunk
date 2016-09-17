@@ -157,10 +157,6 @@ class Map extends React.Component {
             </button>
           </form>
 
-          <div>
-            <CurrInfoComponent current={this.state.current} />
-          </div>
-
         </div>
 
         <div className="col s12 m8 l9">
