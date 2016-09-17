@@ -10,7 +10,8 @@ class App extends React.Component {
       location: 'San Francisco',
       waypoints: [],
       bars: [],
-      randomBar: ''
+      randomBar: '',
+      friends: []
     };
   }
 
@@ -46,6 +47,18 @@ class App extends React.Component {
       });
     }
     console.log(this.state.waypoints);
+  }
+
+  getfriends() {
+    fetch('/api/friends').then(response => {
+      return response.json();
+    }).then(friends => {
+      this.setState({
+        friends: friends
+      });
+    }).catch(err => {
+      console.err('Grabbing Friends Error: ', err);
+    });
   }
 
   getRandomBar() {
