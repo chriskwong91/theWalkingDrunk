@@ -25,7 +25,6 @@ class randomBar extends React.Component {
   };
 
   componentDidMount() {
-    console.log('entered');
     this.swipeFunction(); // a bind here
   }
   render () {

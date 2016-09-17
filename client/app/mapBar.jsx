@@ -9,6 +9,7 @@ var mapBar = (props) => {
 	{props.waypoints.map(bar => {
 	   return (
 	     <Marker
+		 key={bar.id}
 		 name={bar.name}
 		 position={{
 		   lat: bar.location.coordinate.latitude,
