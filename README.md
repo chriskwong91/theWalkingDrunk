@@ -1,12 +1,12 @@
- The Walking Drunk
-===================
+Yelp Crawl
+==========
 
 About this Project
 ------------------
 
 The aim of the project is to develop a central codebase that can be used by future developers to quickly modify the front-end, back-end, and to create new web applications as needed. It will provide a central database for storing generated routes and relevant Pub information.
 
-This codebase utilizes the [**ReactJS**](https://facebook.github.io/react/) front-end framework.  Website data is stored in a [**MongoDB**](http://www.mongodb.com) database. Manipulation of the database is done through [**Mongoose**](http://www.mongoose.com) , an Object Relational Mapping framwork. Database migrations can be handled using another ORM that supports multiple types of databases.
+This codebase utilizes the [**ReactJS**](https://facebook.github.io/react/) front-end framework. 
 
 For easier styling, we will be using [**Materialize**](http://www.materializecss.com), a popular responsive, mobile friendly front-end framework.  To ensure visual cohesion, developers are encouraged to use available templates already created and implemented.  Developers are advised to stick to the coding conventions and practices that are already used to ensure the project is extensible for all future developers.
 
@@ -24,7 +24,7 @@ Requirements
 * Linux or Mac OS X 
 * NodeJS 
 * npm
-* MongoDB
+* MySql
 * (the remaining dependencies will be installed below using *npm*)
 
 Setting Up
@@ -37,10 +37,6 @@ Setting Up
 ## 4.) Run 'npm start' to start server.
 ## 5.) Run 'npm run build' in a different tab to run Webpack in production mode.
 ## 5.) Run 'npm run dev' to run Webpack in the watch mode.
-
-### DOS/Windows
-## Get a Linux distro or go to the nearest Apple Store.
-## Or figure it out yourself.
 
 Ongoing Work
 ------------
