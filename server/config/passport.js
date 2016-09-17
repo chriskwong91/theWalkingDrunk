@@ -13,14 +13,12 @@ module.exports = function(passport) {
 
   // serialize user for session
   passport.serializeUser(function(user, done) {
-    console.log('serializing: ', user);
     done(null, user.facebook.id);
   });
 
   // deserialize the user
   passport.deserializeUser(function(id, done) {
     database.findUser(id, function(err, user) {
-      console.log('user deserialize', user)
         done(err, user);
     });
   });
@@ -38,35 +36,12 @@ module.exports = function(passport) {
   },
   // this is what Facebook sends back
   (token, refreshToken, profile, done) => {
-    console.log(profile);
+    console.log('friends: ', profile._json.friends.data, typeof profile._json.friends.data);
     //async process
     process.nextTick(() => {
       //finds if user is in database
       database.addUser(profile, token, done);
-      // User.findOne({ 'facebook.id' : profile.id }, (err, user) => {
-      //   if (err) { return done(err); }
-      //   // if found, return user
-      //     console.log(profile);
-      //   if (user) {
-      //     console.log(user);
-      //     return done(null, user);
-      //   } else {
-      //     //create new user
-      //     var newUser = new User();
-      //     newUser.facebook.id = profile.id;
-      //     newUser.facebook.token = token;
-      //     // newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyname;
-      //     newUser.facebook.name = profile.displayName;
-      //     newUser.facebook.email = profile.emails[0].value;
-      //     newUser.facebook.friends = profile.friends.data;
-      //     console.log(newUser);
-      //     newUser.save((err) => {
-      //       if (err) { throw err; }
 
-      //       return done(null, newUser);
-      //     // });
-      //   }
-      // });
     });
   }));
 };

@@ -2,7 +2,6 @@
 
 module.exports = {
   isLoggedIn: (req, res, next) => {
-    console.log(req.isAuthenticated());
     if (req.isAuthenticated()) {
       console.log('Authenticated!');
       return next();

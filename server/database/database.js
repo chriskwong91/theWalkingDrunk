@@ -98,14 +98,28 @@ var findUser = (id, callback) => {
     }
   });
 }
+
+var addFriend = (id, friendid) => {
+  var newFriendQuery = `
+    insert into dev.friends
+    (uid1, uid2)
+    values
+    (${mysql.escape(id)}, ${mysql.escape(id)});
+  `
+  connection.query(newFriendQuery);
+};
+
 var addUser = (profile, token, done) => {
   findUser(profile.id, (err, res) => {
     if (err) { console.log('Error!: ', err); }
+
+    // Check if User is in Database
     if (res) {
       console.log('user exists: ', res);
       return done(null, {facebook: res});
     } else {
-      //create new user
+
+      //Create New User
       var newUserQuery = `
         insert into dev.users
         (uid, id, name, email, token)
@@ -114,9 +128,16 @@ var addUser = (profile, token, done) => {
          ${mysql.escape(profile.displayName)}, ${mysql.escape(profile.emails[0].value)},
          ${mysql.escape(token)});
       `;
-      connection.query(newUserQuery, (err, res) => {
+      connection.query(newUserQuery);
+
+      //Add friends to database
+      profile._json.friends.data.forEach((friend) => {
+        addFriend(profile.id, friend.id);
+      });
+
+      // Send New User data back to Facebook Strategy
+      findUser(profile.id, (err, res) => {
         if (err) { console.log('Error!: ', err); }
-        console.log('New User added: ', res);
         return done(null, {facebook: res});
       });
     }
