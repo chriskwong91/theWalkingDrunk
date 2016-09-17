@@ -5,7 +5,10 @@ let FriendView = props => {
   return (
     <div>
       <h1>Yelp Crawlin Friends</h1>
-        <FriendEntryList />
+        {props.friends.map(friend => {
+          return <FriendEntryList friend={friend} />
+          })
+        }
     </div>
   )
 }

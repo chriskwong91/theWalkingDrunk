@@ -1,9 +1,9 @@
 import React from 'react';
 
-let FriendEntryList = () => {
+let FriendEntryList = (props) => {
   return (
     <div>
-      EntryList Hi
+      {props.friend}
     </div>
   )
 }
