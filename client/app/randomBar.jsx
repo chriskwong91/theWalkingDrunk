@@ -43,7 +43,7 @@ class randomBar extends React.Component {
             </div>
           </div>
         </div>
-      </div>    
+      </div> 
     )
   } else {
     var bar = this.props.randomBar;
