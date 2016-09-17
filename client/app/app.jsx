@@ -10,7 +10,8 @@ class App extends React.Component {
       location: 'San Francisco',
       waypoints: [],
       bars: [],
-      randomBar: ''
+      randomBar: '',
+      currentUser: {}
     };
   }
 
@@ -52,6 +53,19 @@ class App extends React.Component {
     });
   }
 
+  getUser(user) {
+    fetch('/api/user').then(response => {
+      return response.json();
+    }).then(user => {
+      this.setState({
+        currentUser: user
+      });
+    }).catch(err => {
+      console.error('Get User Error: ', err);
+    });
+
+  }
+
   getRandomBar() {
     var setIntervalId = setInterval(() => {
       var barsFound = this.state.bars;
@@ -80,7 +94,9 @@ class App extends React.Component {
                  waypoints: this.state.waypoints,
                  getRandomBar: this.getRandomBar.bind(this),
                  removeWaypoint: this.removeWaypoint.bind(this),
-                 randomBar: this.state.randomBar
+                 randomBar: this.state.randomBar,
+                 currentUser: this.state.currentUser,
+                 getUser: this.getUser.bind(this);
       })}
         </div>
       </div>

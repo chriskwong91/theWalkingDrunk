@@ -12,7 +12,7 @@ module.exports = function (app, express) {
   app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'email']}));
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect : '/',
+      successRedirect : '#/location',
       failureRedirect : '#/signup'
     }));
 
