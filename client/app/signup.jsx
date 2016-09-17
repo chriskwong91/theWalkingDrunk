@@ -1,6 +1,6 @@
 import React from 'react';
 
-let signup = () => {
+let signup = (props) => {
   /* ENABLES FACEBOOK SDK */
   window.fbAsyncInit = function() {
     FB.init({
@@ -19,6 +19,7 @@ let signup = () => {
 
   var facebookLogin = () => {
     document.location.href='/auth/facebook';
+    props.getFriends();
   };
   // <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
   return (
