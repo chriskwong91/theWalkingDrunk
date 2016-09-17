@@ -13,12 +13,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev')); // log every request to console
 app.use(cookieParser()); //reads cookies for auth
 
+require('./config/passport.js')(passport);
 //passport requirements
-app.use(session({ secret: 'iloveyelpcrawl' }));
+app.use(session({ secret: 'iloveyelpcrawl', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session()); //persistent login sess
 
-require('./config/passport.js')(passport);
 
 // parse application/json
 app.use(bodyParser.json());

@@ -13,12 +13,18 @@ module.exports = function (app, express) {
 
   //facebook route
   app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'email']}));
-  app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-      successRedirect : '/',
-      failureRedirect : '/signup'
-    }));
+  // app.get('/auth/facebook/callback',
+  //   passport.authenticate('facebook', {
+  //     successRedirect : '/',
+  //     failureRedirect : '/signup'
+  //   }));
 
+  app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function(req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('/location');
+    });
 
   app.use(utils.isLoggedIn);
 

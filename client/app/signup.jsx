@@ -34,12 +34,12 @@ let signup = () => {
     //   });
 
   };
-  // <div className="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
   return (
     <div className='signup valign-wrapper'>
       <div className="welcome thin center-align">
         <p className="p-welcome">Welcome to YelpCrawl</p>
         <button onClick={facebookLogin} className='btn fb-button'>Sign in with FaceBook</button>
+        <div className="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
       </div>
     </div>
   );
