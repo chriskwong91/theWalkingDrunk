@@ -87,6 +87,12 @@ var addRoute = function(uid, location) {
   });
 };
 
+/**
+ * @name findUser
+ * @desc Finds a particular user information
+ * @param {string} uid - A string representing a Facebook uid.
+ * return {object} Returns User data
+ */
 var findUser = (id, callback) => {
   var findUserQuery = `
     select * from dev.users
@@ -99,6 +105,12 @@ var findUser = (id, callback) => {
   });
 }
 
+/**
+ * @name addFriend
+ * @desc Adds two users as friends
+ * @param {string, string} uid1, uid2 - two Facebook user id's
+ * return {undefined}
+ */
 var addFriend = (id, friendid) => {
   var newFriendQuery = `
     insert into dev.friends
@@ -109,6 +121,13 @@ var addFriend = (id, friendid) => {
   connection.query(newFriendQuery);
 };
 
+/**
+ * @name addUser
+ * @desc Checks to see if user is in database, if exist, call done and finish authenticating
+ *  if user doesn't exist, create new user and authenticate
+ * @param {profile, token, done} - profile has Facebook user information. Token is facebook token
+ * return {done} Sends params to the done request to finish authenticating
+ */
 var addUser = (profile, token, done) => {
   findUser(profile.id, (err, res) => {
     if (err) { console.log('Error!: ', err); }
