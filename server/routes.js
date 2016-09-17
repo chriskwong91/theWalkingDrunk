@@ -4,6 +4,7 @@ var db = require('./database/database.js');
 var bodyParser = require('body-parser');
 var utils = require('./config/utils.js');
 var passport = require('passport');
+var database = require('../database/database.js');
 
 
 module.exports = function (app, express) {
@@ -25,6 +26,14 @@ module.exports = function (app, express) {
     });
 
   app.get('/api/search', yelpSearch);
+
+  app.get('/api/user', function(req, res) {
+    var user = req.user;
+    console.log('Getting user data....', user);
+    database.findUser(user.id, function(err, user) {
+      res.json(user);
+    });
+  });
 
   app.route('/api/routes/:uid/:location?')
     .delete((req, res, next) => {
