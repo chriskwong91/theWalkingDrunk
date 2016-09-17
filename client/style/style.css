@@ -9,9 +9,15 @@
     margin-left: 0px;
     margin-right: 0px;
     padding-right: 0px;
-    min-width: 1680px !important;
-    width: 1500px !important;
+    /*width: 1500px !important;*/
+
+    width: 1680px !important;
     max-width: 100%;
+}
+
+.map-styles {
+    max-width: 100%;
+    max-height: 100%
 }
 
 .location-h1 {
