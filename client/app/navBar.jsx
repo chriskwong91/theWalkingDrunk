@@ -22,4 +22,5 @@ let navBar = (props) => {
   );
 };
 
+
 export default navBar;
