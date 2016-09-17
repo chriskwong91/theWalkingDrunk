@@ -20,7 +20,6 @@ class App extends React.Component {
         return response.json();
       })
       .then(value => {
-        console.log('value in app.jsx is: ', value);
         this.setState({
           bars: value.businesses
         });
@@ -45,7 +44,6 @@ class App extends React.Component {
         waypoints: waypoints
       });
     }
-    console.log(this.state.waypoints);
   }
 
   removeWaypoint(id) {
@@ -55,8 +53,6 @@ class App extends React.Component {
   }
 
   getRandomBar() {
-    console.log('entered into randomBar');
-
     var setIntervalId = setInterval(() => {
       var barsFound = this.state.bars;
       if(barsFound.length !== 0){

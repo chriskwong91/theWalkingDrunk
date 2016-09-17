@@ -71,7 +71,7 @@ class Map extends React.Component {
     }
 
     if (this.state.waypoints.length > 8) {
-      console.log('Too many waypoints');
+      console.error('Too many waypoints');
     } else {
       var address;
       if (this.state.waypoints[this.state.waypoints.length - 1]) {
@@ -86,7 +86,7 @@ class Map extends React.Component {
         this.setState({
           waypoints: results.waypoints,
           current: results.current
-        }, () => console.log(this.state.current));
+        });
       });
     }
   }

@@ -24,7 +24,6 @@ class Location extends React.Component {
     // now we need the google api
     var userInput = userInput.split(' ');
     var userInput = userInput.join('+');
-    console.log(userInput);
 
     fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + userInput + '&key=' + googleKey).then(response => {
       return response.json();
@@ -34,10 +33,6 @@ class Location extends React.Component {
       var lng = value.results[0].geometry.location.lng;
       var coord = '' + lat + ',' + lng;
 
-      // this.setState({
-      //   startLoc: coord
-      // });
-      console.log('value for this.props.setlocation', this.props.setLocation);
       this.props.setLocation(coord);
 
     }).catch(err => {

@@ -6,10 +6,7 @@ var selectBar = (props) => {
 
 	if (props.bars.length === 20) {
 		bars = props.bars;	
-    console.log('selectBar1: ', bars[0]);	
-	} else {
-    console.log('selectBar2: ', bars[0]);  
-  }
+	}
 
   /* removed items: 
    <button className="waves-effect waves-light btn mat-btn-select" onClick={ () => { 
