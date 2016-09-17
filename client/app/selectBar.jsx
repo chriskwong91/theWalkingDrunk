@@ -58,7 +58,7 @@ var selectBar = (props) => {
                 <div className="circle"></div>
               </div>
             </div>
-          </div>
+          </div> 
         </div> 
 
       : bars.map( (bar, index) => 
