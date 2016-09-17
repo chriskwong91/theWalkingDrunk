@@ -59,8 +59,8 @@ var selectBar = (props) => {
         </div> 
 
       : bars.map( (bar, index) => 
-   			<div>
-          <div key={ index }>
+   		 <div key ={bar.id}>
+          <div>
             <div className = "select-bar-info thin center-align">
        			  <h5>{ bar.name }</h5>
        			  <span>{ bar.location.address }</span><br/>
