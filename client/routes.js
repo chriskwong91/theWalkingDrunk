@@ -8,6 +8,7 @@ import randomBar from './app/randomBar.jsx';
 import selectBar from './app/selectBar.jsx';
 import signup from './app/signup.jsx';
 import RouteList from './app/RouteList.jsx';
+import FriendView from './app/FriendView.jsx';
 import Index from './app/index.jsx';
 import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
 
@@ -27,6 +28,7 @@ ReactDOM.render (
       <Route path='randombar' component={randomBar} />
       <Route path='selectbar' component={selectBar} />
       <Route path='Routes' component={RouteList} />
+      <Route path='friends' component={FriendView} />
       <Route path='signup' component={signup} />
     </Route>
   </Router>,
