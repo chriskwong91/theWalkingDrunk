@@ -105,6 +105,11 @@ var findUser = (id, callback) => {
   });
 }
 
+var grabFriends = (id, callback) => {
+  var getFriendsQuery = `
+
+  `;
+};
 /**
  * @name addFriend
  * @desc Adds two users as friends
