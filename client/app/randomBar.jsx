@@ -1,12 +1,15 @@
 import React from 'react';
 var Hammer = require('hammerjs');
+import Router from 'react-router';
+import {Link} from 'react-router';
+
 
 class randomBar extends React.Component {
 // var randomBar = (props) => {
   constructor(props) {
     super(props);
 
-
+    console.log(props.randomBar);
   }
   swipeFunction() {
     var myElement = document.getElementById('app');
@@ -16,7 +19,7 @@ class randomBar extends React.Component {
     // listen to events...
     mc.on("swiperight", (function(ev) {
       this.props.addWaypoint(this.props.randomBar);
-      window.location.hash = "#/mapbar";
+      Router.browserHistory.push('/mapbar');
     }).bind(this));
 
     mc.on("swipeleft", (function(ev) {
@@ -62,12 +65,12 @@ class randomBar extends React.Component {
             <div><p className='randombar-header'>Rating:</p>          {bar.rating} / 5</div>
             <div><p className='randombar-header'>Review Count:</p>    {bar.review_count}</div>
             <div><p className='randombar-header'>Phone:</p>           {bar.phone === '' ? 'Not Available' : bar.phone}</div>
-            <div><p className='randombar-header'>Go to Yelp Page:</p> <a href={bar.mobile_url}>{bar.name}</a></div>
+            <div><p className='randombar-header'>Go to Yelp Page:</p> <Link to={bar.mobile_url}>{bar.name}</Link></div>
           </div>
         </div>
         <div className='row center-align buttons-random'>
           <div className=''>
-            <button className='btn add-random-bar' onClick={() => {this.props.addWaypoint(bar)}}><a href="/#/mapbar" className="random-text-btn">Guide Me There Now</a></button>
+            <button className='btn add-random-bar' onClick={() => {this.props.addWaypoint(bar)}}><Link to="/mapbar" className="random-text-btn">Guide Me There Now</Link></button>
           </div>
           <div className=''>
             <button className='btn get-random-bar' onClick={() => {this.props.getRandomBar()}}> I don't like this Bar</button>
@@ -76,7 +79,7 @@ class randomBar extends React.Component {
       </div>
     );
   }
-  }// end of the render() 
+  }// end of the render()
 };
 
 export default randomBar;

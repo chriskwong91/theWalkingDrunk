@@ -1,4 +1,5 @@
 import React from 'react';
+import {browserHistory} from 'react-router';
 
 let signup = () => {
   /* ENABLES FACEBOOK SDK */
@@ -19,8 +20,21 @@ let signup = () => {
 
   var facebookLogin = () => {
     document.location.href='/auth/facebook';
+    // browserHistory.push('/auth/facebook');
+    // fetch('/auth/facebook')
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .then(value => {
+    //     console.log('value in signup.jsx is: ', value);
+
+    //   })
+    //   .catch(err => {
+    //     console.error(`API error: ${err}`);
+    //   });
+
   };
-  // <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
+  // <div className="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false"></div>
   return (
     <div className='signup valign-wrapper'>
       <div className="welcome thin center-align">

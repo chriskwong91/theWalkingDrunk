@@ -11,16 +11,17 @@ import RouteList from './app/RouteList.jsx';
 import Index from './app/index.jsx';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-if (window.location.hash == '#_=_'){
-    history.replaceState
-        ? history.replaceState(null, null, window.location.href.split('#')[0])
-        : window.location.hash = '';
-}
+// if (window.location.hash == '#_=_'){
+//   window.location = '/location';
+    // history.replaceState
+    //     ? history.replaceState(null, null, window.location.href.split('#')[0])
+    //     : window.location.hash = '/location';
+// }
 
 ReactDOM.render (
   <Router history={browserHistory}>
     <Route path='/' component={App}>
-      <IndexRoute component={Index}></IndexRoute>
+      <IndexRoute component={signup}></IndexRoute>
       <Route path='decision' component={Decision} />
       <Route path='location' component={Location} />
       <Route path='mapbar' component={mapBar} />

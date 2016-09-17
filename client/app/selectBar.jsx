@@ -1,20 +1,20 @@
 import React from 'react';
-
+import {Link} from 'react-router';
 
 var selectBar = (props) => {
   var bars = [];
 
 	if (props.bars.length === 20) {
-		bars = props.bars;	
-    console.log('selectBar1: ', bars[0]);	
+		bars = props.bars;
+    console.log('selectBar1: ', bars[0]);
 	} else {
-    console.log('selectBar2: ', bars[0]);  
+    console.log('selectBar2: ', bars[0]);
   }
 
-  /* removed items: 
-   <button className="waves-effect waves-light btn mat-btn-select" onClick={ () => { 
+  /* removed items:
+   <button className="waves-effect waves-light btn mat-btn-select" onClick={ () => {
               props.addWaypoint( bars[index] )
-            } 
+            }
           }>Add</button>
 
 
@@ -59,9 +59,9 @@ var selectBar = (props) => {
               </div>
             </div>
           </div>
-        </div> 
+        </div>
 
-      : bars.map( (bar, index) => 
+      : bars.map( (bar, index) =>
    			<div>
           <div key={ index }>
             <div className = "select-bar-info thin center-align">
@@ -72,15 +72,15 @@ var selectBar = (props) => {
        			  <span>Review Count: { bar.review_count }</span>
        			  <p>{ bar.snippet_text }</p>
             </div>
-     			  
-            <div className="select-bar-test thin center-align" onClick={ () => { 
+
+            <div className="select-bar-test thin center-align" onClick={ () => {
                 props.addWaypoint( bars[index] )
-              } 
+              }
             }>Add <b>{bar.name}</b> to your Route!</div>
      			</div>
-          <span>{index === 9 ? 
-             <div href="/#/mapbar" className="select-go-to-map center-align thin">
-              <a href="/#/mapbar" className="to-map">Kickoff My yelpCrawl!</a>
+          <span>{index === 9 ?
+             <div className="select-go-to-map center-align thin">
+              <Link to="/mapbar" className="to-map">Kickoff My yelpCrawl!</Link>
             </div>
            : <div></div>}</span>
         </div>

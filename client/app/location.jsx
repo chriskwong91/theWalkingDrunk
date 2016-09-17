@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router';
+
 var googleKey = require('../../server/config/env/config.js').GOOGLE_MAPS_API_KEY;
 
 // let location = props => {
@@ -45,11 +47,11 @@ class Location extends React.Component {
     });
 
     //https://maps.googleapis.com/maps/api/geocode/xml?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
-    
+
   }
 
   /* The add location form isn't working at the moment. */
-   render () { 
+   render () {
     return (
       <div>
         <div className="navScreen center-align">
@@ -62,11 +64,11 @@ class Location extends React.Component {
           <div className="center-align"></div>
         </form>
           <div className="center-align current-loc-box">
-            <a className="waves-effect waves-light btn mat-btn" href="/#/decision" onClick={this.handleLocationSubmit.bind(this)}>Add Location</a>
+            <Link className="waves-effect waves-light btn mat-btn" to="/decision" onClick={this.handleLocationSubmit.bind(this)}>Add Location</Link>
           </div>
           <br/>
           <div className="center-align current-loc-box">
-          <a className="waves-effect waves-light btn mat-btn" href="/#/decision" onClick={this.getCurrLoc.bind(this)}>Use Current Location</a>
+          <Link className="waves-effect waves-light btn mat-btn" to="/decision" onClick={this.getCurrLoc.bind(this)}>Use Current Location</Link>
           </div>
       </div>
     );

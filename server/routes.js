@@ -10,6 +10,8 @@ var path = require('path');
 module.exports = function (app, express) {
 
   app.use(express.static(__dirname + '/../client'));
+
+  //facebook route
   app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['user_friends', 'email']}));
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
@@ -17,15 +19,15 @@ module.exports = function (app, express) {
       failureRedirect : '/signup'
     }));
 
-  // app.use(utils.isLoggedIn);
-  //facebook route
 
+  app.use(utils.isLoggedIn);
+
+  app.get('/api/search', yelpSearch);
   app.route('/')
     .get(function(req, res) {
       res.render('index');
     });
 
-  app.get('/api/search', yelpSearch);
 
   app.route('/api/routes/:uid/:location?')
     .delete((req, res, next) => {

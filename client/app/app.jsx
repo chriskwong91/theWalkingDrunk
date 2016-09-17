@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Nav from './navBar.jsx';
+import {Link} from 'react-router';
+
 
 
 class App extends React.Component {
@@ -15,6 +17,7 @@ class App extends React.Component {
   }
 
   setLocation(loc, filt = 'bars,nightlife') {
+    console.log(loc, filt);
     fetch(`/api/search?category_filter=${filt}&ll=${loc}`)
       .then(response => {
         return response.json();
@@ -50,6 +53,7 @@ class App extends React.Component {
 
   getRandomBar() {
     console.log('entered into randomBar');
+    console.log(this.state.randomBar);
 
     var setIntervalId = setInterval(() => {
       var barsFound = this.state.bars;
