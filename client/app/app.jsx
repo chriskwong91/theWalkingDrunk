@@ -48,6 +48,12 @@ class App extends React.Component {
     console.log(this.state.waypoints);
   }
 
+  removeWaypoint(id) {
+    this.setState({
+      waypoints: this.state.waypoints.filter(bar => bar.id !== id)
+    });
+  }
+
   getRandomBar() {
     console.log('entered into randomBar');
 
@@ -77,6 +83,7 @@ class App extends React.Component {
                  bars: this.state.bars,
                  waypoints: this.state.waypoints,
                  getRandomBar: this.getRandomBar.bind(this),
+                 removeWaypoint: this.removeWaypoint.bind(this),
                  randomBar: this.state.randomBar
       })}
         </div>
