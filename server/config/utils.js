@@ -3,10 +3,12 @@
 module.exports = {
   isLoggedIn: (req, res, next) => {
     if (req.isAuthenticated()) {
+      console.log('Authenticated!');
       return next();
     }
 
-    res.redirect('/login');
+    console.log('Not Logged ON');
+    res.redirect('/#/signup');
   },
 
 };

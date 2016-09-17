@@ -13,10 +13,10 @@ module.exports = function (app, express) {
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
       successRedirect : '/',
-      failureRedirect : '/login'
+      failureRedirect : '#/signup'
     }));
-  // app.use(utils.isLoggedIn);
 
+  app.use(utils.isLoggedIn);
   //facebook route
 
   app.route('/')
@@ -60,9 +60,9 @@ module.exports = function (app, express) {
     });
 
   // route for logging out
-  app.get('/logout', function(req, res) {
+  app.get('/auth/logout', function(req, res) {
       req.logout();
-      res.redirect('/login');
+      res.redirect('/#/login');
   });
   app.use(function(req, res){
     res.status(404);
