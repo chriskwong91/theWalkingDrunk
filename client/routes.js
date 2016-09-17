@@ -9,7 +9,7 @@ import selectBar from './app/selectBar.jsx';
 import signup from './app/signup.jsx';
 import RouteList from './app/RouteList.jsx';
 import Index from './app/index.jsx';
-import { Router, Route, IndexRoute, hashHistory, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 if (window.location.hash == '#_=_'){
     history.replaceState
@@ -18,7 +18,7 @@ if (window.location.hash == '#_=_'){
 }
 
 ReactDOM.render (
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path='/' component={App}>
       <IndexRoute component={Index}></IndexRoute>
       <Route path='decision' component={Decision} />

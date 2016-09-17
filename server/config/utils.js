@@ -8,7 +8,7 @@ module.exports = {
     }
 
     console.log('Not Logged ON');
-    res.redirect('/#/signup');
+    res.redirect('/signup');
   },
 
 };

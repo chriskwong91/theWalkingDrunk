@@ -4,6 +4,7 @@ var db = require('./database/database.js');
 var bodyParser = require('body-parser');
 var utils = require('./config/utils.js');
 var passport = require('passport');
+var path = require('path');
 
 
 module.exports = function (app, express) {
@@ -13,10 +14,10 @@ module.exports = function (app, express) {
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
       successRedirect : '/',
-      failureRedirect : '#/signup'
+      failureRedirect : '/signup'
     }));
 
-  app.use(utils.isLoggedIn);
+  // app.use(utils.isLoggedIn);
   //facebook route
 
   app.route('/')
@@ -64,6 +65,11 @@ module.exports = function (app, express) {
       req.logout();
       res.redirect('/#/login');
   });
+
+  app.get('*', function (request, response){
+    response.sendFile(path.resolve(__dirname + '/../client', 'index.html'))
+  });
+
   app.use(function(req, res){
     res.status(404);
 
