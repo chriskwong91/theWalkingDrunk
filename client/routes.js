@@ -21,7 +21,7 @@ if (window.location.hash == '#_=_'){
 ReactDOM.render (
   <Router history={hashHistory}>
     <Route path='/' component={App}>
-      <IndexRoute component={Index}></IndexRoute>
+      <IndexRoute component={signup}></IndexRoute>
       <Route path='decision' component={Decision} />
       <Route path='location' component={Location} />
       <Route path='mapbar' component={mapBar} />
