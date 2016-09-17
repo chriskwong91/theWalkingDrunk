@@ -28,17 +28,12 @@ h1.thin {
     color: #26c6da;
 }*/
 
-.buttons-random {
-    background-color: #ffcc80;
-}
 
 .get-random-bar {
-    background-color: #b2ebf2;
     margin-top: 25px;
 }
 
 .add-random-bar {
-    background-color: #b2ebf2;
     margin-top: 25px;
 }
 
@@ -149,6 +144,10 @@ p.p-welcome {
     padding-bottom: 50px;
     font-size: 50px;
     background-color: #ffcc80;
+}
+
+a.random-text-btn {
+    color: #eee;
 }
 
 .a-select-box {

@@ -1,8 +1,35 @@
 import React from 'react';
+var Hammer = require('hammerjs');
 
-var randomBar = (props) => {
-  console.log(props.randomBar);
-  if (props.randomBar === '') {
+class randomBar extends React.Component {
+// var randomBar = (props) => {
+  constructor(props) {
+    super(props);
+
+
+  }
+  swipeFunction() {
+    var myElement = document.getElementById('app');
+    // create a simple instance
+    // by default, it only adds horizontal recognizers
+    var mc = new Hammer(myElement);
+    // listen to events...
+    mc.on("swiperight", (function(ev) {
+      this.props.addWaypoint(this.props.randomBar);
+      window.location.hash = "#/mapbar";
+    }).bind(this));
+
+    mc.on("swipeleft", (function(ev) {
+      this.props.getRandomBar();
+    }).bind(this));
+  };
+
+  componentDidMount() {
+    console.log('entered');
+    this.swipeFunction(); // a bind here
+  }
+  render () {
+  if (this.props.randomBar === '') {
     return (
       <div className='randomBar spinner container center-align'>
         <div className="preloader-wrapper active center-align">
@@ -19,9 +46,9 @@ var randomBar = (props) => {
       </div>
     )
   } else {
-    var bar = props.randomBar;
+    var bar = this.props.randomBar;
     return (
-      <div className='randomBar thin'>
+      <div className='randomBar thin' id="randomBar">
         <div className="location-h1 nav-Screen center-align">
          <h1 className="thin">Your random bar is:</h1>
         </div>
@@ -40,15 +67,16 @@ var randomBar = (props) => {
         </div>
         <div className='row center-align buttons-random'>
           <div className=''>
-            <button className='btn add-random-bar' onClick={() => {props.addWaypoint(bar)}}>Guide Me There Now</button>
+            <button className='btn add-random-bar' onClick={() => {this.props.addWaypoint(bar)}}><a href="/#/mapbar" className="random-text-btn">Guide Me There Now</a></button>
           </div>
           <div className=''>
-            <button className='btn get-random-bar' onClick={() => {props.getRandomBar()}}> I don't like this Bar</button>
+            <button className='btn get-random-bar' onClick={() => {this.props.getRandomBar()}}> I don't like this Bar</button>
           </div>
         </div>
       </div>
     );
   }
+  }// end of the render() 
 };
 
 export default randomBar;
