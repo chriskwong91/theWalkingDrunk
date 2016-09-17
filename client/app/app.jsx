@@ -49,7 +49,7 @@ class App extends React.Component {
     console.log(this.state.waypoints);
   }
 
-  getfriends() {
+  getFriends() {
     fetch('/api/friends').then(response => {
       return response.json();
     }).then(friends => {
@@ -90,7 +90,9 @@ class App extends React.Component {
                  bars: this.state.bars,
                  waypoints: this.state.waypoints,
                  getRandomBar: this.getRandomBar.bind(this),
-                 randomBar: this.state.randomBar
+                 randomBar: this.state.randomBar,
+                 friends: this.state.friends,
+                 getFriends: this.getFriends.bind(this)
       })}
         </div>
       </div>
