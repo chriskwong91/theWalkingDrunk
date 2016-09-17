@@ -11,6 +11,7 @@ let navBar = (props) => {
           <li><a href="#/selectbar">Select Bar</a></li>
           <li><a href="#/currentbars">Current Bars</a></li>
           <li><a href="#/mapbar">Map</a></li>
+          <li><a href="#/Routes">List Routes</a></li>
           <li><a href="#/signup">Log Out</a></li>
           <li className="no-padding">
           </li>
