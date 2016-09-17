@@ -25,7 +25,7 @@ let signup = () => {
     <div>
       <div className='signup'>
         <div className="welcome">
-          <p className="span-welcome center-align">yelpCrawl</p>
+          <p className="span-welcome center-align">foodCrawl</p>
         </div>
       </div>
       <div className="fb-button-div">
